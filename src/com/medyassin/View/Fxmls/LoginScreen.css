@@ -1,0 +1,12 @@
+#loginBtn {
+   -fx-background-radius : 50;
+}
+
+#username,
+#password{
+    -fx-text-fill: #fff;
+}
+
+#loginScreen {
+    -fx-background-color: #161616;
+}

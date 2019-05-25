@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import java.lang.*?>
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:id="loginScreen" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" stylesheets="@LoginScreen.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.medyassin.View.Controllers.LoginScreen">
+   <children>
+      <!--Right Image-->
+      <ImageView fitHeight="600.0" fitWidth="455.0" layoutX="552.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../Img/welcome_bg.png" />
+         </image>
+      </ImageView>
+
+      <!--App Name-->
+      <Label layoutX="107.0" layoutY="98.0" prefHeight="96.0" prefWidth="339.0" text="Restaurant Management System" textFill="WHITE" wrapText="true">
+         <font>
+            <Font name="HK Grotesk SemiBold" size="31.0" />
+         </font>
+      </Label>
+
+      <!--App Login Description-->
+      <Label layoutX="107.0" layoutY="238.0" text="Please enter login information" textFill="#8a8a8a">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+
+      <!--Username TextField-->
+      <JFXTextField fx:id="username" focusColor="#40de50" labelFloat="true" layoutX="107.0" layoutY="317.0" prefHeight="25.0" prefWidth="339.0" promptText="Username" />
+
+      <!--Password TextField-->
+      <JFXPasswordField fx:id="password" focusColor="#40de50" labelFloat="true" layoutX="107.0" layoutY="384.0" prefHeight="25.0" prefWidth="339.0" promptText="Password" />
+
+      <!--Login Button TextField-->
+      <JFXButton fx:id="loginBtn" layoutX="107.0" layoutY="462.0" onAction="#btnLoginAction" prefHeight="42.0" prefWidth="339.0" style="-fx-background-color: #40DE50;" text="LOG IN" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+   </children>
+</AnchorPane>
