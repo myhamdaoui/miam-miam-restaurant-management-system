@@ -1,13 +1,16 @@
-package com.medyassin.View.Controllers;
+package com.medyassin.Views.Controllers;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
+import com.medyassin.DatabaseControllers.LoginController;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.AnchorPane;
 
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class LoginScreen implements Initializable {
@@ -29,16 +32,24 @@ public class LoginScreen implements Initializable {
     }
 
     @FXML
-    private void btnLoginAction() {
+    private void btnLoginAction(ActionEvent actionEvent) {
         //Get Username input
         String usernameInput = username.getText();
 
         //Get password input
         String passwordInput = password.getText();
 
-        //Check values
+        //Check values form database
 
         //login
-        System.out.println(usernameInput + ", " + passwordInput);
+        try {
+            if(LoginController.login(usernameInput, passwordInput)) {
+                System.out.println("login success");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 }
