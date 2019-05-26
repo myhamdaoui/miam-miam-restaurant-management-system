@@ -43,10 +43,10 @@ public class Main extends Application {
             /* Stage = window parameters */
             primaryStage.setTitle("Restaurant Management System");
             primaryStage.setScene(scene);
-            primaryStage.setMinWidth(1000);
-            primaryStage.setMaxWidth(1000);
-            primaryStage.setMinHeight(600);
-            primaryStage.setMaxHeight(600);
+//            primaryStage.setMinWidth(1000);
+//            primaryStage.setMaxWidth(1000);
+//            primaryStage.setMinHeight(600);
+//            primaryStage.setMaxHeight(600);
             primaryStage.show();
 
         } catch (IOException e) {
