@@ -49,13 +49,13 @@ public class LoginScreen implements Initializable {
         //login
         try {
             //Get Main Screen XML of the user[Cassier]
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/medyassin/Views/Fxmls/CassierMainScreen.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/medyassin/Views/Fxmls/UserManageCustomers.fxml"));
             BorderPane userMainScreen = loader.load();
             // If user inputs are correct, the switch to the main screen
             if(LoginController.login(usernameInput, passwordInput)) {
                 //get the current stage
                 Scene currentScene = loginScreen.getScene();
-                Utilities.switchScreen(currentScene, userMainScreen, getClass().getResource("./../Fxmls/CassierMainScreen.css").toExternalForm());
+                Utilities.switchScreen(currentScene, userMainScreen, getClass().getResource("./../Fxmls/UserManageCustomers.css").toExternalForm(), true);
             } else {
                 System.out.println("Please verify login information");
             }

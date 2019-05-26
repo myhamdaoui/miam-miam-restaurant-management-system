@@ -3,6 +3,7 @@ package com.medyassin.Main;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -42,11 +43,14 @@ public class Main extends Application {
 
             /* Stage = window parameters */
             primaryStage.setTitle("Restaurant Management System");
+            primaryStage.setWidth(1000);
+            primaryStage.setHeight(600);
             primaryStage.setScene(scene);
-//            primaryStage.setMinWidth(1000);
-//            primaryStage.setMaxWidth(1000);
-//            primaryStage.setMinHeight(600);
-//            primaryStage.setMaxHeight(600);
+            primaryStage.setResizable(false);
+
+            // Set icon
+            stage.getIcons().add(new Image(Main.class.getResourceAsStream("/com/medyassin/Img/icons/icon.png")));
+
             primaryStage.show();
 
         } catch (IOException e) {
