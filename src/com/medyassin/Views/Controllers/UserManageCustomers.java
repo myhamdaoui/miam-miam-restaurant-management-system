@@ -3,6 +3,7 @@ package com.medyassin.Views.Controllers;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
+import com.medyassin.DatabaseControllers.ManageCustomer;
 import com.medyassin.Models.Customer;
 import com.medyassin.TableViewModels.CustomerTVModel;
 import com.medyassin.Utilities.Utilities;
@@ -25,6 +26,8 @@ import javafx.scene.shape.Circle;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class UserManageCustomers implements Initializable, EventHandler<MouseEvent> {
@@ -59,7 +62,10 @@ public class UserManageCustomers implements Initializable, EventHandler<MouseEve
     private BorderPane borderPane;
 
     @FXML
-    private JFXTextField AddressTF;
+    private JFXTextField addressTF;
+
+    @FXML
+    private JFXTextField phoneNTF;
 
     @FXML
     private TableColumn cPhoneNumber;
@@ -82,6 +88,7 @@ public class UserManageCustomers implements Initializable, EventHandler<MouseEve
     @FXML
     private JFXComboBox<String> actionCB;
 
+    // Data for the Customer table
     private ObservableList<CustomerTVModel> data = FXCollections.observableArrayList();
 
 
@@ -107,23 +114,85 @@ public class UserManageCustomers implements Initializable, EventHandler<MouseEve
         pendingOrders.setOnMouseEntered(this);
         pendingOrders.setOnMouseExited(this);
 
-        // Set Table
+        // Set Customer Table
+        setCustomerTable();
+
+        // Set Add New Customer Action Event on Confirm Button
+        confirmBtn.setOnAction(e -> {
+            if(actionCB.getValue() == null) {
+                System.err.println("Veuillez choisir un opération");
+
+            } else if(actionCB.getValue().equals("Ajouter")) {
+                addNewCustomer();
+            } else if(actionCB.getValue().equals("Supprimer")) {
+                //TODO
+                System.out.println(actionCB.getValue());
+
+            } else if(actionCB.getValue().equals("Rechercher")) {
+                //TODO
+                System.out.println(actionCB.getValue());
+
+            } else if(actionCB.getValue().equals("Mise à jour")) {
+                //TODO
+                System.out.println(actionCB.getValue());
+            }
+
+        });
+
+        // Set Combo box
+        actionCB.getItems().addAll("Mise à jour", "Supprimer", "Rechercher", "Ajouter");
+    }
+
+    private void clearCustomerForm() {
+        nameTF.setText("");
+        phoneNTF.setText("");
+        addressTF.setText("");
+    }
+
+    private void refreshCustomerTable() {
+        data = FXCollections.observableArrayList();
+        try {
+            ArrayList<Customer> customers = ManageCustomer.getAllCustomers();
+            for(Customer customer: customers) {
+                data.add(new CustomerTVModel(customer.getcID(), customer.getcName(), customer.getcPhoneN(), customer.getcAddress()));
+            }
+            customersTable.setItems(data);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void setCustomerTable() {
         cID.setCellValueFactory(new PropertyValueFactory<CustomerTVModel, String>("customerId"));
         cName.setCellValueFactory(new PropertyValueFactory<CustomerTVModel, String>("customerName"));
         cPhoneNumber.setCellValueFactory(new PropertyValueFactory<CustomerTVModel, String>("customerPhoneN"));
         cAddress.setCellValueFactory(new PropertyValueFactory<CustomerTVModel, String>("customerAddress"));
 
-        data = getData();
-        customersTable.setItems(data);
-
+        refreshCustomerTable();
     }
 
-    private ObservableList<CustomerTVModel> getData() {
-        ObservableList<CustomerTVModel> data = FXCollections.observableArrayList();
-        data.add(new CustomerTVModel("01", "yassin", "060606060", "Oujda Maroc"));
-        data.add(new CustomerTVModel("02", "Ahmed", "064545454", "Berkane, Maroc"));
+    private void addNewCustomer() {
+        String name = nameTF.getText();
+        String phoneN = phoneNTF.getText();
+        String address = addressTF.getText();
 
-        return data;
+        try {
+            if(!ManageCustomer.addNewCustomer(name, phoneN, address)) {
+                System.out.print("Alert: can't add new customer");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        // Refresh
+        refreshCustomerTable();
+
+        // Clear inputs
+        clearCustomerForm();
     }
 
     @FXML

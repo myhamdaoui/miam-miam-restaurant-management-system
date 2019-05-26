@@ -10,6 +10,10 @@ public class Customer {
         this.cAddress = cAddress;
     }
 
+    public Customer() {
+        this("", "", "", "");
+    }
+
     public String getcID() {
         return cID;
     }
