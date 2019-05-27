@@ -66,4 +66,32 @@ public class ManageCustomer {
 
         return true;
     }
+
+    public static boolean updateCustomer(int cID, String name, String phoneN, String address) throws SQLException, ClassNotFoundException {
+        // Connection
+        Connection conn = DatabaseConnection.getDbConn().getConnection();
+
+        String query = "UPDATE Customers SET cName = ?, cPhoneN = ?, cAddress = ? WHERE cID = ?";
+        PreparedStatement stmt = conn.prepareStatement(query);
+        stmt.setObject(1, name);
+        stmt.setObject(2, phoneN);
+        stmt.setObject(3, address);
+        stmt.setObject(4, cID);
+        int count = stmt.executeUpdate();
+        if(count <= 0) {
+            return false;
+        }
+        return true;
+    }
+
+    public static int getNextID() throws SQLException, ClassNotFoundException {
+        // Connection
+        Connection conn = DatabaseConnection.getDbConn().getConnection();
+
+        String query = "SELECT cID FROM Customers ORDER BY cID DESC LIMIT 1";
+        PreparedStatement stmt = conn.prepareStatement(query);
+        ResultSet res = stmt.executeQuery();
+        res.next();
+        return (Integer.parseInt(res.getString("cID")) + 1);
+    }
 }

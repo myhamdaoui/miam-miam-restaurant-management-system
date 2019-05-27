@@ -118,7 +118,7 @@
                      <children>
                             <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="652.0" spacing="20.0">
                            <children>
-                              <JFXTextField fx:id="idTF" promptText="User ID" unFocusColor="#a4a4a4" />
+                              <JFXTextField fx:id="idTF" disable="true" editable="false" promptText="User ID" unFocusColor="#a4a4a4" />
                               <JFXTextField fx:id="nameTF" layoutX="20.0" layoutY="20.0" prefHeight="25.0" prefWidth="164.0" promptText="Name" unFocusColor="#a4a4a4" />
                               <JFXTextField fx:id="phoneNTF" layoutX="155.0" layoutY="20.0" prefHeight="25.0" prefWidth="203.0" promptText="Phone Number" unFocusColor="#a4a4a4" />
                            </children>

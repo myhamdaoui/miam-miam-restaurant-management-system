@@ -134,13 +134,50 @@ public class UserManageCustomers implements Initializable, EventHandler<MouseEve
 
             } else if(actionCB.getValue().equals("Mise à jour")) {
                 //TODO
-                System.out.println(actionCB.getValue());
+                updateCustomer();
             }
 
         });
 
         // Set Combo box
         actionCB.getItems().addAll("Mise à jour", "Supprimer", "Rechercher", "Ajouter");
+
+        // Set next ID for TextField
+        setIDTF();
+
+        // Set row selection listener
+        customersTable.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if(newSelection != null) {
+                CustomerTVModel cm = (CustomerTVModel) newSelection;
+                idTF.setText(cm.getCustomerId());
+                nameTF.setText(cm.getCustomerName());
+                phoneNTF.setText(cm.getCustomerPhoneN());
+                addressTF.setText(cm.getCustomerAddress());
+            }
+        });
+    }
+
+    private void updateCustomer() {
+        int id = Integer.parseInt(idTF.getText());
+        String name = nameTF.getText();
+        String phoneN = phoneNTF.getText();
+        String address = addressTF.getText();
+
+        try {
+            boolean success = ManageCustomer.updateCustomer(id, name, phoneN, address);
+            if(!success) {
+                System.out.println("Alert: update customer has failed !");
+            } else {
+                System.out.println("Alert: update customer is done !");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        // Refresh
+        refreshCustomerTable();
     }
 
     private void clearCustomerForm() {
@@ -173,6 +210,15 @@ public class UserManageCustomers implements Initializable, EventHandler<MouseEve
         refreshCustomerTable();
     }
 
+    private void setIDTF() {
+        try {
+            idTF.setText(ManageCustomer.getNextID() + "");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
     private void addNewCustomer() {
         String name = nameTF.getText();
         String phoneN = phoneNTF.getText();
