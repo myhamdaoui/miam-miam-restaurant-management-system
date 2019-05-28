@@ -4,12 +4,14 @@
 }
 
 #logoutBtn {
-    -fx-border-radius: 50;
-    -fx-border-color: #fff;
-    -fx-border-width: 1;
-    -fx-background-radius: 50;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
 }
 
+#searchTF {
+    -fx-text-fill: #fff;
+    -fx-prompt-text-fill: #ccc;
+}
 
 .table-view{
     -fx-table-color: #43dda1;

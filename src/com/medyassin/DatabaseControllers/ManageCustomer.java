@@ -94,4 +94,46 @@ public class ManageCustomer {
         res.next();
         return (Integer.parseInt(res.getString("cID")) + 1);
     }
+
+    public static boolean deleteCustomer(int id) throws SQLException, ClassNotFoundException {
+        // Connection
+        Connection conn = DatabaseConnection.getDbConn().getConnection();
+
+        String query = "DELETE FROM Customers WHERE cID = ?";
+        PreparedStatement stmt = conn.prepareStatement(query);
+        stmt.setObject(1, id);
+        int count = stmt.executeUpdate();
+        if(count <= 0) {
+            return false;
+        }
+
+        return true;
+    }
+
+    public static ArrayList<Customer> searchForCustomers(String name) throws SQLException, ClassNotFoundException {
+        // Connection
+        Connection conn = DatabaseConnection.getDbConn().getConnection();
+
+        // Result
+        ArrayList<Customer> customers = new ArrayList<>();
+
+        String query = "SELECT * FROM Customers WHERE cName LIKE ?";
+        PreparedStatement stmt = conn.prepareStatement(query);
+        stmt.setObject(1, "%" + name + "%");
+
+        ResultSet result = stmt.executeQuery();
+        while(result.next()) {
+            // Create a Customer
+            Customer c = new Customer();
+            c.setcID(result.getString("cID"));
+            c.setcName(result.getString("cName"));
+            c.setcPhoneN(result.getString("cPhoneN"));
+            c.setcAddress(result.getString("cAddress"));
+
+            // Add customer to the return result
+            customers.add(c);
+        }
+
+        return customers;
+    }
 }

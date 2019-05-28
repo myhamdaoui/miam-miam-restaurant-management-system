@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.*?>
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXTextField?>
@@ -9,7 +18,9 @@
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -20,44 +31,14 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="borderPane" prefHeight="600.0" prefWidth="1000.0" stylesheets="@UserManageCustomers.css" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.medyassin.Views.Controllers.UserManageCustomers">
-    <top>
-        <ToolBar prefHeight="60.0" prefWidth="600.0" style="-fx-background-color: #161616;" BorderPane.alignment="CENTER">
-            <items>
-                <!--User Image Mask(Cirlce)-->
-                <Circle fx:id="UserImageMaskCircle" fill="DODGERBLUE" radius="19.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-                <Label text="M. HAMDAOUI Mohammed-Yassin" textFill="#eeeeee">
-                    <padding>
-                        <Insets left="10.0" />
-                    </padding>
-                    <font>
-                        <Font name="Roboto Medium" size="14.0" />
-                    </font>
-                </Label>
-
-                <Pane HBox.hgrow="ALWAYS" />
-                <!--Log out button-->
-                <JFXButton fx:id="logoutBtn" alignment="CENTER" onAction="#logoutBtnAction" prefHeight="34.0" prefWidth="99.0" ripplerFill="#2fff89" text="LOG OUT" textFill="WHITE">
-                    <padding>
-                        <Insets left="20.0" right="20.0" />
-                    </padding>
-                    <cursor>
-                        <Cursor fx:constant="HAND" />
-                    </cursor>
-                </JFXButton>
-            </items>
-            <padding>
-                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-            </padding>
-        </ToolBar>
-    </top>
+<BorderPane fx:id="borderPane" prefHeight="600.0" prefWidth="1000.0" stylesheets="@UserManageCustomers.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.medyassin.Views.Controllers.UserManageCustomers">
     <left>
-        <VBox prefHeight="200.0" prefWidth="153.0" style="-fx-background-color: #343434;" BorderPane.alignment="CENTER">
+        <VBox prefHeight="542.0" prefWidth="190.0" style="-fx-background-color: #1d262d;" BorderPane.alignment="CENTER">
             <children>
                 <Pane fx:id="manageCustomers" onMouseEntered="#manageCustomersHover" onMouseExited="#manageCustomersHoverEnd" prefHeight="93.0" prefWidth="137.0" style="-fx-background-color: #22DB6C;">
                     <children>
                         <Circle fx:id="manageCustomersMask" fill="#ffffff00" layoutX="41.0" layoutY="30.0" radius="16.0" stroke="WHITE" strokeType="INSIDE" />
-                        <Label layoutX="24.0" layoutY="56.0" text="Manage Customers" textFill="WHITE">
+                        <Label layoutX="24.0" layoutY="56.0" text="Gérer les clients" textFill="WHITE">
                             <font>
                                 <Font name="Roboto Bold" size="12.0" />
                             </font>
@@ -67,10 +48,10 @@
                         <Cursor fx:constant="HAND" />
                     </cursor>
                 </Pane>
-                <Pane fx:id="makeOrder" layoutX="10.0" layoutY="10.0" prefHeight="93.0" prefWidth="137.0" style="-fx-background-color: #343434;">
+                <Pane fx:id="makeOrder" layoutX="10.0" layoutY="10.0" prefHeight="93.0" prefWidth="137.0" style="-fx-background-color: #1d262d;">
                     <children>
-                        <Circle fill="#ffffff00" layoutX="41.0" layoutY="30.0" radius="16.0" stroke="WHITE" strokeType="INSIDE" />
-                        <Label layoutX="24.0" layoutY="56.0" text="Make an order" textFill="WHITE">
+                        <Circle fx:id="makeOrderMask" fill="#ffffff00" layoutX="41.0" layoutY="30.0" radius="16.0" stroke="WHITE" strokeType="INSIDE" />
+                        <Label layoutX="24.0" layoutY="56.0" text="Passer une commande" textFill="WHITE">
                             <font>
                                 <Font name="Roboto Bold" size="12.0" />
                             </font>
@@ -80,10 +61,10 @@
                         <Cursor fx:constant="HAND" />
                     </cursor>
                 </Pane>
-                <Pane fx:id="viewAllOrders" layoutX="10.0" layoutY="103.0" prefHeight="93.0" prefWidth="137.0" style="-fx-background-color: #343434;">
+                <Pane fx:id="viewAllOrders" layoutX="10.0" layoutY="103.0" prefHeight="93.0" prefWidth="137.0" style="-fx-background-color: #1d262d;">
                     <children>
-                        <Circle fill="#ffffff00" layoutX="41.0" layoutY="30.0" radius="16.0" stroke="WHITE" strokeType="INSIDE" />
-                        <Label layoutX="24.0" layoutY="56.0" text="View All orders" textFill="WHITE">
+                        <Circle fx:id="viewAllOrdersMask" fill="#ffffff00" layoutX="41.0" layoutY="30.0" radius="16.0" stroke="WHITE" strokeType="INSIDE" />
+                        <Label layoutX="24.0" layoutY="56.0" text="Voir toutes les commandes" textFill="WHITE">
                             <font>
                                 <Font name="Roboto Bold" size="12.0" />
                             </font>
@@ -93,10 +74,10 @@
                         <Cursor fx:constant="HAND" />
                     </cursor>
                 </Pane>
-                <Pane fx:id="pendingOrders" layoutX="10.0" layoutY="196.0" prefHeight="93.0" prefWidth="137.0" style="-fx-background-color: #343434;">
+                <Pane fx:id="pendingOrders" layoutX="10.0" layoutY="196.0" prefHeight="93.0" prefWidth="137.0" style="-fx-background-color: #1d262d;">
                     <children>
-                        <Circle fill="#ffffff00" layoutX="41.0" layoutY="30.0" radius="16.0" stroke="WHITE" strokeType="INSIDE" />
-                        <Label layoutX="24.0" layoutY="56.0" text="Pending orders" textFill="WHITE">
+                        <Circle fx:id="pendingOrdersMask" fill="#ffffff00" layoutX="41.0" layoutY="30.0" radius="16.0" stroke="WHITE" strokeType="INSIDE" />
+                        <Label layoutX="24.0" layoutY="56.0" text="Commandes en attente" textFill="WHITE">
                             <font>
                                 <Font name="Roboto Bold" size="12.0" />
                             </font>
@@ -137,7 +118,7 @@
                   </Separator>
                   <VBox alignment="CENTER" prefHeight="112.0" prefWidth="262.0" spacing="20.0">
                      <children>
-                        <JFXComboBox fx:id="actionCB" prefHeight="25.0" prefWidth="191.0" promptText="Chose Action" />
+                        <JFXComboBox fx:id="actionCB" prefHeight="25.0" prefWidth="191.0" promptText="Choisir une opération" />
                         <JFXButton fx:id="confirmBtn" prefHeight="35.0" prefWidth="192.0" style="-fx-background-color: #22DB6C;" text="Confirmer" textFill="WHITE">
                            <font>
                               <Font name="HK Grotesk SemiBold" size="14.0" />
@@ -159,7 +140,7 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <TableView fx:id="customersTable" styleClass="table-view" GridPane.columnIndex="0" GridPane.columnSpan="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="0" GridPane.vgrow="ALWAYS">
+                  <TableView fx:id="customersTable" styleClass="table-view" GridPane.columnSpan="1" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
                     <columns>
                       <TableColumn fx:id="cID" prefWidth="97.0" text="CID" />
                       <TableColumn fx:id="cName" prefWidth="218.0" text="Name" />
@@ -175,4 +156,51 @@
          </center>
         </BorderPane>
     </center>
+   <top>
+      <HBox prefHeight="54.0" prefWidth="1000.0" style="-fx-background-color: #1d262d;" BorderPane.alignment="CENTER">
+         <children>
+                <!--User Image Mask(Cirlce)-->
+                <Circle fx:id="UserImageMaskCircle" fill="DODGERBLUE" radius="19.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                <Label text="M. HAMDAOUI Mohammed-Yassin" textFill="#eeeeee">
+                    <padding>
+                        <Insets top="10.0" />
+                    </padding>
+                    <font>
+                        <Font name="Roboto Medium" size="14.0" />
+                    </font>
+               <HBox.margin>
+                  <Insets left="10.0" />
+               </HBox.margin>
+                </Label>
+
+                      <Pane HBox.hgrow="ALWAYS">
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </Pane>
+            <AnchorPane prefHeight="38.0" prefWidth="264.0">
+               <children>
+                  <JFXTextField fx:id="searchTF" focusColor="#49e56900" layoutX="16.0" layoutY="-1.0" onKeyReleased="#searchEvent" prefHeight="36.0" prefWidth="219.0" promptText="Nom du client" style="-fx-border-width: 1; -fx-border-radius: 50; -fx-border-color: #fff; -fx-padding: 0 20;" unFocusColor="#ffffff00" />
+                  <ImageView fitHeight="15.0" fitWidth="13.0" layoutX="204.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../Img/icons/search.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+                <!--Log out button-->
+                <JFXButton fx:id="logoutBtn" alignment="CENTER" onAction="#logoutBtnAction" prefHeight="34.0" prefWidth="99.0" ripplerFill="#2fff89" style="-fx-background-color: #48e4ad; -fx-background-radius: 50;" text="LOG OUT" textFill="WHITE">
+                    <padding>
+                        <Insets left="20.0" right="20.0" />
+                    </padding>
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor>
+                </JFXButton>
+         </children>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+      </HBox>
+   </top>
 </BorderPane>

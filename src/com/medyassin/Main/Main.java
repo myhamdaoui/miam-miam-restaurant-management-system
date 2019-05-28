@@ -1,11 +1,13 @@
 package com.medyassin.Main;
 
+import com.medyassin.Views.Controllers.LoginScreen;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.io.IOException;
 
@@ -29,7 +31,7 @@ public class Main extends Application {
      */
     private void setInitialParams(Stage primaryStage) {
         stage = primaryStage;
-
+        //hide titlebar
         try {
             /* Get XML Loader */
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../Views/Fxmls/LoginScreen.fxml"));
@@ -50,7 +52,6 @@ public class Main extends Application {
 
             // Set icon
             stage.getIcons().add(new Image(Main.class.getResourceAsStream("/com/medyassin/Img/icons/icon.png")));
-
             primaryStage.show();
 
         } catch (IOException e) {

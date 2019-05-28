@@ -1,8 +1,14 @@
 package com.medyassin.Utilities;
 
+import com.jfoenix.controls.JFXSnackbar;
+import javafx.animation.FadeTransition;
+import javafx.animation.TranslateTransition;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 public class Utilities {
     /**
@@ -21,5 +27,21 @@ public class Utilities {
         if(resizable) {
             currentStage.setResizable(true);
         }
+    }
+
+    public static void showToast(String msg, Label toast) {
+        toast.setText(msg);
+        toast.setVisible(true);
+
+        FadeTransition f = new FadeTransition(Duration.seconds(2), toast);
+        f.setToValue(1);
+        f.setFromValue(0);
+        f.play();
+        f.setOnFinished(e -> {
+            FadeTransition f1 = new FadeTransition(Duration.seconds(2), toast);
+            f1.setToValue(0);
+            f1.setFromValue(1);
+            f1.play();
+        });
     }
 }

@@ -6,7 +6,10 @@ import com.jfoenix.controls.JFXTextField;
 import com.medyassin.DatabaseControllers.ManageCustomer;
 import com.medyassin.Models.Customer;
 import com.medyassin.TableViewModels.CustomerTVModel;
+import com.medyassin.Utilities.CustomAlert.CustomerAlert;
 import com.medyassin.Utilities.Utilities;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -17,8 +20,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.ImagePattern;
@@ -35,6 +40,9 @@ public class UserManageCustomers implements Initializable, EventHandler<MouseEve
     private Pane manageCustomers;
 
     @FXML
+    private JFXTextField searchTF;
+
+    @FXML
     private TableView customersTable;
 
     @FXML
@@ -45,6 +53,15 @@ public class UserManageCustomers implements Initializable, EventHandler<MouseEve
 
     @FXML
     private Circle manageCustomersMask;
+
+    @FXML
+    private Circle makeOrderMask;
+
+    @FXML
+    private Circle viewAllOrdersMask;
+
+    @FXML
+    private Circle pendingOrdersMask;
 
     @FXML
     private Pane viewAllOrders;
@@ -101,8 +118,11 @@ public class UserManageCustomers implements Initializable, EventHandler<MouseEve
         // Set no focus for logout btn
         logoutBtn.setDisableVisualFocus(true);
 
-        // Set Image Icon for mask of 'Manage customers'
+        // Set Image Icon for mask of 'Manage customers' ...
         manageCustomersMask.setFill(new ImagePattern(new Image("/com/medyassin/Img/icons/user.png", false)));
+        makeOrderMask.setFill(new ImagePattern(new Image(getClass().getResource("/com/medyassin/Img/icons/order.png").toExternalForm(), false)));
+        viewAllOrdersMask.setFill(new ImagePattern(new Image("/com/medyassin/Img/icons/view.png", false)));
+        pendingOrdersMask.setFill(new ImagePattern(new Image("/com/medyassin/Img/icons/pending.png", false)));
 
         // Set Mouse event on left menu
         makeOrder.setOnMouseEntered(this);
@@ -120,12 +140,20 @@ public class UserManageCustomers implements Initializable, EventHandler<MouseEve
         // Set Add New Customer Action Event on Confirm Button
         confirmBtn.setOnAction(e -> {
             if(actionCB.getValue() == null) {
-                System.err.println("Veuillez choisir un opération");
+                try {
+                    CustomerAlert.display("error", "Veuillez choisir un opération");
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
 
             } else if(actionCB.getValue().equals("Ajouter")) {
-                addNewCustomer();
+                try {
+                    addNewCustomer();
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
             } else if(actionCB.getValue().equals("Supprimer")) {
-                //TODO
+                deleteCustomer();
                 System.out.println(actionCB.getValue());
 
             } else if(actionCB.getValue().equals("Rechercher")) {
@@ -140,7 +168,18 @@ public class UserManageCustomers implements Initializable, EventHandler<MouseEve
         });
 
         // Set Combo box
-        actionCB.getItems().addAll("Mise à jour", "Supprimer", "Rechercher", "Ajouter");
+        actionCB.getItems().addAll("Mise à jour", "Supprimer", "Ajouter");
+        actionCB.valueProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                if(newValue.equals("Ajouter")) {
+                    // Set id
+                    setIDTF();
+                    // Clear inputs
+                    clearCustomerForm();
+                }
+            }
+        });
 
         // Set next ID for TextField
         setIDTF();
@@ -157,6 +196,31 @@ public class UserManageCustomers implements Initializable, EventHandler<MouseEve
         });
     }
 
+    private void deleteCustomer() {
+        int id = Integer.parseInt(idTF.getText());
+        try {
+            if(ManageCustomer.deleteCustomer(id)) {
+               System.out.println("Alert: Customer deleted");
+            } else {
+                try {
+                    CustomerAlert.display("error", "Can't delete this client or client doesn't exists");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        // Refresh
+        refreshCustomerTable();
+
+        // Clear inputs
+        clearCustomerForm();
+    }
+
     private void updateCustomer() {
         int id = Integer.parseInt(idTF.getText());
         String name = nameTF.getText();
@@ -166,9 +230,17 @@ public class UserManageCustomers implements Initializable, EventHandler<MouseEve
         try {
             boolean success = ManageCustomer.updateCustomer(id, name, phoneN, address);
             if(!success) {
-                System.out.println("Alert: update customer has failed !");
+                try {
+                    CustomerAlert.display("error", "Update customer has failed !");
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
             } else {
-                System.out.println("Alert: update customer is done !");
+                try {
+                    CustomerAlert.display("success", "Update Customer has been done successfully !");
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -219,26 +291,52 @@ public class UserManageCustomers implements Initializable, EventHandler<MouseEve
             e.printStackTrace();
         }
     }
-    private void addNewCustomer() {
+    private void addNewCustomer() throws IOException {
         String name = nameTF.getText();
         String phoneN = phoneNTF.getText();
         String address = addressTF.getText();
 
-        try {
-            if(!ManageCustomer.addNewCustomer(name, phoneN, address)) {
-                System.out.print("Alert: can't add new customer");
+        //Validate inputs
+        boolean validated = validateInputs(name, phoneN, address);
+
+        if(validated) {
+            try {
+                if (!ManageCustomer.addNewCustomer(name, phoneN, address)) {
+                    CustomerAlert.display("error", "Can't add new customer");
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+
+            // Refresh
+            refreshCustomerTable();
+
+            // Clear inputs
+            clearCustomerForm();
+
+            // Set next id
+            setIDTF();
+        } else {
+            CustomerAlert.display("error", "Please enter valide data !");
+        }
+    }
+
+    private boolean validateInputs(String name, String phoneN, String address) {
+        if(name.equals("")) {
+            return false;
         }
 
-        // Refresh
-        refreshCustomerTable();
+        if(phoneN.equals("")) {
+            return false;
+        }
 
-        // Clear inputs
-        clearCustomerForm();
+        if(address.equals("")) {
+            return false;
+        }
+
+        return true;
     }
 
     @FXML
@@ -267,5 +365,26 @@ public class UserManageCustomers implements Initializable, EventHandler<MouseEve
         } else if(event.getEventType().toString().equals("MOUSE_EXITED")) {
             pane.setStyle("-fx-background-color:  #343434;");
         }
+    }
+
+    private void searchForCustomer(String name) {
+        data = FXCollections.observableArrayList();
+        try {
+            ArrayList<Customer> customers = ManageCustomer.searchForCustomers(name);
+            for(Customer customer: customers) {
+                data.add(new CustomerTVModel(customer.getcID(), customer.getcName(), customer.getcPhoneN(), customer.getcAddress()));
+            }
+            customersTable.setItems(data);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    void searchEvent(KeyEvent e) {
+        JFXTextField tf = (JFXTextField) e.getSource();
+        searchForCustomer(tf.getText());
     }
 }

@@ -10,3 +10,7 @@
 #loginScreen {
     -fx-background-color: #161616;
 }
+
+#toast {
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 30, 0, 0, 0);
+}
