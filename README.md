@@ -1,2 +1,2 @@
-# restaurant-management
-Une application JavaFX pour la gestion des restaurants [commandes + livraison]
+# restaurant-management JavaFX App
+Une application JavaFX pour la gestion des restaurants [Gestion des clients, des commandes et des articles]
