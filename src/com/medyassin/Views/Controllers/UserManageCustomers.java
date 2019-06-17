@@ -20,7 +20,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
@@ -38,6 +37,15 @@ import java.util.ResourceBundle;
 public class UserManageCustomers implements Initializable, EventHandler<MouseEvent> {
     @FXML
     private Pane manageCustomers;
+
+    @FXML
+    private Pane pendingOrders;
+
+    @FXML
+    private Pane viewAllOrders;
+
+    @FXML
+    private Pane makeOrder;
 
     @FXML
     private JFXTextField searchTF;
@@ -64,16 +72,10 @@ public class UserManageCustomers implements Initializable, EventHandler<MouseEve
     private Circle pendingOrdersMask;
 
     @FXML
-    private Pane viewAllOrders;
-
-    @FXML
     private JFXButton confirmBtn;
 
     @FXML
     private Circle UserImageMaskCircle;
-
-    @FXML
-    private Pane pendingOrders;
 
     @FXML
     private BorderPane borderPane;
@@ -97,9 +99,6 @@ public class UserManageCustomers implements Initializable, EventHandler<MouseEve
     private TableColumn cID;
 
     @FXML
-    private Pane makeOrder;
-
-    @FXML
     private JFXTextField idTF;
 
     @FXML
@@ -112,32 +111,17 @@ public class UserManageCustomers implements Initializable, EventHandler<MouseEve
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        // Set Image for the circular mask
-        UserImageMaskCircle.setFill(new ImagePattern(new Image("/com/medyassin/Img/user_img.jpg", false)));
-
-        // Set no focus for logout btn
-        logoutBtn.setDisableVisualFocus(true);
-
-        // Set Image Icon for mask of 'Manage customers' ...
-        manageCustomersMask.setFill(new ImagePattern(new Image("/com/medyassin/Img/icons/user.png", false)));
-        makeOrderMask.setFill(new ImagePattern(new Image(getClass().getResource("/com/medyassin/Img/icons/order.png").toExternalForm(), false)));
-        viewAllOrdersMask.setFill(new ImagePattern(new Image("/com/medyassin/Img/icons/view.png", false)));
-        pendingOrdersMask.setFill(new ImagePattern(new Image("/com/medyassin/Img/icons/pending.png", false)));
-
-        // Set Mouse event on left menu
-        makeOrder.setOnMouseEntered(this);
-        makeOrder.setOnMouseExited(this);
-
-        viewAllOrders.setOnMouseEntered(this);
-        viewAllOrders.setOnMouseExited(this);
-
-        pendingOrders.setOnMouseEntered(this);
-        pendingOrders.setOnMouseExited(this);
+        /*
+        - Add icons to the sidebar
+        - Add user image to the top bar
+        - Add username to the top bar
+        */
+        setStaticItems();
 
         // Set Customer Table
         setCustomerTable();
 
-        // Set Add New Customer Action Event on Confirm Button
+
         confirmBtn.setOnAction(e -> {
             if(actionCB.getValue() == null) {
                 try {
@@ -154,10 +138,6 @@ public class UserManageCustomers implements Initializable, EventHandler<MouseEve
                 }
             } else if(actionCB.getValue().equals("Supprimer")) {
                 deleteCustomer();
-                System.out.println(actionCB.getValue());
-
-            } else if(actionCB.getValue().equals("Rechercher")) {
-                //TODO
                 System.out.println(actionCB.getValue());
 
             } else if(actionCB.getValue().equals("Mise à jour")) {
@@ -194,6 +174,20 @@ public class UserManageCustomers implements Initializable, EventHandler<MouseEve
                 addressTF.setText(cm.getCustomerAddress());
             }
         });
+    }
+
+    private void setStaticItems() {
+        // Set Image for the circular mask
+        UserImageMaskCircle.setFill(new ImagePattern(new Image("/com/medyassin/Img/user_img.jpg", false)));
+
+        // Set no focus for logout btn
+        logoutBtn.setDisableVisualFocus(true);
+
+        // Set Image Icon for mask of 'Manage customers' ...
+        manageCustomersMask.setFill(new ImagePattern(new Image("/com/medyassin/Img/icons/user.png", false)));
+        makeOrderMask.setFill(new ImagePattern(new Image(getClass().getResource("/com/medyassin/Img/icons/order.png").toExternalForm(), false)));
+        viewAllOrdersMask.setFill(new ImagePattern(new Image("/com/medyassin/Img/icons/view.png", false)));
+        pendingOrdersMask.setFill(new ImagePattern(new Image("/com/medyassin/Img/icons/pending.png", false)));
     }
 
     private void deleteCustomer() {
@@ -347,16 +341,6 @@ public class UserManageCustomers implements Initializable, EventHandler<MouseEve
         Utilities.switchScreen(currentScene, anchorPane, getClass().getResource("/com/medyassin/Views/Fxmls/LoginScreen.css").toExternalForm(), false);
     }
 
-    @FXML
-    private void manageCustomersHover() {
-        manageCustomers.setStyle("-fx-background-color: #1bb85a;");
-    }
-
-    @FXML
-    private void manageCustomersHoverEnd() {
-        manageCustomers.setStyle("-fx-background-color:  #22DB6C;");
-    }
-
     @Override
     public void handle(MouseEvent event) {
         Pane pane = (Pane) event.getSource();
@@ -386,5 +370,16 @@ public class UserManageCustomers implements Initializable, EventHandler<MouseEve
     void searchEvent(KeyEvent e) {
         JFXTextField tf = (JFXTextField) e.getSource();
         searchForCustomer(tf.getText());
+    }
+
+    @FXML
+    public void makeOrderClick(MouseEvent e) {
+        Scene currentScene = manageCustomers.getScene();
+        try {
+            BorderPane target = FXMLLoader.load(getClass().getResource("./../Fxmls/UserMakeOrder.fxml"));
+            Utilities.switchScreen(currentScene, target,getClass().getResource("./../Fxmls/UserMakeOrder.css").toExternalForm(), true);
+        } catch (IOException e1) {
+            e1.printStackTrace();
+        }
     }
 }

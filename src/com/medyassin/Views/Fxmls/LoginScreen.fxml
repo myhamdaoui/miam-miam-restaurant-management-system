@@ -38,7 +38,7 @@
       <!--Password TextField-->
       <JFXPasswordField fx:id="password" focusColor="#40de50" labelFloat="true" layoutX="107.0" layoutY="384.0" prefHeight="25.0" prefWidth="339.0" promptText="Password" />
    
-      <!--Login Button TextField-->
+      <!--Login Button -->
       <JFXButton fx:id="loginBtn" layoutX="107.0" layoutY="462.0" onAction="#btnLoginAction" prefHeight="42.0" prefWidth="339.0" style="-fx-background-color: #40DE50;" text="LOG IN" textFill="WHITE">
          <font>
             <Font name="HK Grotesk SemiBold" size="15.0" />

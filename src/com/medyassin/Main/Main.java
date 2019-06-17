@@ -31,7 +31,7 @@ public class Main extends Application {
      */
     private void setInitialParams(Stage primaryStage) {
         stage = primaryStage;
-        //hide titlebar
+
         try {
             /* Get XML Loader */
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../Views/Fxmls/LoginScreen.fxml"));
@@ -51,7 +51,7 @@ public class Main extends Application {
             primaryStage.setResizable(false);
 
             // Set icon
-            stage.getIcons().add(new Image(Main.class.getResourceAsStream("/com/medyassin/Img/icons/icon.png")));
+            stage.getIcons().add(new Image(getClass().getResourceAsStream("/com/medyassin/Img/icons/icon.png")));
             primaryStage.show();
 
         } catch (IOException e) {

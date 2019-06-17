@@ -9,33 +9,12 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
-<?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXComboBox?>
-<?import com.jfoenix.controls.JFXTextField?>
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.Cursor?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Separator?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.shape.Circle?>
-<?import javafx.scene.text.Font?>
 
 <BorderPane fx:id="borderPane" prefHeight="600.0" prefWidth="1000.0" stylesheets="@UserManageCustomers.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.medyassin.Views.Controllers.UserManageCustomers">
     <left>
         <VBox prefHeight="542.0" prefWidth="190.0" style="-fx-background-color: #1d262d;" BorderPane.alignment="CENTER">
             <children>
-                <Pane fx:id="manageCustomers" onMouseEntered="#manageCustomersHover" onMouseExited="#manageCustomersHoverEnd" prefHeight="93.0" prefWidth="137.0" style="-fx-background-color: #22DB6C;">
+                <Pane fx:id="manageCustomers" prefHeight="93.0" prefWidth="137.0" style="-fx-background-color: #22DB6C;">
                     <children>
                         <Circle fx:id="manageCustomersMask" fill="#ffffff00" layoutX="41.0" layoutY="30.0" radius="16.0" stroke="WHITE" strokeType="INSIDE" />
                         <Label layoutX="24.0" layoutY="56.0" text="Gérer les clients" textFill="WHITE">
@@ -48,7 +27,7 @@
                         <Cursor fx:constant="HAND" />
                     </cursor>
                 </Pane>
-                <Pane fx:id="makeOrder" layoutX="10.0" layoutY="10.0" prefHeight="93.0" prefWidth="137.0" style="-fx-background-color: #1d262d;">
+                <Pane fx:id="makeOrder" layoutX="10.0" layoutY="10.0" onMouseClicked="#makeOrderClick" prefHeight="93.0" prefWidth="137.0" style="-fx-background-color: #1d262d;">
                     <children>
                         <Circle fx:id="makeOrderMask" fill="#ffffff00" layoutX="41.0" layoutY="30.0" radius="16.0" stroke="WHITE" strokeType="INSIDE" />
                         <Label layoutX="24.0" layoutY="56.0" text="Passer une commande" textFill="WHITE">
@@ -173,7 +152,7 @@
                </HBox.margin>
                 </Label>
 
-                      <Pane HBox.hgrow="ALWAYS">
+             <Pane HBox.hgrow="ALWAYS">
                <HBox.margin>
                   <Insets />
                </HBox.margin>

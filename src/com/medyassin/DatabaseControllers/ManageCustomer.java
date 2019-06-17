@@ -50,9 +50,6 @@ public class ManageCustomer {
         // Connection
         Connection conn = DatabaseConnection.getDbConn().getConnection();
 
-        // Result
-        ArrayList<Customer> customers = new ArrayList<>();
-
         String query = "INSERT INTO Customers (cName, cPhoneN, cAddress) VALUES(?, ?, ?)";
         PreparedStatement stmt = conn.prepareStatement(query);
 

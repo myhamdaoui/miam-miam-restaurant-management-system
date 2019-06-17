@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane fx:id="borderPane" prefHeight="600.0" prefWidth="1000.0" stylesheets="@UserMakeOrder.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.medyassin.Views.Controllers.UserMakeOrder">
+    <left>
+        <VBox prefHeight="542.0" prefWidth="190.0" style="-fx-background-color: #1d262d;" BorderPane.alignment="CENTER">
+            <children>
+                <Pane fx:id="manageCustomers" onMouseClicked="#userManagClick" prefHeight="93.0" prefWidth="137.0" style="-fx-background-color: #1d262d;">
+                    <children>
+                        <Circle fx:id="manageCustomersMask" fill="#ffffff00" layoutX="41.0" layoutY="30.0" radius="16.0" stroke="WHITE" strokeType="INSIDE" />
+                        <Label layoutX="24.0" layoutY="56.0" text="Gérer les clients" textFill="WHITE">
+                            <font>
+                                <Font name="Roboto Bold" size="12.0" />
+                            </font>
+                        </Label>
+                    </children>
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor>
+                </Pane>
+                <Pane fx:id="makeOrder" layoutX="10.0" layoutY="10.0" prefHeight="93.0" prefWidth="137.0" style="-fx-background-color: #22DB6C;">
+                    <children>
+                        <Circle fx:id="makeOrderMask" fill="#ffffff00" layoutX="41.0" layoutY="30.0" radius="16.0" stroke="WHITE" strokeType="INSIDE" />
+                        <Label layoutX="24.0" layoutY="56.0" text="Passer une commande" textFill="WHITE">
+                            <font>
+                                <Font name="Roboto Bold" size="12.0" />
+                            </font>
+                        </Label>
+                    </children>
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor>
+                </Pane>
+                <Pane fx:id="viewAllOrders" layoutX="10.0" layoutY="103.0" prefHeight="93.0" prefWidth="137.0" style="-fx-background-color: #1d262d;">
+                    <children>
+                        <Circle fx:id="viewAllOrdersMask" fill="#ffffff00" layoutX="41.0" layoutY="30.0" radius="16.0" stroke="WHITE" strokeType="INSIDE" />
+                        <Label layoutX="24.0" layoutY="56.0" text="Voir toutes les commandes" textFill="WHITE">
+                            <font>
+                                <Font name="Roboto Bold" size="12.0" />
+                            </font>
+                        </Label>
+                    </children>
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor>
+                </Pane>
+                <Pane fx:id="pendingOrders" layoutX="10.0" layoutY="196.0" prefHeight="93.0" prefWidth="137.0" style="-fx-background-color: #1d262d;">
+                    <children>
+                        <Circle fx:id="pendingOrdersMask" fill="#ffffff00" layoutX="41.0" layoutY="30.0" radius="16.0" stroke="WHITE" strokeType="INSIDE" />
+                        <Label layoutX="24.0" layoutY="56.0" text="Commandes en attente" textFill="WHITE">
+                            <font>
+                                <Font name="Roboto Bold" size="12.0" />
+                            </font>
+                        </Label>
+                    </children>
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor>
+                </Pane>
+            </children>
+        </VBox>
+    </left>
+    <center>
+        <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+    </center>
+    <top>
+        <HBox prefHeight="54.0" prefWidth="1000.0" style="-fx-background-color: #1d262d;" BorderPane.alignment="CENTER">
+            <children>
+                <!--User Image Mask(Cirlce)-->
+                <Circle fx:id="UserImageMaskCircle" fill="DODGERBLUE" radius="19.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                <Label text="M. HAMDAOUI Mohammed-Yassin" textFill="#eeeeee">
+                    <padding>
+                        <Insets top="10.0" />
+                    </padding>
+                    <font>
+                        <Font name="Roboto Medium" size="14.0" />
+                    </font>
+                    <HBox.margin>
+                        <Insets left="10.0" />
+                    </HBox.margin>
+                </Label>
+
+                <Pane HBox.hgrow="ALWAYS">
+                    <HBox.margin>
+                        <Insets />
+                    </HBox.margin>
+                </Pane>
+                <!--Log out button-->
+                <JFXButton fx:id="logoutBtn" alignment="CENTER" onAction="#logoutBtnAction" prefHeight="34.0" prefWidth="99.0" ripplerFill="#2fff89" style="-fx-background-color: #48e4ad; -fx-background-radius: 50;" text="LOG OUT" textFill="WHITE">
+                    <padding>
+                        <Insets left="20.0" right="20.0" />
+                    </padding>
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor>
+                </JFXButton>
+            </children>
+            <padding>
+                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+            </padding>
+        </HBox>
+    </top>
+</BorderPane>

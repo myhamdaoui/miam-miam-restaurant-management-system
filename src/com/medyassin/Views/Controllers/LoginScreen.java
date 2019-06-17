@@ -7,6 +7,7 @@ import com.medyassin.DatabaseControllers.LoginController;
 import com.medyassin.Utilities.CustomAlert.CustomerAlert;
 import com.medyassin.Utilities.Utilities;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -15,6 +16,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 
+import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -38,7 +40,7 @@ public class LoginScreen implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        // Set keypress [Enter] listener
+
     }
 
     private void login() {
@@ -53,8 +55,8 @@ public class LoginScreen implements Initializable {
         //login
         try {
             //Get Main Screen XML of the user[Cassier]
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/medyassin/Views/Fxmls/UserManageCustomers.fxml"));
-            BorderPane userMainScreen = loader.load();
+            BorderPane userMainScreen = FXMLLoader.load((getClass().getResource("/com/medyassin/Views/Fxmls/UserManageCustomers.fxml")));
+
             // If user inputs are correct, the switch to the main screen
             if(LoginController.login(usernameInput, passwordInput)) {
                 //get the current stage

@@ -17,10 +17,8 @@ public class LoginController {
         PreparedStatement stmt = conn.prepareStatement(query);
         stmt.setObject(1, username);
         ResultSet set = stmt.executeQuery();
+
         if(set.next()) {
-            if(!set.getString("username").equals(username)) {
-                return false;
-            }
             String pwd = set.getString("password");
             if(pwd.equals(password)) {
                 return true;

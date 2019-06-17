@@ -23,9 +23,9 @@ public class Utilities {
         scene.getStylesheets().addAll(css);
         currentStage.setWidth(1000);
         currentStage.setHeight(600);
-        currentStage.setResizable(false);
+        //currentStage.setResizable(false);
         if(resizable) {
-            currentStage.setResizable(true);
+            //currentStage.setResizable(true);
         }
     }
 
