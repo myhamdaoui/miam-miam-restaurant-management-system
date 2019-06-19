@@ -17,12 +17,12 @@ public class Utilities {
      * @param target -> Target Layout(xml)
      * @param css -> Custom CSS Stylesheet
      */
-    public static void switchScreen(Scene scene, Parent target, String css, boolean resizable) {
+    public static void switchScreen(Scene scene, Parent target, String css, boolean resizable, int height) {
         Stage currentStage = (Stage) scene.getWindow();
         scene.setRoot(target);
         scene.getStylesheets().addAll(css);
         currentStage.setWidth(1000);
-        currentStage.setHeight(600);
+        currentStage.setHeight(height);
         //currentStage.setResizable(false);
         if(resizable) {
             //currentStage.setResizable(true);

@@ -61,7 +61,7 @@ public class LoginScreen implements Initializable {
             if(LoginController.login(usernameInput, passwordInput)) {
                 //get the current stage
                 Scene currentScene = loginScreen.getScene();
-                Utilities.switchScreen(currentScene, userMainScreen, getClass().getResource("./../Fxmls/UserManageCustomers.css").toExternalForm(), true);
+                Utilities.switchScreen(currentScene, userMainScreen, getClass().getResource("./../Fxmls/UserManageCustomers.css").toExternalForm(), true, 600);
             } else {
                 //Utilities.showToast("Please verify login information", toast);
                 try {

@@ -20,6 +20,21 @@ public class NewOrderController {
         return 99999;
     }
 
+    public static boolean deleteOrderDetail(String orderID, String itemCode) throws SQLException, ClassNotFoundException {
+        // Connection
+        Connection conn = DatabaseConnection.getDbConn().getConnection();
+
+        String query = "DELETE FROM orderdetails WHERE OrderID = ? AND ItemCode = ?";
+        PreparedStatement stmt = conn.prepareStatement(query);
+
+        stmt.setObject(1, orderID);
+        stmt.setObject(2, itemCode);
+        if(stmt.executeUpdate() == 1) {
+            return true;
+        }
+        return false;
+    }
+
     public static boolean addNewOrder(String orderDate, String cID, String orderStatus) throws SQLException, ClassNotFoundException{
         // Connection
         Connection conn = DatabaseConnection.getDbConn().getConnection();

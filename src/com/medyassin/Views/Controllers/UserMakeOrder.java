@@ -19,10 +19,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
@@ -206,12 +203,14 @@ public class UserMakeOrder implements Initializable {
 
                 int selectedIndex = customersCB.getSelectionModel().getSelectedIndex();
                 System.out.println(customersIDs);
-                int id = customersIDs[selectedIndex];
-                System.out.println("selectedIndex: " + id);
-                clientID.setText(id + "");
-                clientName.setText(customers.get(selectedIndex).getcName());
-                clientTel.setText(customers.get(selectedIndex).getcPhoneN());
-                clientAdress.setText(customers.get(selectedIndex).getcAddress());
+                if(selectedIndex >= 0) {
+                    int id = customersIDs[selectedIndex];
+                    System.out.println("selectedIndex: " + id);
+                    clientID.setText(id + "");
+                    clientName.setText(customers.get(selectedIndex).getcName());
+                    clientTel.setText(customers.get(selectedIndex).getcPhoneN());
+                    clientAdress.setText(customers.get(selectedIndex).getcAddress());
+                }
             });
 
         } catch (SQLException e1) {
@@ -379,6 +378,32 @@ public class UserMakeOrder implements Initializable {
         payementCB.getItems().add("paiement à la livraison");
     }
 
+    @FXML
+    public void deleteOrderItem(ActionEvent e) throws SQLException, ClassNotFoundException, IOException {
+        // get row index
+        ObservableList ol = itemsTable.getSelectionModel().getSelectedCells();
+        if(ol.size() > 0) {
+            TablePosition<AddNewOrderTVModel, String> tp = (TablePosition<AddNewOrderTVModel, String>)ol.get(0);
+            int index = tp.getRow();
+            AddNewOrderTVModel orderData = (AddNewOrderTVModel)itemsTable.getSelectionModel().getSelectedItem();
+
+            // remove item from data
+            data.remove(index);
+
+            // remove from orderdetails "BD"
+            /* PAS BESOIN PUISQUE IL FAUT CONIFMER L'ORDER
+            if(NewOrderController.deleteOrderDetail(orderID.getText(), orderData.getItemCode())) {
+                CustomerAlert.display("success", "le produit est bien supprimée");
+            } else {
+                CustomerAlert.display("error", "Erreur: le produit n'est pas supprimée");
+            }
+            */
+
+            // set data again
+            itemsTable.setItems(data);
+        }
+    }
+
     /* SECTION UserMakeOrder */
 
     private void setStaticItems() {
@@ -400,7 +425,7 @@ public class UserMakeOrder implements Initializable {
         // Go to login page
         Scene currentScene = logoutBtn.getScene();
         AnchorPane anchorPane = FXMLLoader.load(getClass().getResource("/com/medyassin/Views/Fxmls/LoginScreen.fxml"));
-        Utilities.switchScreen(currentScene, anchorPane, getClass().getResource("/com/medyassin/Views/Fxmls/LoginScreen.css").toExternalForm(), false);
+        Utilities.switchScreen(currentScene, anchorPane, getClass().getResource("/com/medyassin/Views/Fxmls/LoginScreen.css").toExternalForm(), false, 600);
     }
 
     @FXML
@@ -408,7 +433,7 @@ public class UserMakeOrder implements Initializable {
         Scene currentScene = manageCustomers.getScene();
         try {
             BorderPane target = FXMLLoader.load(getClass().getResource("./../Fxmls/UserManageCustomers.fxml"));
-            Utilities.switchScreen(currentScene, target,getClass().getResource("./../Fxmls/UserManageCustomers.css").toExternalForm(), true);
+            Utilities.switchScreen(currentScene, target,getClass().getResource("./../Fxmls/UserManageCustomers.css").toExternalForm(), true, 600);
         } catch (IOException e1) {
             e1.printStackTrace();
         }
@@ -419,7 +444,7 @@ public class UserMakeOrder implements Initializable {
         Scene currentScene = manageCustomers.getScene();
         try {
             BorderPane target = FXMLLoader.load(getClass().getResource("./../Fxmls/PendingOrders.fxml"));
-            Utilities.switchScreen(currentScene, target,getClass().getResource("./../Fxmls/PendingOrders.css").toExternalForm(), true);
+            Utilities.switchScreen(currentScene, target,getClass().getResource("./../Fxmls/PendingOrders.css").toExternalForm(), true, 600);
         } catch (IOException e1) {
             e1.printStackTrace();
         }
@@ -430,7 +455,7 @@ public class UserMakeOrder implements Initializable {
         Scene currentScene = manageCustomers.getScene();
         try {
             BorderPane target = FXMLLoader.load(getClass().getResource("./../Fxmls/ViewAllOrders.fxml"));
-            Utilities.switchScreen(currentScene, target,getClass().getResource("./../Fxmls/ViewAllOrders.css").toExternalForm(), true);
+            Utilities.switchScreen(currentScene, target,getClass().getResource("./../Fxmls/ViewAllOrders.css").toExternalForm(), true, 600);
         } catch (IOException e1) {
             e1.printStackTrace();
         }

@@ -2,21 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/src/com/medyassin/DatabaseControllers/ItemController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/medyassin/DatabaseControllers/NewOrderController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/medyassin/Models/Item.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/medyassin/Models/Order.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/medyassin/TableViewModels/AddNewOrderTVModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Restaurant Management Project/com/medyassin/DatabaseControllers/ManageCustomer.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Restaurant Management Project/com/medyassin/Views/Controllers/UserMakeOrder.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Restaurant Management Project/com/medyassin/Views/Controllers/UserMakeOrder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Restaurant Management Project/com/medyassin/Views/Controllers/UserManageCustomers$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Restaurant Management Project/com/medyassin/Views/Controllers/UserManageCustomers.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Restaurant Management Project/com/medyassin/Views/Controllers/UserManageCustomers.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Restaurant Management Project/com/medyassin/Views/Fxmls/UserMakeOrder.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Restaurant Management Project/com/medyassin/Views/Fxmls/UserMakeOrder.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/medyassin/DatabaseControllers/ManageCustomer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/medyassin/DatabaseControllers/ManageCustomerController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/medyassin/DatabaseControllers/NewOrderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/medyassin/DatabaseControllers/NewOrderController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/medyassin/Utilities/Utilities.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/medyassin/Utilities/Utilities.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/medyassin/Views/Controllers/LoginScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/medyassin/Views/Controllers/LoginScreen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/medyassin/Views/Controllers/PendingOrders.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/medyassin/Views/Controllers/PendingOrders.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/medyassin/Views/Controllers/UserMakeOrder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/medyassin/Views/Controllers/UserMakeOrder.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/medyassin/Views/Controllers/UserManageCustomers.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/medyassin/Views/Controllers/UserManageCustomers.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/medyassin/Views/Controllers/ViewAllOrders.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/medyassin/Views/Controllers/ViewAllOrders.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/medyassin/Views/Fxmls/UserMakeOrder.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/medyassin/Views/Fxmls/UserMakeOrder.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/medyassin/Views/Fxmls/ViewAllOrders.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/medyassin/Views/Fxmls/ViewAllOrders.fxml" afterDir="false" />
     </list>
     <ignored path="JavaFxApplication.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -76,90 +70,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/medyassin/Views/Controllers/UserMakeOrder.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="578">
-              <caret line="280" column="21" selection-start-line="280" selection-start-column="21" selection-end-line="280" selection-end-column="21" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#3567#3568#0" expanded="true" />
-                <element signature="e#3593#3594#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/medyassin/Utilities/CustomAlert/CustomerAlert.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-11">
-              <caret line="11" column="6" selection-start-line="11" selection-start-column="6" selection-end-line="11" selection-end-column="6" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/medyassin/DatabaseControllers/NewOrderController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="44" column="75" selection-start-line="44" selection-start-column="69" selection-end-line="44" selection-end-column="75" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/medyassin/TableViewModels/CustomerTVModel.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="19" lean-forward="true" selection-start-column="19" selection-end-column="19" />
-              <folding>
-                <element signature="e#652#653#0" expanded="true" />
-                <element signature="e#691#692#0" expanded="true" />
-                <element signature="e#747#748#0" expanded="true" />
-                <element signature="e#780#781#0" expanded="true" />
-                <element signature="e#832#833#0" expanded="true" />
-                <element signature="e#879#880#0" expanded="true" />
-                <element signature="e#918#919#0" expanded="true" />
-                <element signature="e#959#960#0" expanded="true" />
-                <element signature="e#1017#1018#0" expanded="true" />
-                <element signature="e#1052#1053#0" expanded="true" />
-                <element signature="e#1108#1109#0" expanded="true" />
-                <element signature="e#1159#1160#0" expanded="true" />
-                <element signature="e#1200#1201#0" expanded="true" />
-                <element signature="e#1243#1244#0" expanded="true" />
-                <element signature="e#1303#1304#0" expanded="true" />
-                <element signature="e#1340#1341#0" expanded="true" />
-                <element signature="e#1400#1401#0" expanded="true" />
-                <element signature="e#1455#1456#0" expanded="true" />
-                <element signature="e#1497#1498#0" expanded="true" />
-                <element signature="e#1541#1542#0" expanded="true" />
-                <element signature="e#1602#1603#0" expanded="true" />
-                <element signature="e#1640#1641#0" expanded="true" />
-                <element signature="e#1702#1703#0" expanded="true" />
-                <element signature="e#1759#1760#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/medyassin/DatabaseControllers/ItemController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1105">
-              <caret line="71" column="30" selection-start-line="71" selection-start-column="30" selection-end-line="71" selection-end-column="30" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/medyassin/DatabaseControllers/ManageCustomerController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="49" selection-start-line="49" selection-end-line="63" selection-end-column="20" />
+            <state relative-caret-position="170">
+              <caret line="246" column="45" selection-start-line="246" selection-start-column="34" selection-end-line="246" selection-end-column="45" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -170,14 +82,26 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/medyassin/Views/Controllers/UserManageCustomers.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="363">
-              <caret line="260" column="32" lean-forward="true" selection-start-line="260" selection-start-column="32" selection-end-line="260" selection-end-column="32" />
+            <state relative-caret-position="40">
+              <caret line="164" column="22" selection-start-line="164" selection-start-column="17" selection-end-line="164" selection-end-column="22" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#clearCustomerForm#0;class#UserManageCustomers#0" />
                 <element signature="method#setCustomerTable#0;class#UserManageCustomers#0" />
                 <element signature="method#searchForCustomer#0;class#UserManageCustomers#0" />
                 <element signature="method#searchEvent#0;class#UserManageCustomers#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/medyassin/DatabaseControllers/NewOrderController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="204">
+              <caret line="48" selection-start-line="48" selection-end-line="48" />
+              <folding>
+                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -201,6 +125,7 @@
       <find>view</find>
       <find>customersTable</find>
       <find>actionCB</find>
+      <find>table</find>
     </findStrings>
   </component>
   <component name="FindManager">
@@ -239,28 +164,28 @@
         <option value="$PROJECT_DIR$/src/com/medyassin/Utilities/CustomAlert/CustomerAlert.java" />
         <option value="$PROJECT_DIR$/src/com/medyassin/Views/Fxmls/LoginScreen.fxml" />
         <option value="$PROJECT_DIR$/src/com/medyassin/DatabaseControllers/LoginController.java" />
-        <option value="$PROJECT_DIR$/src/com/medyassin/Views/Controllers/LoginScreen.java" />
         <option value="$PROJECT_DIR$/src/com/medyassin/DatabaseControllers/ManageCustomer.java" />
-        <option value="$PROJECT_DIR$/src/com/medyassin/Utilities/Utilities.java" />
         <option value="$PROJECT_DIR$/src/com/medyassin/Views/Fxmls/ViewAllCommandes.fxml" />
         <option value="$PROJECT_DIR$/src/com/medyassin/Views/Controllers/ViewAllCommandes.java" />
         <option value="$PROJECT_DIR$/src/com/medyassin/Views/Fxmls/PendingOrder.fxml" />
-        <option value="$PROJECT_DIR$/src/com/medyassin/Views/Controllers/ViewAllOrders.java" />
-        <option value="$PROJECT_DIR$/src/com/medyassin/Views/Controllers/PendingOrders.java" />
         <option value="$PROJECT_DIR$/src/com/medyassin/Views/Fxmls/PendingOrders.fxml" />
         <option value="$PROJECT_DIR$/src/com/medyassin/Views/Fxmls/UserManageCustomers.fxml" />
-        <option value="$PROJECT_DIR$/src/com/medyassin/Views/Fxmls/ViewAllOrders.fxml" />
         <option value="$PROJECT_DIR$/src/com/medyassin/Views/Fxmls/UserMakeOrder.css" />
         <option value="$PROJECT_DIR$/src/com/medyassin/Views/Fxmls/UserMakeOrder.fxml" />
         <option value="$PROJECT_DIR$/src/com/medyassin/Views/Fxmls/UserManageCustomers.css" />
         <option value="$PROJECT_DIR$/src/com/medyassin/Models/Order.java" />
         <option value="$PROJECT_DIR$/src/com/medyassin/Models/Item.java" />
         <option value="$PROJECT_DIR$/src/com/medyassin/DatabaseControllers/ManageCustomerController.java" />
-        <option value="$PROJECT_DIR$/src/com/medyassin/Views/Controllers/UserManageCustomers.java" />
         <option value="$PROJECT_DIR$/src/com/medyassin/Main/Main.java" />
         <option value="$PROJECT_DIR$/src/com/medyassin/DatabaseControllers/ItemController.java" />
         <option value="$PROJECT_DIR$/src/com/medyassin/TableViewModels/CustomerTVModel.java" />
         <option value="$PROJECT_DIR$/src/com/medyassin/TableViewModels/AddNewOrderTVModel.java" />
+        <option value="$PROJECT_DIR$/src/com/medyassin/Views/Fxmls/ViewAllOrders.fxml" />
+        <option value="$PROJECT_DIR$/src/com/medyassin/Utilities/Utilities.java" />
+        <option value="$PROJECT_DIR$/src/com/medyassin/Views/Controllers/LoginScreen.java" />
+        <option value="$PROJECT_DIR$/src/com/medyassin/Views/Controllers/PendingOrders.java" />
+        <option value="$PROJECT_DIR$/src/com/medyassin/Views/Controllers/UserManageCustomers.java" />
+        <option value="$PROJECT_DIR$/src/com/medyassin/Views/Controllers/ViewAllOrders.java" />
         <option value="$PROJECT_DIR$/src/com/medyassin/DatabaseControllers/NewOrderController.java" />
         <option value="$PROJECT_DIR$/src/com/medyassin/Views/Controllers/UserMakeOrder.java" />
       </list>
@@ -283,7 +208,6 @@
     </navigator>
     <panes>
       <pane id="PackagesPane" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -316,10 +240,41 @@
               <item name="medyassin" type="462c0819:PsiDirectoryNode" />
               <item name="TableViewModels" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="Projet de Management de Restaurant" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Projet de Management de Restaurant" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="medyassin" type="462c0819:PsiDirectoryNode" />
+              <item name="Utilities" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Projet de Management de Restaurant" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Projet de Management de Restaurant" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="medyassin" type="462c0819:PsiDirectoryNode" />
+              <item name="Views" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Projet de Management de Restaurant" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Projet de Management de Restaurant" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="medyassin" type="462c0819:PsiDirectoryNode" />
+              <item name="Views" type="462c0819:PsiDirectoryNode" />
+              <item name="Controllers" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Projet de Management de Restaurant" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Projet de Management de Restaurant" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="medyassin" type="462c0819:PsiDirectoryNode" />
+              <item name="Views" type="462c0819:PsiDirectoryNode" />
+              <item name="Fxmls" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -331,7 +286,7 @@
     <property name="MemberChooser.sorted" value="false" />
     <property name="OverrideImplement.combined" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1560978975113" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1560987015670" />
     <property name="dynamic.classpath" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../PREP_EXAMS/DEV_IHM/codes" />
     <property name="project.structure.last.edited" value="SDKs" />
@@ -469,8 +424,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="22" width="1936" height="1019" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.6703755" visible="true" weight="0.18710022" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.6703755" visible="true" weight="0.18923241" />
       <window_info id="Structure" order="1" weight="0.25" />
       <window_info id="Favorites" order="2" />
       <window_info id="Designer" order="3" />
@@ -479,7 +435,7 @@
       <window_info id="Capture Tool" order="6" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32792583" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.23522596" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.23522596" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.3939745" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -580,24 +536,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/medyassin/Views/Controllers/LoginScreen.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="646">
-          <caret line="58" selection-start-line="58" selection-end-line="59" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/medyassin/Views/Fxmls/LoginScreen.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder" />
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="11" selection-start-line="11" selection-start-column="1" selection-end-line="11" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/medyassin/DatabaseControllers/DatabaseConnection.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="306">
@@ -626,49 +564,11 @@
     <entry file="file://$PROJECT_DIR$/src/com/medyassin/Views/Fxmls/PendingOrders.css">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/medyassin/Views/Fxmls/ViewAllOrders.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder" />
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="84" column="87" selection-start-line="84" selection-start-column="87" selection-end-line="84" selection-end-column="87" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/medyassin/Views/Controllers/PendingOrders.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="447">
-          <caret line="82" column="5" selection-start-line="82" selection-start-column="5" selection-end-line="82" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/medyassin/Views/Controllers/ViewAllOrders.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="97" column="9" lean-forward="true" selection-start-line="97" selection-start-column="9" selection-end-line="97" selection-end-column="9" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/medyassin/Views/Fxmls/PendingOrders.fxml">
       <provider editor-type-id="JavaFX-Scene-Builder" />
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
           <caret line="74" column="87" lean-forward="true" selection-start-line="74" selection-start-column="80" selection-end-line="74" selection-end-column="87" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/medyassin/Utilities/Utilities.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -775,73 +675,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/medyassin/DatabaseControllers/ItemController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1105">
-          <caret line="71" column="30" selection-start-line="71" selection-start-column="30" selection-end-line="71" selection-end-column="30" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/medyassin/Views/Controllers/UserManageCustomers.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="363">
-          <caret line="260" column="32" lean-forward="true" selection-start-line="260" selection-start-column="32" selection-end-line="260" selection-end-column="32" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#clearCustomerForm#0;class#UserManageCustomers#0" />
-            <element signature="method#setCustomerTable#0;class#UserManageCustomers#0" />
-            <element signature="method#searchForCustomer#0;class#UserManageCustomers#0" />
-            <element signature="method#searchEvent#0;class#UserManageCustomers#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/medyassin/TableViewModels/CustomerTVModel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="19" lean-forward="true" selection-start-column="19" selection-end-column="19" />
-          <folding>
-            <element signature="e#652#653#0" expanded="true" />
-            <element signature="e#691#692#0" expanded="true" />
-            <element signature="e#747#748#0" expanded="true" />
-            <element signature="e#780#781#0" expanded="true" />
-            <element signature="e#832#833#0" expanded="true" />
-            <element signature="e#879#880#0" expanded="true" />
-            <element signature="e#918#919#0" expanded="true" />
-            <element signature="e#959#960#0" expanded="true" />
-            <element signature="e#1017#1018#0" expanded="true" />
-            <element signature="e#1052#1053#0" expanded="true" />
-            <element signature="e#1108#1109#0" expanded="true" />
-            <element signature="e#1159#1160#0" expanded="true" />
-            <element signature="e#1200#1201#0" expanded="true" />
-            <element signature="e#1243#1244#0" expanded="true" />
-            <element signature="e#1303#1304#0" expanded="true" />
-            <element signature="e#1340#1341#0" expanded="true" />
-            <element signature="e#1400#1401#0" expanded="true" />
-            <element signature="e#1455#1456#0" expanded="true" />
-            <element signature="e#1497#1498#0" expanded="true" />
-            <element signature="e#1541#1542#0" expanded="true" />
-            <element signature="e#1602#1603#0" expanded="true" />
-            <element signature="e#1640#1641#0" expanded="true" />
-            <element signature="e#1702#1703#0" expanded="true" />
-            <element signature="e#1759#1760#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/medyassin/DatabaseControllers/ManageCustomerController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="49" selection-start-line="49" selection-end-line="63" selection-end-column="20" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/medyassin/Utilities/CustomAlert/CustomAlert.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
@@ -849,13 +682,6 @@
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/medyassin/Utilities/CustomAlert/CustomerAlert.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-11">
-          <caret line="11" column="6" selection-start-line="11" selection-start-column="6" selection-end-line="11" selection-end-column="6" />
         </state>
       </provider>
     </entry>
@@ -898,24 +724,152 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/medyassin/DatabaseControllers/NewOrderController.java">
+    <entry file="file://$PROJECT_DIR$/src/com/medyassin/Utilities/CustomAlert/CustomerAlert.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="44" column="75" selection-start-line="44" selection-start-column="69" selection-end-line="44" selection-end-column="75" />
+        <state relative-caret-position="187">
+          <caret line="11" column="6" selection-start-line="11" selection-start-column="6" selection-end-line="11" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/medyassin/TableViewModels/CustomerTVModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="19" selection-start-column="19" selection-end-column="19" />
+          <folding>
+            <element signature="e#652#653#0" expanded="true" />
+            <element signature="e#691#692#0" expanded="true" />
+            <element signature="e#747#748#0" expanded="true" />
+            <element signature="e#780#781#0" expanded="true" />
+            <element signature="e#832#833#0" expanded="true" />
+            <element signature="e#879#880#0" expanded="true" />
+            <element signature="e#918#919#0" expanded="true" />
+            <element signature="e#959#960#0" expanded="true" />
+            <element signature="e#1017#1018#0" expanded="true" />
+            <element signature="e#1052#1053#0" expanded="true" />
+            <element signature="e#1108#1109#0" expanded="true" />
+            <element signature="e#1159#1160#0" expanded="true" />
+            <element signature="e#1200#1201#0" expanded="true" />
+            <element signature="e#1243#1244#0" expanded="true" />
+            <element signature="e#1303#1304#0" expanded="true" />
+            <element signature="e#1340#1341#0" expanded="true" />
+            <element signature="e#1400#1401#0" expanded="true" />
+            <element signature="e#1455#1456#0" expanded="true" />
+            <element signature="e#1497#1498#0" expanded="true" />
+            <element signature="e#1541#1542#0" expanded="true" />
+            <element signature="e#1602#1603#0" expanded="true" />
+            <element signature="e#1640#1641#0" expanded="true" />
+            <element signature="e#1702#1703#0" expanded="true" />
+            <element signature="e#1759#1760#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/medyassin/DatabaseControllers/ItemController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1088">
+          <caret line="71" column="30" selection-start-line="71" selection-start-column="30" selection-end-line="71" selection-end-column="30" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/medyassin/Views/Controllers/UserMakeOrder.java">
+    <entry file="file://$PROJECT_DIR$/src/com/medyassin/DatabaseControllers/ManageCustomerController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="578">
-          <caret line="280" column="21" selection-start-line="280" selection-start-column="21" selection-end-line="280" selection-end-column="21" />
+        <state relative-caret-position="782">
+          <caret line="49" selection-start-line="49" selection-end-line="63" selection-end-column="20" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#3567#3568#0" expanded="true" />
-            <element signature="e#3593#3594#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/medyassin/Views/Fxmls/ViewAllOrders.fxml">
+      <provider editor-type-id="JavaFX-Scene-Builder" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" selection-start-line="3" selection-end-line="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/medyassin/Utilities/Utilities.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="24" column="37" selection-start-line="24" selection-start-column="37" selection-end-line="24" selection-end-column="37" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/medyassin/Views/Fxmls/LoginScreen.fxml">
+      <provider editor-type-id="JavaFX-Scene-Builder" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" column="11" selection-start-line="11" selection-start-column="1" selection-end-line="11" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/medyassin/Views/Controllers/LoginScreen.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="380">
+          <caret line="63" column="157" selection-start-line="63" selection-start-column="157" selection-end-line="63" selection-end-column="157" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/medyassin/Views/Controllers/PendingOrders.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="111" column="144" selection-start-line="111" selection-start-column="144" selection-end-line="111" selection-end-column="144" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/medyassin/Views/Controllers/ViewAllOrders.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="476">
+          <caret line="113" column="138" selection-start-line="113" selection-start-column="138" selection-end-line="113" selection-end-column="138" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/medyassin/DatabaseControllers/NewOrderController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="48" selection-start-line="48" selection-end-line="48" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/medyassin/Views/Controllers/UserManageCustomers.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="40">
+          <caret line="164" column="22" selection-start-line="164" selection-start-column="17" selection-end-line="164" selection-end-column="22" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#clearCustomerForm#0;class#UserManageCustomers#0" />
+            <element signature="method#setCustomerTable#0;class#UserManageCustomers#0" />
+            <element signature="method#searchForCustomer#0;class#UserManageCustomers#0" />
+            <element signature="method#searchEvent#0;class#UserManageCustomers#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/medyassin/Views/Controllers/UserMakeOrder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="246" column="45" selection-start-line="246" selection-start-column="34" selection-end-line="246" selection-end-column="45" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>

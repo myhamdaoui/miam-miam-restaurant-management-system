@@ -81,7 +81,7 @@ public class ViewAllOrders implements Initializable {
         // Go to login page
         Scene currentScene = logoutBtn.getScene();
         AnchorPane anchorPane = FXMLLoader.load(getClass().getResource("/com/medyassin/Views/Fxmls/LoginScreen.fxml"));
-        Utilities.switchScreen(currentScene, anchorPane, getClass().getResource("/com/medyassin/Views/Fxmls/LoginScreen.css").toExternalForm(), false);
+        Utilities.switchScreen(currentScene, anchorPane, getClass().getResource("/com/medyassin/Views/Fxmls/LoginScreen.css").toExternalForm(), false, 600);
     }
 
     @FXML
@@ -89,7 +89,7 @@ public class ViewAllOrders implements Initializable {
         Scene currentScene = manageCustomers.getScene();
         try {
             BorderPane target = FXMLLoader.load(getClass().getResource("./../Fxmls/UserManageCustomers.fxml"));
-            Utilities.switchScreen(currentScene, target,getClass().getResource("./../Fxmls/UserManageCustomers.css").toExternalForm(), true);
+            Utilities.switchScreen(currentScene, target,getClass().getResource("./../Fxmls/UserManageCustomers.css").toExternalForm(), true, 600);
         } catch (IOException e1) {
             e1.printStackTrace();
         }
@@ -100,7 +100,7 @@ public class ViewAllOrders implements Initializable {
         Scene currentScene = manageCustomers.getScene();
         try {
             BorderPane target = FXMLLoader.load(getClass().getResource("./../Fxmls/UserMakeOrder.fxml"));
-            Utilities.switchScreen(currentScene, target,getClass().getResource("./../Fxmls/UserMakeOrder.css").toExternalForm(), true);
+            Utilities.switchScreen(currentScene, target,getClass().getResource("./../Fxmls/UserMakeOrder.css").toExternalForm(), true, 710);
         } catch (IOException e1) {
             e1.printStackTrace();
         }
@@ -111,7 +111,7 @@ public class ViewAllOrders implements Initializable {
         Scene currentScene = manageCustomers.getScene();
         try {
             BorderPane target = FXMLLoader.load(getClass().getResource("./../Fxmls/PendingOrders.fxml"));
-            Utilities.switchScreen(currentScene, target,getClass().getResource("./../Fxmls/PendingOrders.css").toExternalForm(), true);
+            Utilities.switchScreen(currentScene, target,getClass().getResource("./../Fxmls/PendingOrders.css").toExternalForm(), true, 600);
         } catch (IOException e1) {
             e1.printStackTrace();
         }

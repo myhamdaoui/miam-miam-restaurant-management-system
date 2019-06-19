@@ -19,7 +19,7 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="borderPane" prefHeight="600.0" prefWidth="1000.0" stylesheets="@UserManageCustomers.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.medyassin.Views.Controllers.UserMakeOrder">
+<BorderPane fx:id="borderPane" prefHeight="681.0" prefWidth="1000.0" stylesheets="@UserManageCustomers.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.medyassin.Views.Controllers.UserMakeOrder">
     <left>
         <VBox prefHeight="542.0" prefWidth="190.0" style="-fx-background-color: #1d262d;" BorderPane.alignment="CENTER">
             <children>
@@ -81,11 +81,11 @@
     <center>
         <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <bottom>
-            <HBox alignment="CENTER_RIGHT" prefHeight="153.0" prefWidth="810.0" BorderPane.alignment="CENTER_RIGHT">
+            <HBox alignment="CENTER_RIGHT" prefHeight="226.0" prefWidth="810.0" BorderPane.alignment="CENTER_RIGHT">
                <children>
-                  <AnchorPane prefHeight="153.0" prefWidth="610.0" style="-fx-background-color: #eee;" HBox.hgrow="ALWAYS">
+                  <AnchorPane prefHeight="238.0" prefWidth="610.0" style="-fx-background-color: #eee;" HBox.hgrow="ALWAYS">
                       <children>
-                          <TableView fx:id="itemsTable" prefHeight="159.0" prefWidth="610.0" styleClass="table-view" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                          <TableView fx:id="itemsTable" prefHeight="226.0" prefWidth="610.0" styleClass="table-view" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                               <columns>
                                   <TableColumn fx:id="itemIDTC" prefWidth="122.0" text="code produit" />
                                   <TableColumn fx:id="itemNameTC" prefWidth="124.0" text="Description" />
@@ -101,21 +101,26 @@
                   </AnchorPane>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0">
                      <children>
-                        <JFXButton layoutX="23.0" layoutY="110.0" onAction="#confirmOrder" prefHeight="34.0" prefWidth="152.0" style="-fx-background-color: #22DB6C;" text="Confirmer" textFill="WHITE">
+                        <JFXButton layoutX="24.0" layoutY="179.0" onAction="#confirmOrder" prefHeight="34.0" prefWidth="152.0" style="-fx-background-color: #22DB6C;" text="Confirmer" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font></JFXButton>
-                        <JFXComboBox fx:id="payementCB" focusColor="#46e14d" layoutX="25.0" layoutY="73.0" prefHeight="25.0" prefWidth="150.0" promptText="Payer Maintenant ?" unFocusColor="#4bc635" AnchorPane.bottomAnchor="61.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" />
-                        <Label layoutX="23.0" layoutY="5.0" text="Total">
+                        <JFXComboBox fx:id="payementCB" focusColor="#46e14d" layoutX="25.0" layoutY="139.0" prefHeight="25.0" prefWidth="150.0" promptText="Payer Maintenant ?" unFocusColor="#4bc635" AnchorPane.bottomAnchor="62.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" />
+                        <Label layoutX="23.0" layoutY="17.0" text="Total">
                            <font>
                               <Font name="Arial" size="16.0" />
                            </font>
                         </Label>
-                        <Label fx:id="totalLabel" layoutX="22.0" layoutY="35.0" text="0 DH">
+                        <Label fx:id="totalLabel" layoutX="22.0" layoutY="42.0" text="0 DH">
                            <font>
                               <Font name="Roboto Black Italic" size="32.0" />
                            </font>
                         </Label>
+                        <JFXButton layoutX="24.0" layoutY="91.0" onAction="#deleteOrderItem" prefHeight="34.0" prefWidth="152.0" style="-fx-background-color: #e74c3c;" text="Supprimer" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </JFXButton>
                      </children>
                   </AnchorPane>
                </children>
@@ -132,7 +137,7 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #eee;">
                      <children>
                         <Label layoutX="23.0" layoutY="14.0" text="Commande Informations" textFill="#9a9a9a" AnchorPane.leftAnchor="23.0" AnchorPane.topAnchor="14.0">
                            <font>
@@ -143,7 +148,7 @@
                         <DatePicker fx:id="orderDate" layoutX="175.0" layoutY="52.0" promptText="Date de commande" />
                      </children>
                   </AnchorPane>
-                  <AnchorPane prefHeight="166.0" prefWidth="808.0" style="-fx-border-color: #eee;" GridPane.rowIndex="1">
+                  <AnchorPane prefHeight="166.0" prefWidth="808.0" style="-fx-border-color: #eee; -fx-background-color: #f6f6f6;" GridPane.rowIndex="1">
                      <children>
                         <Label layoutX="23.0" layoutY="18.0" text="Client Informations" textFill="#9a9a9a">
                            <font>
@@ -157,11 +162,11 @@
                         <JFXButton layoutX="694.0" layoutY="86.0" onAction="#addClient" prefHeight="29.0" prefWidth="97.0" style="-fx-background-color: #22DB6C;" text="Ajouter" textFill="WHITE" AnchorPane.bottomAnchor="12.0" AnchorPane.rightAnchor="17.0" />
                         <JFXComboBox fx:id="customersCB" focusColor="#46e14d" layoutX="25.0" layoutY="51.0" prefHeight="25.0" prefWidth="150.0" promptText="Choisir un client" unFocusColor="#4bc635" />
                         <Separator layoutX="220.0" layoutY="2.0" orientation="VERTICAL" prefHeight="126.0" prefWidth="7.0" AnchorPane.bottomAnchor="2.0" AnchorPane.topAnchor="1.0" />
-                        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="207.0" layoutY="48.0" prefHeight="29.0" prefWidth="36.0" style="-fx-background-color: #fff;" text="OU" />
+                        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="207.0" layoutY="48.0" prefHeight="29.0" prefWidth="36.0" style="-fx-background-color: #f6f6f6;" text="OU" />
                         <Label layoutX="251.0" layoutY="22.0" text="Ajouter un nouveau client" textFill="#a4a4a4" AnchorPane.topAnchor="19.0" />
                      </children>
                   </AnchorPane>
-                  <AnchorPane prefHeight="78.0" prefWidth="808.0" GridPane.rowIndex="2">
+                  <AnchorPane prefHeight="78.0" prefWidth="808.0" style="-fx-background-color: #fff;" GridPane.rowIndex="2">
                      <children>
                         <Label layoutX="25.0" layoutY="13.0" text="Produit Informations" textFill="#9a9a9a">
                            <font>
