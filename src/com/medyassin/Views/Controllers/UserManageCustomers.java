@@ -3,7 +3,7 @@ package com.medyassin.Views.Controllers;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
-import com.medyassin.DatabaseControllers.ManageCustomer;
+import com.medyassin.DatabaseControllers.ManageCustomerController;
 import com.medyassin.Models.Customer;
 import com.medyassin.TableViewModels.CustomerTVModel;
 import com.medyassin.Utilities.CustomAlert.CustomerAlert;
@@ -149,15 +149,12 @@ public class UserManageCustomers implements Initializable, EventHandler<MouseEve
 
         // Set Combo box
         actionCB.getItems().addAll("Mise à jour", "Supprimer", "Ajouter");
-        actionCB.valueProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                if(newValue.equals("Ajouter")) {
-                    // Set id
-                    setIDTF();
-                    // Clear inputs
-                    clearCustomerForm();
-                }
+        actionCB.valueProperty().addListener((observable, oldValue, newValue) -> {
+            if(newValue.equals("Ajouter")) {
+                // Set id
+                setIDTF();
+                // Clear inputs
+                clearCustomerForm();
             }
         });
 
@@ -193,7 +190,7 @@ public class UserManageCustomers implements Initializable, EventHandler<MouseEve
     private void deleteCustomer() {
         int id = Integer.parseInt(idTF.getText());
         try {
-            if(ManageCustomer.deleteCustomer(id)) {
+            if(ManageCustomerController.deleteCustomer(id)) {
                System.out.println("Alert: Customer deleted");
             } else {
                 try {
@@ -222,7 +219,7 @@ public class UserManageCustomers implements Initializable, EventHandler<MouseEve
         String address = addressTF.getText();
 
         try {
-            boolean success = ManageCustomer.updateCustomer(id, name, phoneN, address);
+            boolean success = ManageCustomerController.updateCustomer(id, name, phoneN, address);
             if(!success) {
                 try {
                     CustomerAlert.display("error", "Update customer has failed !");
@@ -255,7 +252,7 @@ public class UserManageCustomers implements Initializable, EventHandler<MouseEve
     private void refreshCustomerTable() {
         data = FXCollections.observableArrayList();
         try {
-            ArrayList<Customer> customers = ManageCustomer.getAllCustomers();
+            ArrayList<Customer> customers = ManageCustomerController.getAllCustomers();
             for(Customer customer: customers) {
                 data.add(new CustomerTVModel(customer.getcID(), customer.getcName(), customer.getcPhoneN(), customer.getcAddress()));
             }
@@ -278,7 +275,7 @@ public class UserManageCustomers implements Initializable, EventHandler<MouseEve
 
     private void setIDTF() {
         try {
-            idTF.setText(ManageCustomer.getNextID() + "");
+            idTF.setText(ManageCustomerController.getNextID() + "");
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
@@ -295,7 +292,7 @@ public class UserManageCustomers implements Initializable, EventHandler<MouseEve
 
         if(validated) {
             try {
-                if (!ManageCustomer.addNewCustomer(name, phoneN, address)) {
+                if (!ManageCustomerController.addNewCustomer(name, phoneN, address)) {
                     CustomerAlert.display("error", "Can't add new customer");
                 }
             } catch (SQLException e) {
@@ -354,7 +351,7 @@ public class UserManageCustomers implements Initializable, EventHandler<MouseEve
     private void searchForCustomer(String name) {
         data = FXCollections.observableArrayList();
         try {
-            ArrayList<Customer> customers = ManageCustomer.searchForCustomers(name);
+            ArrayList<Customer> customers = ManageCustomerController.searchForCustomers(name);
             for(Customer customer: customers) {
                 data.add(new CustomerTVModel(customer.getcID(), customer.getcName(), customer.getcPhoneN(), customer.getcAddress()));
             }

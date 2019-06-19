@@ -5,7 +5,7 @@ import com.medyassin.Models.Customer;
 import java.sql.*;
 import java.util.ArrayList;
 
-public class ManageCustomer {
+public class ManageCustomerController {
     /**
      * Retrieve all customers
      * @return ArrayList<Customer>

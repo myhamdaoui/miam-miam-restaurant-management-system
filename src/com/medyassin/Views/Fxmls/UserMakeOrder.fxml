@@ -85,13 +85,13 @@
                <children>
                   <AnchorPane prefHeight="153.0" prefWidth="610.0" style="-fx-background-color: #eee;" HBox.hgrow="ALWAYS">
                       <children>
-                          <TableView fx:id="ordersTable" prefHeight="159.0" prefWidth="610.0" styleClass="table-view" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                          <TableView fx:id="itemsTable" prefHeight="159.0" prefWidth="610.0" styleClass="table-view" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                               <columns>
-                                  <TableColumn fx:id="itemID" prefWidth="122.0" text="code produit" />
-                                  <TableColumn fx:id="itemName" prefWidth="124.0" text="Description" />
-                                  <TableColumn fx:id="itemPrice" text="Prix" />
-                                  <TableColumn fx:id="qt" text="Quantité" />
-                                  <TableColumn fx:id="amount" text="Total" />
+                                  <TableColumn fx:id="itemIDTC" prefWidth="122.0" text="code produit" />
+                                  <TableColumn fx:id="itemNameTC" prefWidth="124.0" text="Description" />
+                                  <TableColumn fx:id="itemPriceTC" text="Prix" />
+                                  <TableColumn fx:id="itemQtTC" text="Quantité" />
+                                  <TableColumn fx:id="itemAmountTC" text="Total" />
                               </columns>
                               <columnResizePolicy>
                                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -101,17 +101,17 @@
                   </AnchorPane>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0">
                      <children>
-                        <JFXButton layoutX="23.0" layoutY="110.0" prefHeight="34.0" prefWidth="152.0" style="-fx-background-color: #22DB6C;" text="Confirmer" textFill="WHITE">
+                        <JFXButton layoutX="23.0" layoutY="110.0" onAction="#confirmOrder" prefHeight="34.0" prefWidth="152.0" style="-fx-background-color: #22DB6C;" text="Confirmer" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font></JFXButton>
-                        <JFXComboBox focusColor="#46e14d" layoutX="25.0" layoutY="73.0" prefHeight="25.0" prefWidth="150.0" promptText="Payer Maintenant ?" unFocusColor="#4bc635" AnchorPane.bottomAnchor="61.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" />
+                        <JFXComboBox fx:id="payementCB" focusColor="#46e14d" layoutX="25.0" layoutY="73.0" prefHeight="25.0" prefWidth="150.0" promptText="Payer Maintenant ?" unFocusColor="#4bc635" AnchorPane.bottomAnchor="61.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" />
                         <Label layoutX="23.0" layoutY="5.0" text="Total">
                            <font>
                               <Font name="Arial" size="16.0" />
                            </font>
                         </Label>
-                        <Label layoutX="22.0" layoutY="35.0" text="2500 DH">
+                        <Label fx:id="totalLabel" layoutX="22.0" layoutY="35.0" text="0 DH">
                            <font>
                               <Font name="Roboto Black Italic" size="32.0" />
                            </font>
@@ -134,41 +134,44 @@
                <children>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0">
                      <children>
-                        <Label layoutX="23.0" layoutY="14.0" text="Commande Informations" AnchorPane.leftAnchor="23.0" AnchorPane.topAnchor="14.0">
+                        <Label layoutX="23.0" layoutY="14.0" text="Commande Informations" textFill="#9a9a9a" AnchorPane.leftAnchor="23.0" AnchorPane.topAnchor="14.0">
                            <font>
                               <Font name="Roboto Medium" size="14.0" />
                            </font>
                         </Label>
-                        <JFXTextField focusColor="#405aa8" layoutX="23.0" layoutY="51.0" promptText="Commande id" />
-                        <DatePicker layoutX="175.0" layoutY="52.0" promptText="Date de commande" style="-fx-border-width: 0 0 1px 0; -fx-border-color: #4059a9; -fx-background-color: transparent;" />
+                        <JFXTextField fx:id="orderID" disable="true" focusColor="#405aa8" layoutX="23.0" layoutY="51.0" promptText="Commande id" />
+                        <DatePicker fx:id="orderDate" layoutX="175.0" layoutY="52.0" promptText="Date de commande" />
                      </children>
                   </AnchorPane>
                   <AnchorPane prefHeight="166.0" prefWidth="808.0" style="-fx-border-color: #eee;" GridPane.rowIndex="1">
                      <children>
-                        <Label layoutX="23.0" layoutY="18.0" text="Client Informations">
+                        <Label layoutX="23.0" layoutY="18.0" text="Client Informations" textFill="#9a9a9a">
                            <font>
                               <Font name="Roboto Medium" size="14.0" />
                            </font>
                         </Label>
-                        <JFXTextField focusColor="#405aa8" layoutX="23.0" layoutY="43.0" prefHeight="25.0" prefWidth="73.0" promptText="Client ID" />
-                        <JFXTextField focusColor="#405aa8" layoutX="118.0" layoutY="43.0" prefHeight="25.0" prefWidth="151.0" promptText="Name" />
-                        <JFXTextField focusColor="#405aa8" layoutX="291.0" layoutY="43.0" promptText="Tél" />
-                        <JFXTextField focusColor="#405aa8" layoutX="23.0" layoutY="84.0" prefHeight="25.0" prefWidth="232.0" promptText="Adresse" />
-                        <JFXButton layoutX="698.0" layoutY="32.0" prefHeight="29.0" prefWidth="97.0" style="-fx-background-color: #22DB6C;" text="Ajouter" textFill="WHITE" AnchorPane.bottomAnchor="67.0" AnchorPane.rightAnchor="16.0" />
-                        <JFXButton layoutX="695.0" layoutY="71.0" prefHeight="29.0" prefWidth="99.0" ripplerFill="#5fe86d" style="-fx-background-color: transparent; -fx-border-color: #22DB6C; -fx-border-width: 2px; -fx-border-radius: 2px;" text="Rechercher" AnchorPane.bottomAnchor="27.0" AnchorPane.rightAnchor="14.0" />
+                        <JFXTextField fx:id="clientID" disable="true" focusColor="#405aa8" layoutX="251.0" layoutY="51.0" prefHeight="25.0" prefWidth="92.0" promptText="Client ID" />
+                        <JFXTextField fx:id="clientName" disable="true" focusColor="#405aa8" layoutX="377.0" layoutY="51.0" prefHeight="25.0" prefWidth="151.0" promptText="Name" />
+                        <JFXTextField fx:id="clientTel" disable="true" focusColor="#405aa8" layoutX="251.0" layoutY="86.0" promptText="Tél" />
+                        <JFXTextField fx:id="clientAdress" disable="true" focusColor="#405aa8" layoutX="420.0" layoutY="86.0" prefHeight="25.0" prefWidth="232.0" promptText="Adresse" />
+                        <JFXButton layoutX="694.0" layoutY="86.0" onAction="#addClient" prefHeight="29.0" prefWidth="97.0" style="-fx-background-color: #22DB6C;" text="Ajouter" textFill="WHITE" AnchorPane.bottomAnchor="12.0" AnchorPane.rightAnchor="17.0" />
+                        <JFXComboBox fx:id="customersCB" focusColor="#46e14d" layoutX="25.0" layoutY="51.0" prefHeight="25.0" prefWidth="150.0" promptText="Choisir un client" unFocusColor="#4bc635" />
+                        <Separator layoutX="220.0" layoutY="2.0" orientation="VERTICAL" prefHeight="126.0" prefWidth="7.0" AnchorPane.bottomAnchor="2.0" AnchorPane.topAnchor="1.0" />
+                        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="207.0" layoutY="48.0" prefHeight="29.0" prefWidth="36.0" style="-fx-background-color: #fff;" text="OU" />
+                        <Label layoutX="251.0" layoutY="22.0" text="Ajouter un nouveau client" textFill="#a4a4a4" AnchorPane.topAnchor="19.0" />
                      </children>
                   </AnchorPane>
                   <AnchorPane prefHeight="78.0" prefWidth="808.0" GridPane.rowIndex="2">
                      <children>
-                        <Label layoutX="25.0" layoutY="13.0" text="Produit Informations">
+                        <Label layoutX="25.0" layoutY="13.0" text="Produit Informations" textFill="#9a9a9a">
                            <font>
                               <Font name="Roboto Medium" size="14.0" />
                            </font>
                         </Label>
-                        <JFXComboBox focusColor="#46e14d" layoutX="25.0" layoutY="51.0" prefHeight="25.0" prefWidth="125.0" promptText="Catégorie" unFocusColor="#4bc635" />
-                        <JFXComboBox focusColor="#46e14d" layoutX="170.0" layoutY="51.0" prefHeight="25.0" prefWidth="150.0" promptText="Produit" unFocusColor="#4bc635" />
-                        <JFXTextField layoutX="345.0" layoutY="51.0" promptText="Quantité" />
-                        <JFXButton layoutX="707.0" layoutY="49.0" prefHeight="29.0" prefWidth="96.0" style="-fx-background-color: #22DB6C;" text="Ajouter" textFill="WHITE" AnchorPane.bottomAnchor="49.0" AnchorPane.rightAnchor="17.0" />
+                        <JFXComboBox fx:id="itemType" focusColor="#46e14d" layoutX="25.0" layoutY="51.0" onAction="#itemTypeAction" prefHeight="25.0" prefWidth="125.0" promptText="Catégorie" unFocusColor="#4bc635" />
+                        <JFXComboBox fx:id="itemName" focusColor="#46e14d" layoutX="170.0" layoutY="51.0" prefHeight="25.0" prefWidth="150.0" promptText="Produit" unFocusColor="#4bc635" />
+                        <JFXTextField fx:id="qt" layoutX="345.0" layoutY="51.0" promptText="Quantité" />
+                        <JFXButton layoutX="707.0" layoutY="49.0" onAction="#addItem" prefHeight="29.0" prefWidth="96.0" style="-fx-background-color: #22DB6C;" text="Ajouter" textFill="WHITE" AnchorPane.bottomAnchor="49.0" AnchorPane.rightAnchor="17.0" />
                      </children>
                   </AnchorPane>
                </children>
