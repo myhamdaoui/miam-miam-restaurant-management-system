@@ -48,7 +48,7 @@ public class Main extends Application {
             primaryStage.setWidth(1000);
             primaryStage.setHeight(600);
             primaryStage.setScene(scene);
-            primaryStage.setResizable(false);
+            //primaryStage.setResizable(false);
 
             // Set icon
             stage.getIcons().add(new Image(getClass().getResourceAsStream("/com/medyassin/Img/icons/icon.png")));
