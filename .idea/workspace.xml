@@ -7,8 +7,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/medyassin/DatabaseControllers/ManageCustomerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/medyassin/DatabaseControllers/ManageCustomerController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <ignored path="JavaFxApplication.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -75,7 +74,7 @@
         <entry file="file://$PROJECT_DIR$/../restaurant-management/src/com/medyassin/DatabaseControllers/ManageCustomerController.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="461">
-              <caret line="69" column="20" lean-forward="true" selection-start-line="49" selection-start-column="8" selection-end-line="69" selection-end-column="20" />
+              <caret line="69" column="20" selection-start-line="49" selection-start-column="8" selection-end-line="69" selection-end-column="20" />
             </state>
           </provider>
         </entry>
@@ -157,7 +156,7 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/medyassin/DatabaseControllers/ManageCustomerController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="486">
+            <state relative-caret-position="145">
               <caret line="69" column="20" selection-start-line="69" selection-start-column="20" selection-end-line="69" selection-end-column="20" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -275,7 +274,7 @@
     </option>
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="-9" />
     <option name="y" value="16" />
     <option name="width" value="1447" />
@@ -477,10 +476,10 @@
     <option name="totallyTimeSpent" value="1302000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.6703755" visible="true" weight="0.19667171" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.6703755" visible="true" weight="0.19667171" />
       <window_info id="Structure" order="1" weight="0.25" />
       <window_info id="Favorites" order="2" />
       <window_info id="Designer" order="3" />
@@ -489,7 +488,7 @@
       <window_info id="Capture Tool" order="6" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32792583" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.20973349" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.20949264" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.3939745" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -944,7 +943,7 @@
     <entry file="file://$PROJECT_DIR$/../restaurant-management/src/com/medyassin/DatabaseControllers/ManageCustomerController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="461">
-          <caret line="69" column="20" lean-forward="true" selection-start-line="49" selection-start-column="8" selection-end-line="69" selection-end-column="20" />
+          <caret line="69" column="20" selection-start-line="49" selection-start-column="8" selection-end-line="69" selection-end-column="20" />
         </state>
       </provider>
     </entry>
@@ -963,7 +962,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/medyassin/DatabaseControllers/ManageCustomerController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="486">
+        <state relative-caret-position="145">
           <caret line="69" column="20" selection-start-line="69" selection-start-column="20" selection-end-line="69" selection-end-column="20" />
           <folding>
             <element signature="imports" expanded="true" />
