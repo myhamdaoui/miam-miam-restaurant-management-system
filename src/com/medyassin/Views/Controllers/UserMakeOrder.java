@@ -238,7 +238,7 @@ public class UserMakeOrder implements Initializable {
 
     @FXML
     void confirmOrder(ActionEvent event) {
-        if(validateInputs()) {
+        if(validateOrderInputs()) {
             // get inputs :Order information
             String orderIDInput = orderID.getText();
             String orderDateInput = orderDate.getValue().toString();
@@ -408,22 +408,27 @@ public class UserMakeOrder implements Initializable {
     }
 
 
-    private boolean validateInputs() {
+    private boolean validateOrderInputs() {
         RequiredFieldValidator validator = new RequiredFieldValidator();
         validator.setMessage("Ce champ est obligatoire");
+        if(orderDate.getValue() == null) {
+            try {
+                CustomerAlert.display("error", "Veuillez choisir une date pour la commande");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return false;
+        }
 
-        clientName.getValidators().add(validator);
-        clientAdress.getValidators().add(validator);
-        clientTel.getValidators().add(validator);
+//        clientName.getValidators().add(validator);
+//        clientAdress.getValidators().add(validator);
+//        clientTel.getValidators().add(validator);
+        customersCB.getValidators().add(validator);
         itemType.getValidators().add(validator);
         itemName.getValidators().add(validator);
         qt.getValidators().add(validator);
 
-        if(!clientName.validate()) {
-            return false;
-        } else if(!clientAdress.validate()) {
-            return false;
-        } else if(!clientTel.validate()) {
+        if(!customersCB.validate()) {
             return false;
         } else if(!itemType.validate()) {
             return false;
