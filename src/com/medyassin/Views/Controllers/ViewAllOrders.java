@@ -124,7 +124,7 @@ public class ViewAllOrders implements Initializable {
 
     private void refreshTable(String date) {
         try {
-            data = AllOrdersController.getAllOrders(date);
+            data = AllOrdersController.getAllOrders(date, true);
             allOrdersTable.setItems(data);
 
         } catch (SQLException e) {
@@ -164,8 +164,8 @@ public class ViewAllOrders implements Initializable {
     public void userManagClick(MouseEvent e) {
         Scene currentScene = manageCustomers.getScene();
         try {
-            BorderPane target = FXMLLoader.load(getClass().getResource("./../Fxmls/UserManageCustomers.fxml"));
-            Utilities.switchScreen(currentScene, target,getClass().getResource("./../Fxmls/UserManageCustomers.css").toExternalForm(), true, 600);
+            BorderPane target = FXMLLoader.load(getClass().getResource("/com/medyassin/Views/Fxmls/UserManageCustomers.fxml"));
+            Utilities.switchScreen(currentScene, target,getClass().getResource("/com/medyassin/Views/Fxmls/UserManageCustomers.css").toExternalForm(), true, 600);
         } catch (IOException e1) {
             e1.printStackTrace();
         }
@@ -175,8 +175,8 @@ public class ViewAllOrders implements Initializable {
     public void makeOrderClick(MouseEvent e) {
         Scene currentScene = manageCustomers.getScene();
         try {
-            BorderPane target = FXMLLoader.load(getClass().getResource("./../Fxmls/UserMakeOrder.fxml"));
-            Utilities.switchScreen(currentScene, target,getClass().getResource("./../Fxmls/UserMakeOrder.css").toExternalForm(), true, 710);
+            BorderPane target = FXMLLoader.load(getClass().getResource("/com/medyassin/Views/Fxmls/UserMakeOrder.fxml"));
+            Utilities.switchScreen(currentScene, target,getClass().getResource("/com/medyassin/Views/Fxmls/UserMakeOrder.css").toExternalForm(), true, 710);
         } catch (IOException e1) {
             e1.printStackTrace();
         }
@@ -186,8 +186,8 @@ public class ViewAllOrders implements Initializable {
     public void pendingClick(MouseEvent e) {
         Scene currentScene = manageCustomers.getScene();
         try {
-            BorderPane target = FXMLLoader.load(getClass().getResource("./../Fxmls/PendingOrders.fxml"));
-            Utilities.switchScreen(currentScene, target,getClass().getResource("./../Fxmls/PendingOrders.css").toExternalForm(), true, 600);
+            BorderPane target = FXMLLoader.load(getClass().getResource("/com/medyassin/Views/Fxmls/PendingOrders.fxml"));
+            Utilities.switchScreen(currentScene, target,getClass().getResource("/com/medyassin/Views/Fxmls/PendingOrders.css").toExternalForm(), true, 600);
         } catch (IOException e1) {
             e1.printStackTrace();
         }

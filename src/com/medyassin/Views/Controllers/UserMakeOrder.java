@@ -3,6 +3,7 @@ package com.medyassin.Views.Controllers;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.validation.RequiredFieldValidator;
 import com.medyassin.DatabaseControllers.ItemController;
 import com.medyassin.DatabaseControllers.ManageCustomerController;
 import com.medyassin.DatabaseControllers.NewOrderController;
@@ -237,38 +238,40 @@ public class UserMakeOrder implements Initializable {
 
     @FXML
     void confirmOrder(ActionEvent event) {
-        // get inputs :Order information
-        String orderIDInput = orderID.getText();
-        String orderDateInput = orderDate.getValue().toString();
-        String customerID = clientID.getText();
-        String orderStatus = payementCB.getValue().equals("payez maintenant") ? "1" : "0";
+        if(validateInputs()) {
+            // get inputs :Order information
+            String orderIDInput = orderID.getText();
+            String orderDateInput = orderDate.getValue().toString();
+            String customerID = clientID.getText();
+            String orderStatus = payementCB.getValue().equals("payez maintenant") ? "1" : "0";
 
-        try {
-            if(NewOrderController.addNewOrder(orderDateInput, customerID, orderStatus)) {
-                CustomerAlert.display("success", "Votre commande a été bien ajoutée");
+            try {
+                if(NewOrderController.addNewOrder(orderDateInput, customerID, orderStatus)) {
+                    CustomerAlert.display("success", "Votre commande a été bien ajoutée");
 
-                for(AddNewOrderTVModel curr: (ObservableList<AddNewOrderTVModel>)itemsTable.getItems()) {
-                    // Add order details to DB
-                    if(!NewOrderController.addNewOrderDetails(orderID.getText() + "", curr.getItemCode(), curr.getItemQT())) {
-                        try {
-                            CustomerAlert.display("error", "Can't add order details");
-                        } catch(IOException e) {
-                            e.printStackTrace();
+                    for(AddNewOrderTVModel curr: (ObservableList<AddNewOrderTVModel>)itemsTable.getItems()) {
+                        // Add order details to DB
+                        if(!NewOrderController.addNewOrderDetails(orderID.getText() + "", curr.getItemCode(), curr.getItemQT())) {
+                            try {
+                                CustomerAlert.display("error", "Can't add order details");
+                            } catch(IOException e) {
+                                e.printStackTrace();
+                            }
                         }
                     }
+
+                    clearInputs();
+
+                } else {
+                    CustomerAlert.display("error", "Veuillez verifier les infromations de la commande");
                 }
-
-                clearInputs();
-
-            } else {
-                CustomerAlert.display("error", "Veuillez verifier les infromations de la commande");
+            } catch(SQLException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-        } catch(SQLException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
         }
     }
 
@@ -404,7 +407,38 @@ public class UserMakeOrder implements Initializable {
         }
     }
 
+
+    private boolean validateInputs() {
+        RequiredFieldValidator validator = new RequiredFieldValidator();
+        validator.setMessage("Ce champ est obligatoire");
+
+        clientName.getValidators().add(validator);
+        clientAdress.getValidators().add(validator);
+        clientTel.getValidators().add(validator);
+        itemType.getValidators().add(validator);
+        itemName.getValidators().add(validator);
+        qt.getValidators().add(validator);
+
+        if(!clientName.validate()) {
+            return false;
+        } else if(!clientAdress.validate()) {
+            return false;
+        } else if(!clientTel.validate()) {
+            return false;
+        } else if(!itemType.validate()) {
+            return false;
+        } else if(!itemName.validate()) {
+            return false;
+        } else if(!qt.validate()) {
+            return false;
+        }
+
+        return true;
+    }
+
     /* SECTION UserMakeOrder */
+
+
 
     private void setStaticItems() {
         // Set Image for the circular mask
@@ -432,8 +466,8 @@ public class UserMakeOrder implements Initializable {
     public void userManagClick(MouseEvent e) {
         Scene currentScene = manageCustomers.getScene();
         try {
-            BorderPane target = FXMLLoader.load(getClass().getResource("./../Fxmls/UserManageCustomers.fxml"));
-            Utilities.switchScreen(currentScene, target,getClass().getResource("./../Fxmls/UserManageCustomers.css").toExternalForm(), true, 600);
+            BorderPane target = FXMLLoader.load(getClass().getResource("/com/medyassin/Views/Fxmls/UserManageCustomers.fxml"));
+            Utilities.switchScreen(currentScene, target,getClass().getResource("/com/medyassin/Views/Fxmls/UserManageCustomers.css").toExternalForm(), true, 600);
         } catch (IOException e1) {
             e1.printStackTrace();
         }
@@ -443,8 +477,8 @@ public class UserMakeOrder implements Initializable {
     public void pendingClick(MouseEvent e) {
         Scene currentScene = manageCustomers.getScene();
         try {
-            BorderPane target = FXMLLoader.load(getClass().getResource("./../Fxmls/PendingOrders.fxml"));
-            Utilities.switchScreen(currentScene, target,getClass().getResource("./../Fxmls/PendingOrders.css").toExternalForm(), true, 600);
+            BorderPane target = FXMLLoader.load(getClass().getResource("/com/medyassin/Views/Fxmls/PendingOrders.fxml"));
+            Utilities.switchScreen(currentScene, target,getClass().getResource("/com/medyassin/Views/Fxmls/PendingOrders.css").toExternalForm(), true, 600);
         } catch (IOException e1) {
             e1.printStackTrace();
         }
@@ -454,8 +488,8 @@ public class UserMakeOrder implements Initializable {
     public void allOrderClick(MouseEvent e) {
         Scene currentScene = manageCustomers.getScene();
         try {
-            BorderPane target = FXMLLoader.load(getClass().getResource("./../Fxmls/ViewAllOrders.fxml"));
-            Utilities.switchScreen(currentScene, target,getClass().getResource("./../Fxmls/ViewAllOrders.css").toExternalForm(), true, 600);
+            BorderPane target = FXMLLoader.load(getClass().getResource("/com/medyassin/Views/Fxmls/ViewAllOrders.fxml"));
+            Utilities.switchScreen(currentScene, target,getClass().getResource("/com/medyassin/Views/Fxmls/ViewAllOrders.css").toExternalForm(), true, 600);
         } catch (IOException e1) {
             e1.printStackTrace();
         }

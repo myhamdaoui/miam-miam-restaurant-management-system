@@ -8,6 +8,11 @@
     -fx-background-radius: 5;
 }
 
+.split-pane > .split-pane-divider {
+    -fx-background-color: linear-gradient(to right, #ecf4fa 0%, #ced4d9 100%);
+    -fx-padding: 0 3 0 3;
+}
+
 #searchTF {
     -fx-text-fill: #fff;
     -fx-prompt-text-fill: #ccc;

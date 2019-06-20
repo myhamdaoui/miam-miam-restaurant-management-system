@@ -34,14 +34,14 @@ public class Main extends Application {
 
         try {
             /* Get XML Loader */
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../Views/Fxmls/LoginScreen.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/medyassin/Views/Fxmls/LoginScreen.fxml"));
             AnchorPane pane = loader.load();
 
             /* Set the scene */
             Scene scene = new Scene(pane);
 
             /* Set CSS Stylesheet */
-            scene.getStylesheets().addAll(getClass().getResource("./../Views/Fxmls/LoginScreen.css").toExternalForm());
+            scene.getStylesheets().addAll(getClass().getResource("/com/medyassin/Views/Fxmls/LoginScreen.css").toExternalForm());
 
             /* Stage = window parameters */
             primaryStage.setTitle("Restaurant Management System");

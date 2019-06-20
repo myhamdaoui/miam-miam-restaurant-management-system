@@ -1,12 +1,23 @@
 package com.medyassin.Views.Controllers;
 
 import com.jfoenix.controls.JFXButton;
+import com.medyassin.DatabaseControllers.AllOrdersController;
+import com.medyassin.TableViewModels.AddNewOrderTVModel;
+import com.medyassin.TableViewModels.ViewAllOrdersTVModel;
+import com.medyassin.Utilities.CustomAlert.CustomerAlert;
 import com.medyassin.Utilities.Utilities;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TablePosition;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -17,6 +28,7 @@ import javafx.scene.shape.Circle;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class PendingOrders implements Initializable {
@@ -50,6 +62,27 @@ public class PendingOrders implements Initializable {
     @FXML
     private Circle UserImageMaskCircle;
 
+    @FXML
+    private TableColumn orderIDTC;
+
+    @FXML
+    private TableColumn clientNameTC;
+
+    @FXML
+    private TableColumn orderDateTC;
+
+    @FXML
+    private TableColumn amountTC;
+
+    @FXML
+    private DatePicker datePicker;
+
+    @FXML
+    private TableView pendingOrdersTable;
+
+    private ObservableList<ViewAllOrdersTVModel> data = FXCollections.observableArrayList();
+
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         /*
@@ -58,7 +91,75 @@ public class PendingOrders implements Initializable {
         - Add username to the top bar
         */
         setStaticItems();
+
+        /* Set AllOrders table */
+        setPendingOrdersTable();
+
+        /* filter by date */
+        filterByDate();
     }
+
+    private void filterByDate() {
+        datePicker.setOnAction(e -> {
+            if(datePicker.getValue() == null) {
+                refreshTable("all");
+            } else {
+                refreshTable(datePicker.getValue().toString());
+            }
+
+        });
+    }
+
+    private void setPendingOrdersTable() {
+        orderIDTC.setCellValueFactory(new PropertyValueFactory<ViewAllOrdersTVModel, String>("orderID"));
+        clientNameTC.setCellValueFactory(new PropertyValueFactory<ViewAllOrdersTVModel, String>("clientName"));
+        orderDateTC.setCellValueFactory(new PropertyValueFactory<ViewAllOrdersTVModel, String>("orderDate"));
+        amountTC.setCellValueFactory(new PropertyValueFactory<ViewAllOrdersTVModel, String>("orderAmount"));
+
+        refreshTable("all");
+    }
+
+    private void refreshTable(String date) {
+        try {
+            data = AllOrdersController.getAllOrders(date, false);
+            pendingOrdersTable.setItems(data);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /* LOGIC HERE */
+
+    @FXML
+    public void markAsPaid(ActionEvent e) throws IOException, SQLException, ClassNotFoundException {
+        // get row index
+
+        ObservableList ol = pendingOrdersTable.getSelectionModel().getSelectedCells();
+        if(ol.size() > 0) {
+            TablePosition<ViewAllOrdersTVModel, String> tp = (TablePosition<ViewAllOrdersTVModel, String>)ol.get(0);
+            int index = tp.getRow();
+            ViewAllOrdersTVModel orderData = (ViewAllOrdersTVModel)pendingOrdersTable.getSelectionModel().getSelectedItem();
+            System.out.println("index:" + index);
+            // remove item from data
+            data.remove(index);
+
+            // remove from orderdetails "BD"
+            if(AllOrdersController.markAsPaid(orderData.getOrderID())) {
+                CustomerAlert.display("success", "la commande a été payée");
+            } else {
+                CustomerAlert.display("error", "Erreur: La commande ne peut pas être payée");
+            }
+
+
+            // set data again
+            pendingOrdersTable.setItems(data);
+        }
+    }
+
+    /* SECTION Pending orders */
 
     private void setStaticItems() {
         // Set Image for the circular mask
@@ -86,8 +187,8 @@ public class PendingOrders implements Initializable {
     public void makeOrderClick(MouseEvent e) {
         Scene currentScene = manageCustomers.getScene();
         try {
-            BorderPane target = FXMLLoader.load(getClass().getResource("./../Fxmls/UserMakeOrder.fxml"));
-            Utilities.switchScreen(currentScene, target,getClass().getResource("./../Fxmls/UserMakeOrder.css").toExternalForm(), true, 710);
+            BorderPane target = FXMLLoader.load(getClass().getResource("/com/medyassin/Views/Fxmls/UserMakeOrder.fxml"));
+            Utilities.switchScreen(currentScene, target,getClass().getResource("/com/medyassin/Views/Fxmls/UserMakeOrder.css").toExternalForm(), true, 710);
         } catch (IOException e1) {
             e1.printStackTrace();
         }
@@ -97,8 +198,8 @@ public class PendingOrders implements Initializable {
     public void allOrderClick(MouseEvent e) {
         Scene currentScene = manageCustomers.getScene();
         try {
-            BorderPane target = FXMLLoader.load(getClass().getResource("./../Fxmls/ViewAllOrders.fxml"));
-            Utilities.switchScreen(currentScene, target,getClass().getResource("./../Fxmls/ViewAllOrders.css").toExternalForm(), true, 600);
+            BorderPane target = FXMLLoader.load(getClass().getResource("/com/medyassin/Views/Fxmls/ViewAllOrders.fxml"));
+            Utilities.switchScreen(currentScene, target,getClass().getResource("/com/medyassin/Views/Fxmls/ViewAllOrders.css").toExternalForm(), true, 600);
         } catch (IOException e1) {
             e1.printStackTrace();
         }
@@ -108,8 +209,8 @@ public class PendingOrders implements Initializable {
     public void userManagClick(MouseEvent e) {
         Scene currentScene = manageCustomers.getScene();
         try {
-            BorderPane target = FXMLLoader.load(getClass().getResource("./../Fxmls/UserManageCustomers.fxml"));
-            Utilities.switchScreen(currentScene, target,getClass().getResource("./../Fxmls/UserManageCustomers.css").toExternalForm(), true, 600);
+            BorderPane target = FXMLLoader.load(getClass().getResource("/com/medyassin/Views/Fxmls/UserManageCustomers.fxml"));
+            Utilities.switchScreen(currentScene, target,getClass().getResource("/com/medyassin/Views/Fxmls/UserManageCustomers.css").toExternalForm(), true, 600);
         } catch (IOException e1) {
             e1.printStackTrace();
         }

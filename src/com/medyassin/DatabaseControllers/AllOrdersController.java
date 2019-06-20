@@ -2,6 +2,7 @@ package com.medyassin.DatabaseControllers;
 
 import com.medyassin.Models.Customer;
 import com.medyassin.TableViewModels.ViewAllOrdersTVModel;
+import com.sun.org.apache.bcel.internal.generic.RET;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -12,17 +13,25 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class AllOrdersController {
-    public static ObservableList<ViewAllOrdersTVModel> getAllOrders(String date) throws SQLException, ClassNotFoundException {
+    public static ObservableList<ViewAllOrdersTVModel> getAllOrders(String date, boolean all) throws SQLException, ClassNotFoundException {
         // Connection
         Connection conn = DatabaseConnection.getDbConn().getConnection();
 
         // Result
         ObservableList<ViewAllOrdersTVModel> list = FXCollections.observableArrayList();
         String query = "";
-        if(date.equals("all")) {
-            query = "SELECT OrderID, OrderDate, cName, OrderStatus FROM orders o, customers c WHERE o.CID = c.cID";
+        if(all) {
+            if(date.equals("all")) {
+                query = "SELECT OrderID, OrderDate, cName, OrderStatus FROM orders o, customers c WHERE o.CID = c.cID";
+            } else {
+                query = "SELECT OrderID, OrderDate, cName, OrderStatus FROM orders o, customers c WHERE o.CID = c.cID AND OrderDate = ?";
+            }
         } else {
-            query = "SELECT OrderID, OrderDate, cName, OrderStatus FROM orders o, customers c WHERE o.CID = c.cID AND OrderDate = ?";
+            if(date.equals("all")) {
+                query = "SELECT OrderID, OrderDate, cName, OrderStatus FROM orders o, customers c WHERE o.CID = c.cID AND o.OrderStatus = 0";
+            } else {
+                query = "SELECT OrderID, OrderDate, cName, OrderStatus FROM orders o, customers c WHERE o.CID = c.cID AND OrderDate = ? o.OrderStatus = 0";
+            }
         }
         PreparedStatement stmt = conn.prepareStatement(query);
 
@@ -41,7 +50,7 @@ public class AllOrdersController {
             // Create a Customer
             ViewAllOrdersTVModel o = new ViewAllOrdersTVModel();
             if(result1.next()) {
-                o.setOrderAmount(result1.getString("amount"));
+                o.setOrderAmount(result1.getString("amount") + " DH");
             }
             o.setOrderID(result.getString("OrderID"));
             o.setOrderDate(result.getString("OrderDate"));
@@ -57,5 +66,21 @@ public class AllOrdersController {
         }
 
         return list;
+    }
+
+    public static boolean markAsPaid(String orderID) throws SQLException, ClassNotFoundException {
+        // Connection
+        Connection conn = DatabaseConnection.getDbConn().getConnection();
+
+        String query = "UPDATE orders SET OrderStatus = 1 WHERE orderID = ?";
+        PreparedStatement stmt = conn.prepareStatement(query);
+
+        stmt.setObject(1, orderID);
+
+        if(stmt.executeUpdate() > 0) {
+            return true;
+        }
+
+        return false;
     }
 }

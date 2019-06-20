@@ -3,6 +3,7 @@ package com.medyassin.Views.Controllers;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.validation.RequiredFieldValidator;
 import com.medyassin.DatabaseControllers.ManageCustomerController;
 import com.medyassin.Models.Customer;
 import com.medyassin.TableViewModels.CustomerTVModel;
@@ -46,9 +47,6 @@ public class UserManageCustomers implements Initializable, EventHandler<MouseEve
 
     @FXML
     private Pane makeOrder;
-
-    @FXML
-    private JFXTextField searchTF;
 
     @FXML
     private TableView customersTable;
@@ -138,7 +136,6 @@ public class UserManageCustomers implements Initializable, EventHandler<MouseEve
                 }
             } else if(actionCB.getValue().equals("Supprimer")) {
                 deleteCustomer();
-                System.out.println(actionCB.getValue());
 
             } else if(actionCB.getValue().equals("Mise à jour")) {
                 //TODO
@@ -191,7 +188,7 @@ public class UserManageCustomers implements Initializable, EventHandler<MouseEve
         int id = Integer.parseInt(idTF.getText());
         try {
             if(ManageCustomerController.deleteCustomer(id)) {
-               System.out.println("Alert: Customer deleted");
+               CustomerAlert.display("success", "Le client a été bien supprimé");
             } else {
                 try {
                     CustomerAlert.display("error", "Can't delete this client or client doesn't exists");
@@ -202,6 +199,8 @@ public class UserManageCustomers implements Initializable, EventHandler<MouseEve
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
@@ -288,12 +287,14 @@ public class UserManageCustomers implements Initializable, EventHandler<MouseEve
         String address = addressTF.getText();
 
         //Validate inputs
-        boolean validated = validateInputs(name, phoneN, address);
+        boolean validated = validateInputs();
 
         if(validated) {
             try {
                 if (!ManageCustomerController.addNewCustomer(name, phoneN, address)) {
                     CustomerAlert.display("error", "Can't add new customer");
+                } else {
+                    CustomerAlert.display("success", "Le client a été bien ajouté");
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -309,21 +310,21 @@ public class UserManageCustomers implements Initializable, EventHandler<MouseEve
 
             // Set next id
             setIDTF();
-        } else {
-            CustomerAlert.display("error", "Please enter valide data !");
         }
     }
 
-    private boolean validateInputs(String name, String phoneN, String address) {
-        if(name.equals("")) {
-            return false;
-        }
+    private boolean validateInputs() {
+        RequiredFieldValidator validator = new RequiredFieldValidator();
+        validator.setMessage("Ce champ est obligatoire");
+        nameTF.getValidators().add(validator);
+        phoneNTF.getValidators().add(validator);
+        addressTF.getValidators().add(validator);
 
-        if(phoneN.equals("")) {
+        if(!nameTF.validate()) {
             return false;
-        }
-
-        if(address.equals("")) {
+        } else if(!phoneNTF.validate()) {
+            return false;
+        } else if(!addressTF.validate()) {
             return false;
         }
 
@@ -373,8 +374,8 @@ public class UserManageCustomers implements Initializable, EventHandler<MouseEve
     public void makeOrderClick(MouseEvent e) {
         Scene currentScene = manageCustomers.getScene();
         try {
-            BorderPane target = FXMLLoader.load(getClass().getResource("./../Fxmls/UserMakeOrder.fxml"));
-            Utilities.switchScreen(currentScene, target,getClass().getResource("./../Fxmls/UserMakeOrder.css").toExternalForm(), true, 710);
+            BorderPane target = FXMLLoader.load(getClass().getResource("/com/medyassin/Views/Fxmls/UserMakeOrder.fxml"));
+            Utilities.switchScreen(currentScene, target,getClass().getResource("/com/medyassin/Views/Fxmls/UserMakeOrder.css").toExternalForm(), true, 710);
         } catch (IOException e1) {
             e1.printStackTrace();
         }
@@ -384,8 +385,8 @@ public class UserManageCustomers implements Initializable, EventHandler<MouseEve
     public void allOrderClick(MouseEvent e) {
         Scene currentScene = manageCustomers.getScene();
         try {
-            BorderPane target = FXMLLoader.load(getClass().getResource("./../Fxmls/ViewAllOrders.fxml"));
-            Utilities.switchScreen(currentScene, target,getClass().getResource("./../Fxmls/ViewAllOrders.css").toExternalForm(), true,  600);
+            BorderPane target = FXMLLoader.load(getClass().getResource("/com/medyassin/Views/Fxmls/ViewAllOrders.fxml"));
+            Utilities.switchScreen(currentScene, target,getClass().getResource("/com/medyassin/Views/Fxmls/ViewAllOrders.css").toExternalForm(), true,  600);
         } catch (IOException e1) {
             e1.printStackTrace();
         }
@@ -395,8 +396,8 @@ public class UserManageCustomers implements Initializable, EventHandler<MouseEve
     public void pendingClick(MouseEvent e) {
         Scene currentScene = manageCustomers.getScene();
         try {
-            BorderPane target = FXMLLoader.load(getClass().getResource("./../Fxmls/PendingOrders.fxml"));
-            Utilities.switchScreen(currentScene, target,getClass().getResource("./../Fxmls/PendingOrders.css").toExternalForm(), true, 600);
+            BorderPane target = FXMLLoader.load(getClass().getResource("/com/medyassin/Views/Fxmls/PendingOrders.fxml"));
+            Utilities.switchScreen(currentScene, target,getClass().getResource("/com/medyassin/Views/Fxmls/PendingOrders.css").toExternalForm(), true, 600);
         } catch (IOException e1) {
             e1.printStackTrace();
         }

@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.shape.*?>
 <?import javafx.scene.effect.*?>
 <?import com.jfoenix.controls.*?>
 <?import java.lang.*?>
@@ -11,12 +13,17 @@
 
 <AnchorPane fx:id="loginScreen" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" stylesheets="@LoginScreen.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.medyassin.Views.Controllers.LoginScreen">
    <children>
-      <!--Right Image-->
-      <ImageView fitHeight="600.0" fitWidth="455.0" layoutX="552.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../Img/welcome_bg.png" />
-         </image>
-      </ImageView>
+      <Circle layoutX="670.0" layoutY="206.0" radius="108.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" AnchorPane.rightAnchor="222.0">
+         <fill>
+            <LinearGradient endX="0.8285714285714285" endY="0.1952380952380952">
+               <stops>
+                  <Stop color="#53785c" />
+                  <Stop color="#d7485b" offset="0.007662835249042145" />
+                  <Stop color="#ffb871" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </fill>
+      </Circle>
    
       <!--App Name-->
       <Label layoutX="107.0" layoutY="98.0" prefHeight="96.0" prefWidth="339.0" text="Restaurant Management System" textFill="WHITE" wrapText="true">
@@ -26,17 +33,17 @@
       </Label>
    
       <!--App Login Description-->
-      <Label layoutX="107.0" layoutY="238.0" text="Please enter login information" textFill="#8a8a8a">
+      <Label layoutX="107.0" layoutY="238.0" text="Please enter login information" textFill="#5b5b5b">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
    
       <!--Username TextField-->
-      <JFXTextField fx:id="username" focusColor="#40de50" labelFloat="true" layoutX="107.0" layoutY="317.0" prefHeight="25.0" prefWidth="339.0" promptText="Username" />
+      <JFXTextField fx:id="username" focusColor="#40de50" labelFloat="true" layoutX="107.0" layoutY="317.0" prefHeight="25.0" prefWidth="339.0" promptText="Username" unFocusColor="#494949" />
    
       <!--Password TextField-->
-      <JFXPasswordField fx:id="password" focusColor="#40de50" labelFloat="true" layoutX="107.0" layoutY="384.0" prefHeight="25.0" prefWidth="339.0" promptText="Password" />
+      <JFXPasswordField fx:id="password" focusColor="#40de50" labelFloat="true" layoutX="107.0" layoutY="384.0" prefHeight="25.0" prefWidth="339.0" promptText="Password" unFocusColor="#494949" />
    
       <!--Login Button -->
       <JFXButton fx:id="loginBtn" layoutX="107.0" layoutY="462.0" onAction="#btnLoginAction" prefHeight="42.0" prefWidth="339.0" style="-fx-background-color: #40DE50;" text="LOG IN" textFill="WHITE">
@@ -52,5 +59,17 @@
             <Font size="16.0" />
          </font>
       </Label>
+      <Circle fx:id="heroImgCircle" fill="#a1a1a1" layoutX="918.0" layoutY="373.0" radius="303.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" AnchorPane.bottomAnchor="-76.0" AnchorPane.rightAnchor="-221.0" AnchorPane.topAnchor="70.0" />
+      <Circle layoutX="29.0" radius="78.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0">
+         <fill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop color="#53785c" />
+                  <Stop color="#86f5ee" offset="0.007662835249042145" />
+                  <Stop color="#84ff82" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </fill>
+      </Circle>
    </children>
 </AnchorPane>

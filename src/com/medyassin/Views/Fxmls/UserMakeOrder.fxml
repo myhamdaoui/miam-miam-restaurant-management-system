@@ -137,7 +137,7 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #eee;">
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0">
                      <children>
                         <Label layoutX="23.0" layoutY="14.0" text="Commande Informations" textFill="#9a9a9a" AnchorPane.leftAnchor="23.0" AnchorPane.topAnchor="14.0">
                            <font>

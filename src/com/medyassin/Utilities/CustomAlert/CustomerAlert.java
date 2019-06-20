@@ -21,17 +21,16 @@ public class CustomerAlert {
         window.initStyle(StageStyle.TRANSPARENT);
         window.initModality(Modality.APPLICATION_MODAL);
 
-        AnchorPane pane = FXMLLoader.load(CustomerAlert.class.getResource("./CustomAlert.fxml"));
-        Pane pane1 = (Pane) pane.getChildren().get(0);
-        Label msgLabel = (Label) pane1.getChildren().get(0);
+        AnchorPane pane = FXMLLoader.load(CustomerAlert.class.getResource("/com/medyassin/Utilities/CustomAlert/CustomAlert.fxml"));
+        Label msgLabel = (Label) pane.getChildren().get(2);
 
         if(type.equals("error")) {
             // do nothing
         } else {
             // Retrieve the imageview
-            ImageView img = (ImageView) pane1.getChildren().get(2);
+            ImageView img = (ImageView) pane.getChildren().get(1);
             // change source image to success icon
-            img.setImage(new Image(CustomerAlert.class.getResourceAsStream("./icons/success.png")));
+            img.setImage(new Image(CustomerAlert.class.getResourceAsStream("/com/medyassin/Utilities/CustomAlert/icons/success.png")));
         }
 
         msgLabel.setText(message);

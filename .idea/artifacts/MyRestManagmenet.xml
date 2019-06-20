@@ -1,0 +1,26 @@
+<component name="ArtifactManager">
+  <artifact type="javafx" name="MyRestManagmenet">
+    <output-path>$PROJECT_DIR$/out/artifacts/MyRestManagmenet</output-path>
+    <properties id="ant-preprocessing">
+      <options enabled="true" />
+    </properties>
+    <properties id="javafx-properties">
+      <options>
+        <option name="appClass" value="com.medyassin.Main.Main" />
+        <option name="description" value="MyRestManagmenet" />
+        <option name="height" value="600" />
+        <option name="htmlPlaceholderId" value="" />
+        <option name="title" value="MyRestManagmenet" />
+        <option name="vendor" value="MyRestManagmenet" />
+        <option name="version" value="1.0" />
+        <option name="width" value="1000" />
+      </options>
+    </properties>
+    <root id="root">
+      <element id="archive" name="Restaurant_Management_Project.jar">
+        <element id="module-output" name="Restaurant Management Project" />
+      </element>
+      <element id="library" level="project" name="jfoenix-8.0.8" />
+    </root>
+  </artifact>
+</component>

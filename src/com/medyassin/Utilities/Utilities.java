@@ -27,6 +27,7 @@ public class Utilities {
         if(resizable) {
             //currentStage.setResizable(true);
         }
+
     }
 
     public static void showToast(String msg, Label toast) {

@@ -26,4 +26,23 @@ public class LoginController {
         }
         return false;
     }
+
+    public static String getUserRole(String username, String password) throws SQLException, ClassNotFoundException{
+        /* SQL Query */
+        String query = "SELECT role FROM users WHERE username = ? AND password = ?";
+
+        /* Ger DB Connection */
+        Connection conn = DatabaseConnection.getDbConn().getConnection();
+
+        /* Statement */
+        PreparedStatement stmt = conn.prepareStatement(query);
+        stmt.setObject(1, username);
+        stmt.setObject(2, password);
+        ResultSet set = stmt.executeQuery();
+
+        if(set.next()) {
+            return set.getString("role");
+        }
+        return "NO ROLE NO ERROR XD";
+    }
 }
