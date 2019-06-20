@@ -49,9 +49,15 @@ public class ManageCustomerController {
     public static boolean addNewCustomer(String name, String phoneN, String address) throws SQLException, ClassNotFoundException {
         // Connection
         Connection conn = DatabaseConnection.getDbConn().getConnection();
+        System.out.println("hello");
+        int maxId=getNextID();
+        String query ="ALTER TABLE Customers AUTO_INCREMENT = ?";
+        PreparedStatement stmt=conn.prepareStatement(query);
+        stmt.setObject(1,maxId);
+        stmt.execute();
 
-        String query = "INSERT INTO Customers (cName, cPhoneN, cAddress) VALUES(?, ?, ?)";
-        PreparedStatement stmt = conn.prepareStatement(query);
+        query = "INSERT INTO Customers (cName, cPhoneN, cAddress) VALUES(?, ?, ?)";
+        stmt = conn.prepareStatement(query);
 
         stmt.setObject(1, name);
         stmt.setObject(2, phoneN);
