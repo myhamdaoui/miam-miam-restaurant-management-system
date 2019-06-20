@@ -17,7 +17,7 @@ public class NewOrderController {
         if(res.next()) {
             return (Integer.parseInt(res.getString("orderID")) + 1);
         }
-        return 99999;
+        return 1;
     }
 
     public static boolean deleteOrderDetail(String orderID, String itemCode) throws SQLException, ClassNotFoundException {

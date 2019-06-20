@@ -1,12 +1,22 @@
 package com.medyassin.Views.Controllers;
 
 import com.jfoenix.controls.JFXButton;
+import com.medyassin.DatabaseControllers.AllOrdersController;
+import com.medyassin.DatabaseControllers.NewOrderController;
+import com.medyassin.TableViewModels.AddNewOrderTVModel;
+import com.medyassin.TableViewModels.ViewAllOrdersTVModel;
 import com.medyassin.Utilities.Utilities;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -14,9 +24,9 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
-
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class ViewAllOrders implements Initializable {
@@ -50,6 +60,29 @@ public class ViewAllOrders implements Initializable {
     @FXML
     private Circle UserImageMaskCircle;
 
+    @FXML
+    private TableColumn orderIDTC;
+
+    @FXML
+    private TableColumn orderDateTC;
+
+    @FXML
+    private TableColumn clientNameTC;
+
+    @FXML
+    private TableColumn amountTC;
+
+    @FXML
+    private TableColumn statusTC;
+
+    @FXML
+    private DatePicker datePicker;
+
+    @FXML
+    private TableView allOrdersTable;
+
+    // data for the AllOrders table
+    private ObservableList<ViewAllOrdersTVModel> data = FXCollections.observableArrayList();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -59,7 +92,50 @@ public class ViewAllOrders implements Initializable {
         - Add username to the top bar
         */
         setStaticItems();
+
+        /* Set AllOrders table */
+        setAllOrdersTable();
+
+        /* filter by date */
+        filterByDate();
+
     }
+
+    private void filterByDate() {
+        datePicker.setOnAction(e -> {
+            if(datePicker.getValue() == null) {
+                refreshTable("all");
+            } else {
+                refreshTable(datePicker.getValue().toString());
+            }
+
+        });
+    }
+
+    private void setAllOrdersTable() {
+        orderIDTC.setCellValueFactory(new PropertyValueFactory<ViewAllOrdersTVModel, String>("orderID"));
+        clientNameTC.setCellValueFactory(new PropertyValueFactory<ViewAllOrdersTVModel, String>("clientName"));
+        orderDateTC.setCellValueFactory(new PropertyValueFactory<ViewAllOrdersTVModel, String>("orderDate"));
+        amountTC.setCellValueFactory(new PropertyValueFactory<ViewAllOrdersTVModel, String>("orderAmount"));
+        statusTC.setCellValueFactory(new PropertyValueFactory<ViewAllOrdersTVModel, String>("orderStatus"));
+
+        refreshTable("all");
+    }
+
+    private void refreshTable(String date) {
+        try {
+            data = AllOrdersController.getAllOrders(date);
+            allOrdersTable.setItems(data);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    /* SECTION ViewAllOrders */
 
     private void setStaticItems() {
         // Set Image for the circular mask
