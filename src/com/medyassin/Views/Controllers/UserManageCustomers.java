@@ -113,6 +113,12 @@ public class UserManageCustomers implements Initializable, EventHandler<MouseEve
     @FXML
     private Label nameLabel;
 
+    @FXML
+    private Circle manageItemsMask;
+
+    @FXML
+    private Pane manageItems;
+
     // Data for the Customer table
     private ObservableList<CustomerTVModel> data = FXCollections.observableArrayList();
 
@@ -128,6 +134,8 @@ public class UserManageCustomers implements Initializable, EventHandler<MouseEve
             } else {
                 manageUsers.setMaxHeight(0);
                 manageUsers.setVisible(false);
+                manageItems.setVisible(false);
+                manageItems.setMaxHeight(0);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -227,6 +235,7 @@ public class UserManageCustomers implements Initializable, EventHandler<MouseEve
         viewAllOrdersMask.setFill(new ImagePattern(new Image("/com/medyassin/Img/icons/view.png", false)));
         pendingOrdersMask.setFill(new ImagePattern(new Image("/com/medyassin/Img/icons/pending.png", false)));
         manageUsersMask.setFill(new ImagePattern(new Image("/com/medyassin/Img/icons/user.png", false)));
+        manageItemsMask.setFill(new ImagePattern(new Image("/com/medyassin/Img/icons/product.png", false)));
     }
 
     private void deleteCustomer() {
@@ -459,4 +468,16 @@ public class UserManageCustomers implements Initializable, EventHandler<MouseEve
             e1.printStackTrace();
         }
     }
+
+    @FXML
+    public void manageItemsClick(MouseEvent e) {
+        Scene currentScene = manageCustomers.getScene();
+        try {
+            BorderPane target = FXMLLoader.load(getClass().getResource("/com/medyassin/Views/Fxmls/AdminManageItems.fxml"));
+            Utilities.switchScreen(currentScene, target,getClass().getResource("/com/medyassin/Views/Fxmls/PendingOrders.css").toExternalForm(), true, 600);
+        } catch (IOException e1) {
+            e1.printStackTrace();
+        }
+    }
+
 }

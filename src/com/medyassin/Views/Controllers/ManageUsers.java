@@ -41,7 +41,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-public class ManageUsers implements Initializable, EventHandler<MouseEvent> {
+public class ManageUsers implements Initializable {
     @FXML
     private Pane manageCustomers;
 
@@ -406,16 +406,6 @@ public class ManageUsers implements Initializable, EventHandler<MouseEvent> {
 
     }
 
-    @Override
-    public void handle(MouseEvent event) {
-        Pane pane = (Pane) event.getSource();
-        if(event.getEventType().toString().equals("MOUSE_ENTERED")) {
-            pane.setStyle("-fx-background-color:  #4E4E4E;");
-        } else if(event.getEventType().toString().equals("MOUSE_EXITED")) {
-            pane.setStyle("-fx-background-color:  #343434;");
-        }
-    }
-
     private void searchForUsers(String name) {
         data = FXCollections.observableArrayList();
         try {
@@ -433,18 +423,6 @@ public class ManageUsers implements Initializable, EventHandler<MouseEvent> {
     void searchEvent(KeyEvent e) {
         JFXTextField tf = (JFXTextField) e.getSource();
         searchForUsers(tf.getText());
-    }
-
-
-    @FXML
-    public void manageUsersClick(MouseEvent e) {
-        Scene currentScene = manageCustomers.getScene();
-        try {
-            BorderPane target = FXMLLoader.load(getClass().getResource("/com/medyassin/Views/Fxmls/UserManageCustomers.fxml"));
-            Utilities.switchScreen(currentScene, target,getClass().getResource("/com/medyassin/Views/Fxmls/UserManageCustomers.css").toExternalForm(), true, 600);
-        } catch (IOException e1) {
-            e1.printStackTrace();
-        }
     }
 
     @FXML
@@ -490,6 +468,19 @@ public class ManageUsers implements Initializable, EventHandler<MouseEvent> {
             e1.printStackTrace();
         }
     }
+
+    @FXML
+    public void manageCustomersClick(MouseEvent e) {
+        Scene currentScene = manageCustomers.getScene();
+        try {
+            BorderPane target = FXMLLoader.load(getClass().getResource("/com/medyassin/Views/Fxmls/UserManageCustomers.fxml"));
+            Utilities.switchScreen(currentScene, target,getClass().getResource("/com/medyassin/Views/Fxmls/UserManageCustomers.css").toExternalForm(), true, 600);
+        } catch (IOException e1) {
+            e1.printStackTrace();
+        }
+    }
+
+
 
 
 }

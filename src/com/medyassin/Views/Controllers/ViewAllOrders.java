@@ -48,6 +48,9 @@ public class ViewAllOrders implements Initializable {
     private Pane manageUsers;
 
     @FXML
+    private Pane manageItems;
+
+    @FXML
     private JFXButton logoutBtn;
 
     @FXML
@@ -92,6 +95,9 @@ public class ViewAllOrders implements Initializable {
     @FXML
     private Label nameLabel;
 
+    @FXML
+    private Circle manageItemsMask;
+
     // data for the AllOrders table
     private ObservableList<ViewAllOrdersTVModel> data = FXCollections.observableArrayList();
 
@@ -126,6 +132,8 @@ public class ViewAllOrders implements Initializable {
             } else {
                 manageUsers.setMaxHeight(0);
                 manageUsers.setVisible(false);
+                manageItems.setVisible(false);
+                manageItems.setMaxHeight(0);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -152,6 +160,7 @@ public class ViewAllOrders implements Initializable {
         amountTC.setCellValueFactory(new PropertyValueFactory<ViewAllOrdersTVModel, String>("orderAmount"));
         statusTC.setCellValueFactory(new PropertyValueFactory<ViewAllOrdersTVModel, String>("orderStatus"));
         manageUsersMask.setFill(new ImagePattern(new Image("/com/medyassin/Img/icons/user.png", false)));
+        manageItemsMask.setFill(new ImagePattern(new Image("/com/medyassin/Img/icons/product.png", false)));
 
         refreshTable("all");
     }
@@ -244,6 +253,17 @@ public class ViewAllOrders implements Initializable {
         Scene currentScene = manageCustomers.getScene();
         try {
             BorderPane target = FXMLLoader.load(getClass().getResource("/com/medyassin/Views/Fxmls/PendingOrders.fxml"));
+            Utilities.switchScreen(currentScene, target,getClass().getResource("/com/medyassin/Views/Fxmls/PendingOrders.css").toExternalForm(), true, 600);
+        } catch (IOException e1) {
+            e1.printStackTrace();
+        }
+    }
+
+    @FXML
+    public void manageItemsClick(MouseEvent e) {
+        Scene currentScene = manageCustomers.getScene();
+        try {
+            BorderPane target = FXMLLoader.load(getClass().getResource("/com/medyassin/Views/Fxmls/AdminManageItems.fxml"));
             Utilities.switchScreen(currentScene, target,getClass().getResource("/com/medyassin/Views/Fxmls/PendingOrders.css").toExternalForm(), true, 600);
         } catch (IOException e1) {
             e1.printStackTrace();

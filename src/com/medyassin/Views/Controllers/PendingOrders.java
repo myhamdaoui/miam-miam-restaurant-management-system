@@ -87,6 +87,12 @@ public class PendingOrders implements Initializable {
     @FXML
     private Label nameLabel;
 
+    @FXML
+    private Circle manageItemsMask;
+
+    @FXML
+    private Pane manageItems;
+
     private ObservableList<ViewAllOrdersTVModel> data = FXCollections.observableArrayList();
 
 
@@ -125,6 +131,7 @@ public class PendingOrders implements Initializable {
         orderDateTC.setCellValueFactory(new PropertyValueFactory<ViewAllOrdersTVModel, String>("orderDate"));
         amountTC.setCellValueFactory(new PropertyValueFactory<ViewAllOrdersTVModel, String>("orderAmount"));
         manageUsersMask.setFill(new ImagePattern(new Image("/com/medyassin/Img/icons/user.png", false)));
+        manageItemsMask.setFill(new ImagePattern(new Image("/com/medyassin/Img/icons/product.png", false)));
 
         refreshTable("all");
     }
@@ -180,6 +187,8 @@ public class PendingOrders implements Initializable {
             } else {
                 manageUsers.setMaxHeight(0);
                 manageUsers.setVisible(false);
+                manageItems.setVisible(false);
+                manageItems.setMaxHeight(0);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -259,6 +268,17 @@ public class PendingOrders implements Initializable {
 
     @FXML
     public void userManagClick(MouseEvent e) {
+        Scene currentScene = manageCustomers.getScene();
+        try {
+            BorderPane target = FXMLLoader.load(getClass().getResource("/com/medyassin/Views/Fxmls/UserManageCustomers.fxml"));
+            Utilities.switchScreen(currentScene, target,getClass().getResource("/com/medyassin/Views/Fxmls/UserManageCustomers.css").toExternalForm(), true, 600);
+        } catch (IOException e1) {
+            e1.printStackTrace();
+        }
+    }
+
+    @FXML
+    public void manageItemsClick(MouseEvent e) {
         Scene currentScene = manageCustomers.getScene();
         try {
             BorderPane target = FXMLLoader.load(getClass().getResource("/com/medyassin/Views/Fxmls/UserManageCustomers.fxml"));

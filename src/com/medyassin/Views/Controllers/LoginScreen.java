@@ -71,6 +71,7 @@ public class LoginScreen implements Initializable {
     }
 
     private void login() {
+        System.out.println("hhhhhhh");
         //Get Username input
         String usernameInput = username.getText();
 
@@ -88,6 +89,8 @@ public class LoginScreen implements Initializable {
 
                     if(role.equals("admin")) {
 
+
+
                         //Get Main Screen XML of the user[Adminadmi]
                         BorderPane userMainScreen = FXMLLoader.load((getClass().getResource("/com/medyassin/Views/Fxmls/ManageUsers.fxml")));
 
@@ -95,6 +98,8 @@ public class LoginScreen implements Initializable {
                         Scene currentScene = loginScreen.getScene();
                         Utilities.switchScreen(currentScene, userMainScreen, getClass().getResource("/com/medyassin/Views/Fxmls/UserManageCustomers.css").toExternalForm(), true, 600);
                     } else {
+
+                        System.out.println("cassier");
 
                         //Get Main Screen XML of the user[Cassier]
                         BorderPane userMainScreen = FXMLLoader.load((getClass().getResource("/com/medyassin/Views/Fxmls/UserManageCustomers.fxml")));

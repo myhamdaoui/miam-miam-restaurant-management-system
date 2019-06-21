@@ -155,6 +155,7 @@ public class AdminManageItems implements Initializable, EventHandler<MouseEvent>
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        System.out.println("Here i am in items");
         /*
         - Add icons to the sidebar
         - Add user image to the top bar
@@ -221,7 +222,7 @@ public class AdminManageItems implements Initializable, EventHandler<MouseEvent>
                 itemNameTF.setText(i.getItemName());
                 itemPriceTF.setText(i.getItemPrice());
                 itemImageTF.setText(i.getItemImg());
-
+                itemTypeTF.setText(i.getItemType());
 
             }
         });
@@ -491,4 +492,20 @@ public class AdminManageItems implements Initializable, EventHandler<MouseEvent>
             e1.printStackTrace();
         }
     }
+
+    @FXML
+    public void manageCustomersClick(MouseEvent e) {
+
+        Scene currentScene = manageCustomers.getScene();
+        try {
+            BorderPane target = FXMLLoader.load(getClass().getResource("/com/medyassin/Views/Fxmls/UserManageCustomers.fxml"));
+            Utilities.switchScreen(currentScene, target,getClass().getResource("/com/medyassin/Views/Fxmls/UserManageCustomers.css").toExternalForm(), true, 600);
+        } catch (IOException e1) {
+            e1.printStackTrace();
+        }
+    }
+
+
+
+
 }

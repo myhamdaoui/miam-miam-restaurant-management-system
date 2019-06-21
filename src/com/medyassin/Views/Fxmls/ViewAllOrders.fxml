@@ -26,6 +26,19 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Pane>
+            <Pane fx:id="manageItems" onMouseClicked="#manageItemsClick" prefHeight="93.0" prefWidth="137.0" style="-fx-background-color: #1d262d;">
+               <children>
+                  <Circle fx:id="manageItemsMask" fill="#ffffff00" layoutX="41.0" layoutY="30.0" radius="16.0" stroke="WHITE" strokeType="INSIDE" />
+                  <Label layoutX="24.0" layoutY="56.0" text="Gérer les produits" textFill="WHITE">
+                     <font>
+                        <Font name="Roboto Bold" size="12.0" />
+                     </font>
+                  </Label>
+               </children>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Pane>
                 <Pane fx:id="manageCustomers" onMouseClicked="#userManagClick" prefHeight="93.0" prefWidth="137.0" style="-fx-background-color: #1d262d;">
                     <children>
                         <Circle fx:id="manageCustomersMask" fill="#ffffff00" layoutX="41.0" layoutY="30.0" radius="16.0" stroke="WHITE" strokeType="INSIDE" />
