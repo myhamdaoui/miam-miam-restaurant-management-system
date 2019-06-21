@@ -7,11 +7,17 @@ import java.sql.SQLException;
 
 public class LoginController {
     public static boolean login(String username, String password) throws SQLException, ClassNotFoundException {
+
         /* SQL Query */
         String query = "SELECT * FROM users WHERE username=?";
 
         /* Ger DB Connection */
         Connection conn = DatabaseConnection.getDbConn().getConnection();
+
+        /* Make all user inactif */
+        String query2 = "UPDATE users SET actif = 0";
+        PreparedStatement stmt2 = conn.prepareStatement(query2);
+        stmt2.execute();
 
         /* Statement */
         PreparedStatement stmt = conn.prepareStatement(query);

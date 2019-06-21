@@ -7,6 +7,7 @@ import com.jfoenix.validation.RequiredFieldValidator;
 import com.medyassin.DatabaseControllers.ItemController;
 import com.medyassin.DatabaseControllers.ManageCustomerController;
 import com.medyassin.DatabaseControllers.NewOrderController;
+import com.medyassin.DatabaseControllers.UserController;
 import com.medyassin.Models.Customer;
 import com.medyassin.Models.Item;
 import com.medyassin.TableViewModels.AddNewOrderTVModel;
@@ -49,6 +50,9 @@ public class UserMakeOrder implements Initializable {
 
     @FXML
     private Pane makeOrder;
+
+    @FXML
+    private Pane manageUsers;
 
     @FXML
     private JFXButton logoutBtn;
@@ -125,6 +129,9 @@ public class UserMakeOrder implements Initializable {
     @FXML
     private DatePicker orderDate;
 
+    @FXML
+    private Label nameLabel;
+
     private int total = 0;
 
     // data for the items table
@@ -138,6 +145,8 @@ public class UserMakeOrder implements Initializable {
         - Add username to the top bar
         */
         setStaticItems();
+
+        setVisibility();
 
         // Set Order ID
         setOrderID();
@@ -478,13 +487,44 @@ public class UserMakeOrder implements Initializable {
         return true;
     }
 
+    /*
+    - Show sections based on user role
+     */
+    public void setVisibility() {
+        try {
+            if(UserController.getUserRole().equals("admin")) {
+                makeOrder.setMaxHeight(0);
+                makeOrder.setVisible(false);
+            } else {
+                manageUsers.setMaxHeight(0);
+                manageUsers.setVisible(false);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
     /* SECTION UserMakeOrder */
 
 
 
     private void setStaticItems() {
         // Set Image for the circular mask
-        UserImageMaskCircle.setFill(new ImagePattern(new Image("/com/medyassin/Img/user_img.jpg", false)));
+
+        try {
+            String url = "/com/medyassin/Img/" + UserController.getUserImg();
+            System.out.println(url);
+            UserImageMaskCircle.setFill(new ImagePattern(new Image(url, false)));
+
+            // set name
+            nameLabel.setText("Bienvenue " + UserController.getUserName());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
 
         // Set no focus for logout btn
         logoutBtn.setDisableVisualFocus(true);
@@ -494,6 +534,17 @@ public class UserMakeOrder implements Initializable {
         makeOrderMask.setFill(new ImagePattern(new Image(getClass().getResource("/com/medyassin/Img/icons/order.png").toExternalForm(), false)));
         viewAllOrdersMask.setFill(new ImagePattern(new Image("/com/medyassin/Img/icons/view.png", false)));
         pendingOrdersMask.setFill(new ImagePattern(new Image("/com/medyassin/Img/icons/pending.png", false)));
+    }
+
+    @FXML
+    public void manageUsersClick(MouseEvent e) {
+        Scene currentScene = manageCustomers.getScene();
+        try {
+            BorderPane target = FXMLLoader.load(getClass().getResource("/com/medyassin/Views/Fxmls/ManageUsers.fxml"));
+            Utilities.switchScreen(currentScene, target,getClass().getResource("/com/medyassin/Views/Fxmls/UserManageCustomers.css").toExternalForm(), true, 600);
+        } catch (IOException e1) {
+            e1.printStackTrace();
+        }
     }
 
     @FXML

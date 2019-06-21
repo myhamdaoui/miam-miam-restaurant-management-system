@@ -2,12 +2,14 @@ package com.medyassin.Views.Controllers;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.validation.RequiredFieldValidator;
 import com.medyassin.DatabaseControllers.ManageCustomerController;
 import com.medyassin.DatabaseControllers.UserController;
 import com.medyassin.Models.Customer;
 import com.medyassin.TableViewModels.CustomerTVModel;
+import com.medyassin.TableViewModels.UserTVModel;
 import com.medyassin.Utilities.CustomAlert.CustomerAlert;
 import com.medyassin.Utilities.Utilities;
 import javafx.beans.value.ChangeListener;
@@ -25,11 +27,13 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Rectangle;
 
 import java.io.IOException;
 import java.net.URL;
@@ -37,7 +41,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-public class UserManageCustomers implements Initializable, EventHandler<MouseEvent> {
+public class ManageUsers implements Initializable, EventHandler<MouseEvent> {
     @FXML
     private Pane manageCustomers;
 
@@ -60,7 +64,10 @@ public class UserManageCustomers implements Initializable, EventHandler<MouseEve
     private JFXButton logoutBtn;
 
     @FXML
-    private JFXTextField nameTF;
+    private JFXTextField userImageTF;
+
+    @FXML
+    private JFXPasswordField userPassTF;
 
     @FXML
     private Circle manageCustomersMask;
@@ -75,6 +82,9 @@ public class UserManageCustomers implements Initializable, EventHandler<MouseEve
     private Circle pendingOrdersMask;
 
     @FXML
+    private Circle manageUsersMask;
+
+    @FXML
     private JFXButton confirmBtn;
 
     @FXML
@@ -84,25 +94,25 @@ public class UserManageCustomers implements Initializable, EventHandler<MouseEve
     private BorderPane borderPane;
 
     @FXML
-    private JFXTextField addressTF;
+    private JFXTextField userNameTF;
 
     @FXML
-    private JFXTextField phoneNTF;
+    private JFXTextField userRoleTF;
 
     @FXML
-    private TableColumn cPhoneNumber;
+    private TableColumn userIDTC;
 
     @FXML
-    private TableColumn cAddress;
+    private TableColumn userNameTC;
 
     @FXML
-    private TableColumn cName;
+    private TableColumn userRoleTC;
 
     @FXML
-    private TableColumn cID;
+    private TableColumn userImageTC;
 
     @FXML
-    private JFXTextField idTF;
+    private JFXTextField userIDTF;
 
     @FXML
     private JFXComboBox<String> actionCB;
@@ -111,7 +121,7 @@ public class UserManageCustomers implements Initializable, EventHandler<MouseEve
     private Label nameLabel;
 
     // Data for the Customer table
-    private ObservableList<CustomerTVModel> data = FXCollections.observableArrayList();
+    private ObservableList<UserTVModel> data = FXCollections.observableArrayList();
 
 
     /*
@@ -145,7 +155,7 @@ public class UserManageCustomers implements Initializable, EventHandler<MouseEve
         setVisibility();
 
         // Set Customer Table
-        setCustomerTable();
+        setUsersTable();
 
 
         confirmBtn.setOnAction(e -> {
@@ -189,11 +199,11 @@ public class UserManageCustomers implements Initializable, EventHandler<MouseEve
         // Set row selection listener
         customersTable.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if(newSelection != null) {
-                CustomerTVModel cm = (CustomerTVModel) newSelection;
-                idTF.setText(cm.getCustomerId());
-                nameTF.setText(cm.getCustomerName());
-                phoneNTF.setText(cm.getCustomerPhoneN());
-                addressTF.setText(cm.getCustomerAddress());
+                UserTVModel cm = (UserTVModel) newSelection;
+                userIDTF.setText(cm.getUserID());
+                userNameTF.setText(cm.getUserName());
+                userRoleTF.setText(cm.getUserRole());
+                userImageTF.setText(cm.getUserImg());
             }
         });
     }
@@ -223,16 +233,18 @@ public class UserManageCustomers implements Initializable, EventHandler<MouseEve
         makeOrderMask.setFill(new ImagePattern(new Image(getClass().getResource("/com/medyassin/Img/icons/order.png").toExternalForm(), false)));
         viewAllOrdersMask.setFill(new ImagePattern(new Image("/com/medyassin/Img/icons/view.png", false)));
         pendingOrdersMask.setFill(new ImagePattern(new Image("/com/medyassin/Img/icons/pending.png", false)));
+        manageUsersMask.setFill(new ImagePattern(new Image("/com/medyassin/Img/icons/user.png", false)));
     }
 
     private void deleteCustomer() {
-        int id = Integer.parseInt(idTF.getText());
+        int id = Integer.parseInt(userIDTF.getText());
+
         try {
-            if(ManageCustomerController.deleteCustomer(id)) {
-               CustomerAlert.display("success", "Le client a été bien supprimé");
+            if(UserController.deleteUser(id)) {
+                CustomerAlert.display("success", "L'utilisateur a été bien supprimé");
             } else {
                 try {
-                    CustomerAlert.display("error", "Can't delete this client or client doesn't exists");
+                    CustomerAlert.display("error", "Can't delete this user or user doesn't exists");
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -246,29 +258,30 @@ public class UserManageCustomers implements Initializable, EventHandler<MouseEve
         }
 
         // Refresh
-        refreshCustomerTable();
+        refreshTable();
 
         // Clear inputs
         clearCustomerForm();
     }
 
     private void updateCustomer() {
-        int id = Integer.parseInt(idTF.getText());
-        String name = nameTF.getText();
-        String phoneN = phoneNTF.getText();
-        String address = addressTF.getText();
+        int id = Integer.parseInt(userIDTF.getText());
+        String userName = userNameTF.getText();
+        String userRole = userRoleTF.getText();
+        String userImage = userImageTF.getText();
+        String password = userPassTF.getText();
 
         try {
-            boolean success = ManageCustomerController.updateCustomer(id, name, phoneN, address);
+            boolean success = UserController.updateUser(id, userName, password, userRole, userImage);
             if(!success) {
                 try {
-                    CustomerAlert.display("error", "Update customer has failed !");
+                    CustomerAlert.display("error", "Update user has failed !");
                 } catch (IOException e1) {
                     e1.printStackTrace();
                 }
             } else {
                 try {
-                    CustomerAlert.display("success", "Update Customer has been done successfully !");
+                    CustomerAlert.display("success", "Update user has been done successfully !");
                 } catch (IOException e1) {
                     e1.printStackTrace();
                 }
@@ -280,22 +293,20 @@ public class UserManageCustomers implements Initializable, EventHandler<MouseEve
         }
 
         // Refresh
-        refreshCustomerTable();
+        refreshTable();
     }
 
     private void clearCustomerForm() {
-        nameTF.setText("");
-        phoneNTF.setText("");
-        addressTF.setText("");
+        userNameTF.setText("");
+        userRoleTF.setText("");
+        userImageTF.setText("");
+        userPassTF.setText("");
     }
 
-    private void refreshCustomerTable() {
+    private void refreshTable() {
         data = FXCollections.observableArrayList();
         try {
-            ArrayList<Customer> customers = ManageCustomerController.getAllCustomers();
-            for(Customer customer: customers) {
-                data.add(new CustomerTVModel(customer.getcID(), customer.getcName(), customer.getcPhoneN(), customer.getcAddress()));
-            }
+            data = UserController.getAllUsers();
             customersTable.setItems(data);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -304,38 +315,42 @@ public class UserManageCustomers implements Initializable, EventHandler<MouseEve
         }
     }
 
-    private void setCustomerTable() {
-        cID.setCellValueFactory(new PropertyValueFactory<CustomerTVModel, String>("customerId"));
-        cName.setCellValueFactory(new PropertyValueFactory<CustomerTVModel, String>("customerName"));
-        cPhoneNumber.setCellValueFactory(new PropertyValueFactory<CustomerTVModel, String>("customerPhoneN"));
-        cAddress.setCellValueFactory(new PropertyValueFactory<CustomerTVModel, String>("customerAddress"));
+    private void setUsersTable() {
+        userIDTC.setCellValueFactory(new PropertyValueFactory<CustomerTVModel, String>("userID"));
+        userNameTC.setCellValueFactory(new PropertyValueFactory<CustomerTVModel, String>("userName"));
+        userRoleTC.setCellValueFactory(new PropertyValueFactory<CustomerTVModel, String>("userRole"));
+        userImageTC.setCellValueFactory(new PropertyValueFactory<CustomerTVModel, Rectangle>("userImgView"));
 
-        refreshCustomerTable();
+        refreshTable();
     }
 
     private void setIDTF() {
+
         try {
-            idTF.setText(ManageCustomerController.getNextID() + "");
+            userIDTF.setText(UserController.getNextID() + "");
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
+
     }
     private void addNewCustomer() throws IOException {
-        String name = nameTF.getText();
-        String phoneN = phoneNTF.getText();
-        String address = addressTF.getText();
+        String userName = userNameTF.getText();
+        String userRole = userRoleTF.getText();
+        String userImage = userImageTF.getText();
+        String password = userPassTF.getText();
 
         //Validate inputs
         boolean validated = validateInputs();
 
+
         if(validated) {
             try {
-                if (!ManageCustomerController.addNewCustomer(name, phoneN, address)) {
-                    CustomerAlert.display("error", "Can't add new customer");
+                if (!UserController.addNewUser(userName, password, userRole, userImage)) {
+                    CustomerAlert.display("error", "Can't add new user");
                 } else {
-                    CustomerAlert.display("success", "Le client a été bien ajouté");
+                    CustomerAlert.display("success", "L'utilisateur a été bien ajouté");
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -344,7 +359,7 @@ public class UserManageCustomers implements Initializable, EventHandler<MouseEve
             }
 
             // Refresh
-            refreshCustomerTable();
+            refreshTable();
 
             // Clear inputs
             clearCustomerForm();
@@ -352,35 +367,28 @@ public class UserManageCustomers implements Initializable, EventHandler<MouseEve
             // Set next id
             setIDTF();
         }
+
     }
 
     private boolean validateInputs() {
         RequiredFieldValidator validator = new RequiredFieldValidator();
         validator.setMessage("Ce champ est obligatoire");
-        nameTF.getValidators().add(validator);
-        phoneNTF.getValidators().add(validator);
-        addressTF.getValidators().add(validator);
+        userNameTF.getValidators().add(validator);
+        userRoleTF.getValidators().add(validator);
+        userImageTF.getValidators().add(validator);
+        userPassTF.getValidators().add(validator);
 
-        if(!nameTF.validate()) {
+        if(!userNameTF.validate()) {
             return false;
-        } else if(!phoneNTF.validate()) {
+        } else if(!userRoleTF.validate()) {
             return false;
-        } else if(!addressTF.validate()) {
+        } else if(!userImageTF.validate()) {
+            return false;
+        } else if(!userPassTF.validate()) {
             return false;
         }
 
         return true;
-    }
-
-    @FXML
-    public void manageUsersClick(MouseEvent e) {
-        Scene currentScene = manageCustomers.getScene();
-        try {
-            BorderPane target = FXMLLoader.load(getClass().getResource("/com/medyassin/Views/Fxmls/ManageUsers.fxml"));
-            Utilities.switchScreen(currentScene, target,getClass().getResource("/com/medyassin/Views/Fxmls/UserManageCustomers.css").toExternalForm(), true, 600);
-        } catch (IOException e1) {
-            e1.printStackTrace();
-        }
     }
 
     @FXML
@@ -402,13 +410,11 @@ public class UserManageCustomers implements Initializable, EventHandler<MouseEve
         }
     }
 
-    private void searchForCustomer(String name) {
+    private void searchForUsers(String name) {
         data = FXCollections.observableArrayList();
         try {
-            ArrayList<Customer> customers = ManageCustomerController.searchForCustomers(name);
-            for(Customer customer: customers) {
-                data.add(new CustomerTVModel(customer.getcID(), customer.getcName(), customer.getcPhoneN(), customer.getcAddress()));
-            }
+            data = UserController.searchForUsers(name);
+
             customersTable.setItems(data);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -420,7 +426,19 @@ public class UserManageCustomers implements Initializable, EventHandler<MouseEve
     @FXML
     void searchEvent(KeyEvent e) {
         JFXTextField tf = (JFXTextField) e.getSource();
-        searchForCustomer(tf.getText());
+        searchForUsers(tf.getText());
+    }
+
+
+    @FXML
+    public void manageUsersClick(MouseEvent e) {
+        Scene currentScene = manageCustomers.getScene();
+        try {
+            BorderPane target = FXMLLoader.load(getClass().getResource("/com/medyassin/Views/Fxmls/UserManageCustomers.fxml"));
+            Utilities.switchScreen(currentScene, target,getClass().getResource("/com/medyassin/Views/Fxmls/UserManageCustomers.css").toExternalForm(), true, 600);
+        } catch (IOException e1) {
+            e1.printStackTrace();
+        }
     }
 
     @FXML

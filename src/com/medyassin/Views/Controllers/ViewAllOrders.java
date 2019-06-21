@@ -3,6 +3,7 @@ package com.medyassin.Views.Controllers;
 import com.jfoenix.controls.JFXButton;
 import com.medyassin.DatabaseControllers.AllOrdersController;
 import com.medyassin.DatabaseControllers.NewOrderController;
+import com.medyassin.DatabaseControllers.UserController;
 import com.medyassin.TableViewModels.AddNewOrderTVModel;
 import com.medyassin.TableViewModels.ViewAllOrdersTVModel;
 import com.medyassin.Utilities.Utilities;
@@ -14,6 +15,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -41,6 +43,9 @@ public class ViewAllOrders implements Initializable {
 
     @FXML
     private Pane makeOrder;
+
+    @FXML
+    private Pane manageUsers;
 
     @FXML
     private JFXButton logoutBtn;
@@ -81,6 +86,9 @@ public class ViewAllOrders implements Initializable {
     @FXML
     private TableView allOrdersTable;
 
+    @FXML
+    private Label nameLabel;
+
     // data for the AllOrders table
     private ObservableList<ViewAllOrdersTVModel> data = FXCollections.observableArrayList();
 
@@ -93,12 +101,34 @@ public class ViewAllOrders implements Initializable {
         */
         setStaticItems();
 
+        setVisibility();
+
         /* Set AllOrders table */
         setAllOrdersTable();
 
         /* filter by date */
         filterByDate();
 
+    }
+
+    /*
+    - Show sections based on user role
+     */
+    public void setVisibility() {
+        try {
+            if(UserController.getUserRole().equals("admin")) {
+                makeOrder.setMaxHeight(0);
+                makeOrder.setVisible(false);
+
+            } else {
+                manageUsers.setMaxHeight(0);
+                manageUsers.setVisible(false);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     private void filterByDate() {
@@ -139,7 +169,19 @@ public class ViewAllOrders implements Initializable {
 
     private void setStaticItems() {
         // Set Image for the circular mask
-        UserImageMaskCircle.setFill(new ImagePattern(new Image("/com/medyassin/Img/user_img.jpg", false)));
+
+        try {
+            String url = "/com/medyassin/Img/" + UserController.getUserImg();
+            System.out.println(url);
+            UserImageMaskCircle.setFill(new ImagePattern(new Image(url, false)));
+
+            // set name
+            nameLabel.setText("Bienvenue " + UserController.getUserName());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
 
         // Set no focus for logout btn
         logoutBtn.setDisableVisualFocus(true);
@@ -165,6 +207,17 @@ public class ViewAllOrders implements Initializable {
         Scene currentScene = manageCustomers.getScene();
         try {
             BorderPane target = FXMLLoader.load(getClass().getResource("/com/medyassin/Views/Fxmls/UserManageCustomers.fxml"));
+            Utilities.switchScreen(currentScene, target,getClass().getResource("/com/medyassin/Views/Fxmls/UserManageCustomers.css").toExternalForm(), true, 600);
+        } catch (IOException e1) {
+            e1.printStackTrace();
+        }
+    }
+
+    @FXML
+    public void manageUsersClick(MouseEvent e) {
+        Scene currentScene = manageCustomers.getScene();
+        try {
+            BorderPane target = FXMLLoader.load(getClass().getResource("/com/medyassin/Views/Fxmls/ManageUsers.fxml"));
             Utilities.switchScreen(currentScene, target,getClass().getResource("/com/medyassin/Views/Fxmls/UserManageCustomers.css").toExternalForm(), true, 600);
         } catch (IOException e1) {
             e1.printStackTrace();

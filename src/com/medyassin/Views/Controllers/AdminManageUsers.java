@@ -29,7 +29,7 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-public class PendingOrders implements Initializable {
+public class AdminManageUsers implements Initializable {
     @FXML
     private Pane manageCustomers;
 
@@ -41,9 +41,6 @@ public class PendingOrders implements Initializable {
 
     @FXML
     private Pane makeOrder;
-
-    @FXML
-    private Pane manageUsers;
 
     @FXML
     private JFXButton logoutBtn;
@@ -95,47 +92,10 @@ public class PendingOrders implements Initializable {
         - Add username to the top bar
         */
         setStaticItems();
-
-        setVisibility();
-
-        /* Set AllOrders table */
-        setPendingOrdersTable();
-
-        /* filter by date */
-        filterByDate();
     }
 
-    private void filterByDate() {
-        datePicker.setOnAction(e -> {
-            if(datePicker.getValue() == null) {
-                refreshTable("all");
-            } else {
-                refreshTable(datePicker.getValue().toString());
-            }
 
-        });
-    }
 
-    private void setPendingOrdersTable() {
-        orderIDTC.setCellValueFactory(new PropertyValueFactory<ViewAllOrdersTVModel, String>("orderID"));
-        clientNameTC.setCellValueFactory(new PropertyValueFactory<ViewAllOrdersTVModel, String>("clientName"));
-        orderDateTC.setCellValueFactory(new PropertyValueFactory<ViewAllOrdersTVModel, String>("orderDate"));
-        amountTC.setCellValueFactory(new PropertyValueFactory<ViewAllOrdersTVModel, String>("orderAmount"));
-
-        refreshTable("all");
-    }
-
-    private void refreshTable(String date) {
-        try {
-            data = AllOrdersController.getAllOrders(date, false);
-            pendingOrdersTable.setItems(data);
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-    }
 
     /* LOGIC HERE */
 
@@ -165,25 +125,6 @@ public class PendingOrders implements Initializable {
         }
     }
 
-    /*
-    - Show sections based on user role
-     */
-    public void setVisibility() {
-        try {
-            if(UserController.getUserRole().equals("admin")) {
-                makeOrder.setMaxHeight(0);
-                makeOrder.setVisible(false);
-            } else {
-                manageUsers.setMaxHeight(0);
-                manageUsers.setVisible(false);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-    }
-
     /* SECTION Pending orders */
 
     private void setStaticItems() {
@@ -207,7 +148,6 @@ public class PendingOrders implements Initializable {
 
         // Set Image Icon for mask of 'Manage customers' ...
         manageCustomersMask.setFill(new ImagePattern(new Image("/com/medyassin/Img/icons/user.png", false)));
-        makeOrderMask.setFill(new ImagePattern(new Image(getClass().getResource("/com/medyassin/Img/icons/order.png").toExternalForm(), false)));
         viewAllOrdersMask.setFill(new ImagePattern(new Image("/com/medyassin/Img/icons/view.png", false)));
         pendingOrdersMask.setFill(new ImagePattern(new Image("/com/medyassin/Img/icons/pending.png", false)));
     }
@@ -218,17 +158,6 @@ public class PendingOrders implements Initializable {
         Scene currentScene = logoutBtn.getScene();
         AnchorPane anchorPane = FXMLLoader.load(getClass().getResource("/com/medyassin/Views/Fxmls/LoginScreen.fxml"));
         Utilities.switchScreen(currentScene, anchorPane, getClass().getResource("/com/medyassin/Views/Fxmls/LoginScreen.css").toExternalForm(), false, 600);
-    }
-
-    @FXML
-    public void manageUsersClick(MouseEvent e) {
-        Scene currentScene = manageCustomers.getScene();
-        try {
-            BorderPane target = FXMLLoader.load(getClass().getResource("/com/medyassin/Views/Fxmls/ManageUsers.fxml"));
-            Utilities.switchScreen(currentScene, target,getClass().getResource("/com/medyassin/Views/Fxmls/UserManageCustomers.css").toExternalForm(), true, 600);
-        } catch (IOException e1) {
-            e1.printStackTrace();
-        }
     }
 
     @FXML

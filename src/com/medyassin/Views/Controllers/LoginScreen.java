@@ -80,17 +80,30 @@ public class LoginScreen implements Initializable {
         if(validateInputs()){
             //login
             try {
-                //Get Main Screen XML of the user[Cassier]
-                BorderPane userMainScreen = FXMLLoader.load((getClass().getResource("/com/medyassin/Views/Fxmls/UserManageCustomers.fxml")));
 
                 // If user inputs are correct, the switch to the main screen
                 if(LoginController.login(usernameInput, passwordInput)) {
                     //Check user role
                     String role = LoginController.getUserRole(usernameInput,passwordInput);
 
-                    //get the current stage
-                    Scene currentScene = loginScreen.getScene();
-                    Utilities.switchScreen(currentScene, userMainScreen, getClass().getResource("/com/medyassin/Views/Fxmls/UserManageCustomers.css").toExternalForm(), true, 600);
+                    if(role.equals("admin")) {
+
+                        //Get Main Screen XML of the user[Adminadmi]
+                        BorderPane userMainScreen = FXMLLoader.load((getClass().getResource("/com/medyassin/Views/Fxmls/ManageUsers.fxml")));
+
+                        //get the current stage
+                        Scene currentScene = loginScreen.getScene();
+                        Utilities.switchScreen(currentScene, userMainScreen, getClass().getResource("/com/medyassin/Views/Fxmls/UserManageCustomers.css").toExternalForm(), true, 600);
+                    } else {
+
+                        //Get Main Screen XML of the user[Cassier]
+                        BorderPane userMainScreen = FXMLLoader.load((getClass().getResource("/com/medyassin/Views/Fxmls/UserManageCustomers.fxml")));
+
+
+                        //get the current stage
+                        Scene currentScene = loginScreen.getScene();
+                        Utilities.switchScreen(currentScene, userMainScreen, getClass().getResource("/com/medyassin/Views/Fxmls/UserManageCustomers.css").toExternalForm(), true, 600);
+                    }
                 } else {
                     //Utilities.showToast("Please verify login information", toast);
                     try {
