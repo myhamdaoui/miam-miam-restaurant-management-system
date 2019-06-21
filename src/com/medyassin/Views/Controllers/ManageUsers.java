@@ -168,7 +168,7 @@ public class ManageUsers implements Initializable, EventHandler<MouseEvent> {
 
             } else if(actionCB.getValue().equals("Ajouter")) {
                 try {
-                    addNewCustomer();
+                    addNewUser();
                 } catch (IOException e1) {
                     e1.printStackTrace();
                 }
@@ -335,7 +335,7 @@ public class ManageUsers implements Initializable, EventHandler<MouseEvent> {
         }
 
     }
-    private void addNewCustomer() throws IOException {
+    private void addNewUser() throws IOException {
         String userName = userNameTF.getText();
         String userRole = userRoleTF.getText();
         String userImage = userImageTF.getText();

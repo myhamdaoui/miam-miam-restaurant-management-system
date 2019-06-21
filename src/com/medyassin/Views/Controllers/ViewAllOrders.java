@@ -66,6 +66,9 @@ public class ViewAllOrders implements Initializable {
     private Circle UserImageMaskCircle;
 
     @FXML
+    private Circle manageUsersMask;
+
+    @FXML
     private TableColumn orderIDTC;
 
     @FXML
@@ -148,6 +151,7 @@ public class ViewAllOrders implements Initializable {
         orderDateTC.setCellValueFactory(new PropertyValueFactory<ViewAllOrdersTVModel, String>("orderDate"));
         amountTC.setCellValueFactory(new PropertyValueFactory<ViewAllOrdersTVModel, String>("orderAmount"));
         statusTC.setCellValueFactory(new PropertyValueFactory<ViewAllOrdersTVModel, String>("orderStatus"));
+        manageUsersMask.setFill(new ImagePattern(new Image("/com/medyassin/Img/icons/user.png", false)));
 
         refreshTable("all");
     }

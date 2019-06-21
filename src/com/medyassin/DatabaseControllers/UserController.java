@@ -70,7 +70,7 @@ public class UserController {
         ResultSet result = stmt.executeQuery();
         while(result.next()) {
             // Create a Customer
-            UserTVModel c = new UserTVModel("","", "","ahmed.jpg");
+            UserTVModel c = new UserTVModel("","", "","");
             c.setUserID(result.getString("id"));
             c.setUserName(result.getString("username"));
             c.setUserRole(result.getString("role"));
@@ -151,7 +151,7 @@ public class UserController {
         // Connection
         Connection conn = DatabaseConnection.getDbConn().getConnection();
 
-        String query = "DELETE FROM Users WHERE cID = ?";
+        String query = "DELETE FROM Users WHERE id = ?";
         PreparedStatement stmt = conn.prepareStatement(query);
         stmt.setObject(1, id);
         int count = stmt.executeUpdate();

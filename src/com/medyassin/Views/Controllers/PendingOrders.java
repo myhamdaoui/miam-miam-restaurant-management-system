@@ -64,6 +64,9 @@ public class PendingOrders implements Initializable {
     private Circle UserImageMaskCircle;
 
     @FXML
+    private Circle manageUsersMask;
+
+    @FXML
     private TableColumn orderIDTC;
 
     @FXML
@@ -121,6 +124,7 @@ public class PendingOrders implements Initializable {
         clientNameTC.setCellValueFactory(new PropertyValueFactory<ViewAllOrdersTVModel, String>("clientName"));
         orderDateTC.setCellValueFactory(new PropertyValueFactory<ViewAllOrdersTVModel, String>("orderDate"));
         amountTC.setCellValueFactory(new PropertyValueFactory<ViewAllOrdersTVModel, String>("orderAmount"));
+        manageUsersMask.setFill(new ImagePattern(new Image("/com/medyassin/Img/icons/user.png", false)));
 
         refreshTable("all");
     }

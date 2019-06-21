@@ -75,6 +75,9 @@ public class UserManageCustomers implements Initializable, EventHandler<MouseEve
     private Circle pendingOrdersMask;
 
     @FXML
+    private Circle manageUsersMask;
+
+    @FXML
     private JFXButton confirmBtn;
 
     @FXML
@@ -223,6 +226,7 @@ public class UserManageCustomers implements Initializable, EventHandler<MouseEve
         makeOrderMask.setFill(new ImagePattern(new Image(getClass().getResource("/com/medyassin/Img/icons/order.png").toExternalForm(), false)));
         viewAllOrdersMask.setFill(new ImagePattern(new Image("/com/medyassin/Img/icons/view.png", false)));
         pendingOrdersMask.setFill(new ImagePattern(new Image("/com/medyassin/Img/icons/pending.png", false)));
+        manageUsersMask.setFill(new ImagePattern(new Image("/com/medyassin/Img/icons/user.png", false)));
     }
 
     private void deleteCustomer() {

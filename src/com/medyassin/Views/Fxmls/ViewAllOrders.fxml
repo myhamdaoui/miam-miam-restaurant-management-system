@@ -15,7 +15,7 @@
             <children>
             <Pane fx:id="manageUsers" onMouseClicked="#manageUsersClick" prefHeight="93.0" prefWidth="137.0" style="-fx-background-color: #1d262d;">
                <children>
-                  <Circle fx:id="manageCustomersMask1" fill="#ffffff00" layoutX="41.0" layoutY="30.0" radius="16.0" stroke="WHITE" strokeType="INSIDE" />
+                  <Circle fx:id="manageUsersMask" fill="#ffffff00" layoutX="41.0" layoutY="30.0" radius="16.0" stroke="WHITE" strokeType="INSIDE" />
                   <Label layoutX="24.0" layoutY="56.0" text="Gérer les utilisateurs" textFill="WHITE">
                      <font>
                         <Font name="Roboto Bold" size="12.0" />
