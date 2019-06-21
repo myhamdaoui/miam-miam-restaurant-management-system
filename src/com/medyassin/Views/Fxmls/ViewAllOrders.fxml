@@ -81,7 +81,7 @@
                 <Pane fx:id="pendingOrders" layoutX="10.0" layoutY="196.0" onMouseClicked="#pendingClick" prefHeight="93.0" prefWidth="137.0" style="-fx-background-color: #1d262d;">
                     <children>
                         <Circle fx:id="pendingOrdersMask" fill="#ffffff00" layoutX="41.0" layoutY="30.0" radius="16.0" stroke="WHITE" strokeType="INSIDE" />
-                        <Label layoutX="24.0" layoutY="56.0" text="Commandes en attente" textFill="WHITE">
+                        <Label layoutX="24.0" layoutY="56.0" text="Commandes en attentes" textFill="WHITE">
                             <font>
                                 <Font name="Roboto Bold" size="12.0" />
                             </font>
@@ -105,8 +105,8 @@
          <center>
             <TableView fx:id="allOrdersTable" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
               <columns>
-                <TableColumn fx:id="orderIDTC" prefWidth="128.0" text="OrderID" />
-                  <TableColumn fx:id="orderDateTC" prefWidth="75.0" text="Commande date" />
+                <TableColumn fx:id="orderIDTC" prefWidth="128.0" text="Commande ID" />
+                  <TableColumn fx:id="orderDateTC" prefWidth="75.0" text="Date de commande" />
                 <TableColumn fx:id="clientNameTC" prefWidth="277.0" text="Nom du client" />
                   <TableColumn fx:id="amountTC" minWidth="8.0" prefWidth="108.0" text="Total payé" />
                   <TableColumn fx:id="statusTC" prefWidth="118.0" text="Etat" />

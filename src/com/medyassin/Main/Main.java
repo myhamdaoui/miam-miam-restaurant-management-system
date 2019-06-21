@@ -44,7 +44,7 @@ public class Main extends Application {
             scene.getStylesheets().addAll(getClass().getResource("/com/medyassin/Views/Fxmls/LoginScreen.css").toExternalForm());
 
             /* Stage = window parameters */
-            primaryStage.setTitle("Restaurant Management System");
+            primaryStage.setTitle("Miam-Miam Restaurant Management Système");
             primaryStage.setWidth(1000);
             primaryStage.setHeight(600);
             primaryStage.setScene(scene);

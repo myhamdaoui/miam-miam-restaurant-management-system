@@ -78,7 +78,7 @@
                 <Pane fx:id="pendingOrders" layoutX="10.0" layoutY="196.0" onMouseClicked="#pendingClick" prefHeight="93.0" prefWidth="137.0" style="-fx-background-color: #1d262d;">
                     <children>
                         <Circle fx:id="pendingOrdersMask" fill="#ffffff00" layoutX="41.0" layoutY="30.0" radius="16.0" stroke="WHITE" strokeType="INSIDE" />
-                        <Label layoutX="24.0" layoutY="56.0" text="Commandes en attente" textFill="WHITE">
+                        <Label layoutX="24.0" layoutY="56.0" text="Commandes en attentes" textFill="WHITE">
                             <font>
                                 <Font name="Roboto Bold" size="12.0" />
                             </font>

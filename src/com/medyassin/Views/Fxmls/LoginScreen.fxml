@@ -26,27 +26,27 @@
       </Circle>
    
       <!--App Name-->
-      <Label layoutX="107.0" layoutY="98.0" prefHeight="96.0" prefWidth="339.0" text="Restaurant Management System" textFill="WHITE" wrapText="true">
+      <Label layoutX="107.0" layoutY="98.0" prefHeight="96.0" prefWidth="364.0" text="Miam-Miam Management Système" textFill="WHITE" wrapText="true">
          <font>
             <Font name="HK Grotesk SemiBold" size="31.0" />
          </font>
       </Label>
    
       <!--App Login Description-->
-      <Label layoutX="107.0" layoutY="238.0" text="Please enter login information" textFill="#5b5b5b">
+      <Label layoutX="107.0" layoutY="238.0" text="Veuillez saisir vos informations" textFill="#5b5b5b">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
    
       <!--Username TextField-->
-      <JFXTextField fx:id="username" focusColor="#40de50" labelFloat="true" layoutX="107.0" layoutY="317.0" prefHeight="25.0" prefWidth="339.0" promptText="Username" unFocusColor="#494949" />
+      <JFXTextField fx:id="username" focusColor="#40de50" labelFloat="true" layoutX="107.0" layoutY="317.0" prefHeight="25.0" prefWidth="339.0" promptText="Identifiant" unFocusColor="#494949" />
    
       <!--Password TextField-->
-      <JFXPasswordField fx:id="password" focusColor="#40de50" labelFloat="true" layoutX="107.0" layoutY="384.0" prefHeight="25.0" prefWidth="339.0" promptText="Password" unFocusColor="#494949" />
+      <JFXPasswordField fx:id="password" focusColor="#40de50" labelFloat="true" layoutX="107.0" layoutY="384.0" prefHeight="25.0" prefWidth="339.0" promptText="Mot de passe" unFocusColor="#494949" />
    
       <!--Login Button -->
-      <JFXButton fx:id="loginBtn" layoutX="107.0" layoutY="462.0" onAction="#btnLoginAction" prefHeight="42.0" prefWidth="339.0" style="-fx-background-color: #40DE50;" text="LOG IN" textFill="WHITE">
+      <JFXButton fx:id="loginBtn" layoutX="107.0" layoutY="462.0" onAction="#btnLoginAction" prefHeight="42.0" prefWidth="339.0" style="-fx-background-color: #40DE50;" text="Connexion" textFill="WHITE">
          <font>
             <Font name="HK Grotesk SemiBold" size="15.0" />
          </font>
