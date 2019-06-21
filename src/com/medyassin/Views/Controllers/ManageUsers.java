@@ -58,6 +58,9 @@ public class ManageUsers implements Initializable, EventHandler<MouseEvent> {
     private Pane manageUsers;
 
     @FXML
+    private Pane manageItems;
+
+    @FXML
     private TableView customersTable;
 
     @FXML
@@ -213,7 +216,6 @@ public class ManageUsers implements Initializable, EventHandler<MouseEvent> {
 
         try {
             String url = "/com/medyassin/Img/" + UserController.getUserImg();
-            System.out.println(url);
             UserImageMaskCircle.setFill(new ImagePattern(new Image(url, false)));
 
             // set name
@@ -473,4 +475,17 @@ public class ManageUsers implements Initializable, EventHandler<MouseEvent> {
             e1.printStackTrace();
         }
     }
+
+    @FXML
+    public void manageItemsClick(MouseEvent e) {
+        Scene currentScene = manageCustomers.getScene();
+        try {
+            BorderPane target = FXMLLoader.load(getClass().getResource("/com/medyassin/Views/Fxmls/AdminManageItems.fxml"));
+            Utilities.switchScreen(currentScene, target,getClass().getResource("/com/medyassin/Views/Fxmls/PendingOrders.css").toExternalForm(), true, 600);
+        } catch (IOException e1) {
+            e1.printStackTrace();
+        }
+    }
+
+
 }

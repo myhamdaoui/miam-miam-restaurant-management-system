@@ -2,6 +2,10 @@ package com.medyassin.DatabaseControllers;
 
 import com.medyassin.Models.Customer;
 import com.medyassin.Models.Item;
+import com.medyassin.TableViewModels.ItemTVModel;
+import com.medyassin.TableViewModels.UserTVModel;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -54,7 +58,7 @@ public class ItemController {
         Connection conn = DatabaseConnection.getDbConn().getConnection();
 
         // Result
-        int code = 9999;
+        int code = 1;
 
 
         String query = "SELECT ItemCode FROM Items WHERE ItemName = ?";
@@ -69,7 +73,7 @@ public class ItemController {
         return code;
     }
 
-    public static Item getItem(int itemCode) throws SQLException, ClassNotFoundException {
+    public static Item getItem(String itemCode) throws SQLException, ClassNotFoundException {
         // Connection
         Connection conn = DatabaseConnection.getDbConn().getConnection();
 
@@ -92,5 +96,32 @@ public class ItemController {
         }
 
         return item;
+    }
+
+    public static ObservableList<ItemTVModel> getAllItems() throws SQLException, ClassNotFoundException {
+        // Connection
+        Connection conn = DatabaseConnection.getDbConn().getConnection();
+
+        // Result
+        ObservableList<ItemTVModel> items = FXCollections.observableArrayList();
+
+        String query = "SELECT * FROM items";
+        PreparedStatement stmt = conn.prepareStatement(query);
+
+        ResultSet result = stmt.executeQuery();
+        while(result.next()) {
+            // Create a Customer
+            ItemTVModel i = new ItemTVModel("","", "","", "");
+            i.setItemCode(result.getString("ItemCode"));
+            i.setItemName(result.getString("ItemName"));
+            i.setItemPrice(result.getString("ItemPrice"));
+            i.setItemType(result.getString("ItemType"));
+            i.setItemImg(result.getString("ItemImage"));
+
+            // Add customer to the return result
+            items.add(i);
+        }
+
+        return items;
     }
 }

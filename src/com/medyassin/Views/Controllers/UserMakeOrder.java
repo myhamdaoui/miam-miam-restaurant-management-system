@@ -372,7 +372,7 @@ public class UserMakeOrder implements Initializable {
             try {
                 // get inputs
                 int itemCode = ItemController.getItemCodeFromName(itemName.getValue());
-                Item item = ItemController.getItem(itemCode);
+                Item item = ItemController.getItem(itemCode+ "");
 
                 int amount = Integer.parseInt(item.getItemPrice()) * Integer.parseInt(qt.getText());
 

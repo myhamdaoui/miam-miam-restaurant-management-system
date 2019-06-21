@@ -73,9 +73,9 @@ public class UserTVModel {
     public void setUserImg(String userImg) {
 
         if(!userImg.equals("")) {
-            userImgView.setFill(new ImagePattern(new Image("/com/medyassin/Img/" + userImg, false)));
+            userImgView.setFill(new ImagePattern(new Image("file:img/users/" + userImg, false)));
         } else {
-            userImgView.setFill(new ImagePattern(new Image("/com/medyassin/Img/ahmed.jpg", false)));
+            userImgView.setFill(new ImagePattern(new Image(getClass().getResource("file:img/users/" + userImg).toExternalForm(), false)));
 
         }
 
