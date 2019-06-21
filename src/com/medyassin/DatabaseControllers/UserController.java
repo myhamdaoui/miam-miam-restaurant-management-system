@@ -106,8 +106,10 @@ public class UserController {
         query = "INSERT INTO Users (username, password, role, Image) VALUES(?, ?, ?, ?)";
         stmt = conn.prepareStatement(query);
 
+        String encryptedPassword = LoginController.encryptePassword(password);
+
         stmt.setObject(1, username);
-        stmt.setObject(2, password);
+        stmt.setObject(2, encryptedPassword);
         stmt.setObject(3, userRole);
         stmt.setObject(4, userImg);
 
@@ -124,8 +126,11 @@ public class UserController {
 
         String query = "UPDATE Users SET username = ?, password = ?, role = ?, Image = ? WHERE id = ?";
         PreparedStatement stmt = conn.prepareStatement(query);
+
+        String encryptedPassword = LoginController.encryptePassword(password);
+
         stmt.setObject(1, username);
-        stmt.setObject(2, password);
+        stmt.setObject(2, encryptedPassword);
         stmt.setObject(3, role);
         stmt.setObject(4, image);
         stmt.setObject(5, userID);

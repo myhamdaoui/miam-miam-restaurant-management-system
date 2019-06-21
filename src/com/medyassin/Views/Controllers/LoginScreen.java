@@ -85,10 +85,9 @@ public class LoginScreen implements Initializable {
                 // If user inputs are correct, the switch to the main screen
                 if(LoginController.login(usernameInput, passwordInput)) {
                     //Check user role
-                    String role = LoginController.getUserRole(usernameInput,passwordInput);
-
+                    String role = LoginController.getUserRole(usernameInput);
+                    System.out.println(role);
                     if(role.equals("admin")) {
-
 
 
                         //Get Main Screen XML of the user[Adminadmi]
