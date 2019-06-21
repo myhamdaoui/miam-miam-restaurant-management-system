@@ -40,7 +40,7 @@
                         <Cursor fx:constant="HAND" />
                     </cursor>
                 </Pane>
-                <Pane fx:id="viewAllOrders" layoutX="10.0" layoutY="103.0" prefHeight="93.0" onMouseClicked="#allOrderClick" prefWidth="137.0" style="-fx-background-color: #1d262d;">
+                <Pane fx:id="viewAllOrders" layoutX="10.0" layoutY="103.0" onMouseClicked="#allOrderClick" prefHeight="93.0" prefWidth="137.0" style="-fx-background-color: #1d262d;">
                     <children>
                         <Circle fx:id="viewAllOrdersMask" fill="#ffffff00" layoutX="41.0" layoutY="30.0" radius="16.0" stroke="WHITE" strokeType="INSIDE" />
                         <Label layoutX="24.0" layoutY="56.0" text="Voir toutes les commandes" textFill="WHITE">
@@ -140,7 +140,7 @@
          <children>
                 <!--User Image Mask(Cirlce)-->
                 <Circle fx:id="UserImageMaskCircle" fill="DODGERBLUE" radius="19.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-                <Label text="M. HAMDAOUI Mohammed-Yassin" textFill="#eeeeee">
+                <Label fx:id="nameLabel" text="M. HAMDAOUI Mohammed-Yassin" textFill="#eeeeee">
                     <padding>
                         <Insets top="10.0" />
                     </padding>

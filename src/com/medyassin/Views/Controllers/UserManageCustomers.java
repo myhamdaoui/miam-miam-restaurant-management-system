@@ -5,6 +5,7 @@ import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.validation.RequiredFieldValidator;
 import com.medyassin.DatabaseControllers.ManageCustomerController;
+import com.medyassin.DatabaseControllers.UserController;
 import com.medyassin.Models.Customer;
 import com.medyassin.TableViewModels.CustomerTVModel;
 import com.medyassin.Utilities.CustomAlert.CustomerAlert;
@@ -19,6 +20,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -102,6 +104,9 @@ public class UserManageCustomers implements Initializable, EventHandler<MouseEve
     @FXML
     private JFXComboBox<String> actionCB;
 
+    @FXML
+    private Label nameLabel;
+
     // Data for the Customer table
     private ObservableList<CustomerTVModel> data = FXCollections.observableArrayList();
 
@@ -170,9 +175,22 @@ public class UserManageCustomers implements Initializable, EventHandler<MouseEve
         });
     }
 
-    private void setStaticItems() {
+    private void setStaticItems()  {
         // Set Image for the circular mask
-        UserImageMaskCircle.setFill(new ImagePattern(new Image("/com/medyassin/Img/user_img.jpg", false)));
+
+        try {
+            String url = "/com/medyassin/Img/" + UserController.getUserImg();
+            System.out.println(url);
+            UserImageMaskCircle.setFill(new ImagePattern(new Image(url, false)));
+
+            // set name
+            nameLabel.setText("Bienvenue" + UserController.getUserName());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
 
         // Set no focus for logout btn
         logoutBtn.setDisableVisualFocus(true);
@@ -337,6 +355,7 @@ public class UserManageCustomers implements Initializable, EventHandler<MouseEve
         Scene currentScene = borderPane.getScene();
         AnchorPane anchorPane = FXMLLoader.load(getClass().getResource("/com/medyassin/Views/Fxmls/LoginScreen.fxml"));
         Utilities.switchScreen(currentScene, anchorPane, getClass().getResource("/com/medyassin/Views/Fxmls/LoginScreen.css").toExternalForm(), false, 600);
+
     }
 
     @Override

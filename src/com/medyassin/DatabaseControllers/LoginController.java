@@ -21,11 +21,17 @@ public class LoginController {
         if(set.next()) {
             String pwd = set.getString("password");
             if(pwd.equals(password)) {
+                String query1 = "UPDATE users SET actif = 1 WHERE id = ?";
+                PreparedStatement stmt1 = conn.prepareStatement(query1);
+                stmt1.setObject(1, set.getString("id"));
+                stmt1.execute();
                 return true;
             }
         }
         return false;
     }
+
+
 
     public static String getUserRole(String username, String password) throws SQLException, ClassNotFoundException{
         /* SQL Query */

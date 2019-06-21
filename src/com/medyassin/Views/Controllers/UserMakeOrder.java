@@ -125,6 +125,8 @@ public class UserMakeOrder implements Initializable {
     @FXML
     private DatePicker orderDate;
 
+    private int total = 0;
+
     // data for the items table
     private ObservableList<AddNewOrderTVModel> data = FXCollections.observableArrayList();
 
@@ -285,6 +287,7 @@ public class UserMakeOrder implements Initializable {
 
     @FXML
     void addClient(ActionEvent event) throws IOException{
+
         // Add new Customer if inputs are enabled
         if(clientName.isDisable()) {
             // clear inputs
@@ -304,63 +307,85 @@ public class UserMakeOrder implements Initializable {
             clientAdress.setDisable(false);
             clientTel.setDisable(false);
         } else {
-            String name = clientName.getText();
-            String phoneN = clientAdress.getText();
-            String address = clientTel.getText();
+            if(validateInputs()) {
+                String name = clientName.getText();
+                String phoneN = clientAdress.getText();
+                String address = clientTel.getText();
 
-            //TODO Validation
-            boolean validated = true;
+                //TODO Validation
+                boolean validated = true;
 
-            if(validated) {
-                try {
-                    if (!ManageCustomerController.addNewCustomer(name, phoneN, address)) {
-                        CustomerAlert.display("error", "Can't add new customer");
-                    } else {
-                        CustomerAlert.display("success", "Le client a été bien ajouté");
+                if(validated) {
+                    try {
+                        if (!ManageCustomerController.addNewCustomer(name, phoneN, address)) {
+                            CustomerAlert.display("error", "Can't add new customer");
+                        } else {
+                            CustomerAlert.display("success", "Le client a été bien ajouté");
+                        }
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    } catch (ClassNotFoundException e) {
+                        e.printStackTrace();
                     }
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                } catch (ClassNotFoundException e) {
-                    e.printStackTrace();
+
+                    // Update combobox
+                    setCustomersCB();
+
+                } else {
+                    CustomerAlert.display("error", "Please enter valide data !");
                 }
-
-                // Update combobox
-                setCustomersCB();
-
-            } else {
-                CustomerAlert.display("error", "Please enter valide data !");
             }
         }
 
     }
 
+    private boolean validateInputs() {
+        RequiredFieldValidator validator = new RequiredFieldValidator();
+        validator.setMessage("Ce champ est obligatoire");
+        clientName.getValidators().add(validator);
+        clientTel.getValidators().add(validator);
+        clientAdress.getValidators().add(validator);
+
+        if(!clientName.validate()) {
+            return false;
+        } else if(!clientTel.validate()) {
+            return false;
+        } else if(!clientAdress.validate()) {
+            return false;
+        }
+
+        return true;
+    }
+
     @FXML
     private void addItem(ActionEvent event) {
-        try {
-            // get inputs
-            int itemCode = ItemController.getItemCodeFromName(itemName.getValue());
-            Item item = ItemController.getItem(itemCode);
+        if(validateItemInputs()) {
+            try {
+                // get inputs
+                int itemCode = ItemController.getItemCodeFromName(itemName.getValue());
+                Item item = ItemController.getItem(itemCode);
 
-            int amount = Integer.parseInt(item.getItemPrice()) * Integer.parseInt(qt.getText());
+                int amount = Integer.parseInt(item.getItemPrice()) * Integer.parseInt(qt.getText());
 
-            AddNewOrderTVModel model = new AddNewOrderTVModel(item.getItemCode(), item.getItemName(), item.getItemPrice(), qt.getText(), amount + "");
-            data.add(model);
-            itemsTable.setItems(data);
+                AddNewOrderTVModel model = new AddNewOrderTVModel(item.getItemCode(), item.getItemName(), item.getItemPrice(), qt.getText(), amount + "");
+                data.add(model);
+                itemsTable.setItems(data);
 
-            // Set total
-            int total = 0;
-            for(AddNewOrderTVModel curr: (ObservableList<AddNewOrderTVModel>)itemsTable.getItems()) {
-                // total calc
-                total += Integer.parseInt(curr.getItemAmount());
+                // Set total
+                total = 0;
+                for(AddNewOrderTVModel curr: (ObservableList<AddNewOrderTVModel>)itemsTable.getItems()) {
+                    // total calc
+                    total += Integer.parseInt(curr.getItemAmount());
+                }
+
+                totalLabel.setText(total + " DH");
+
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
             }
-
-            totalLabel.setText(total + " DH");
-
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
         }
     }
 
@@ -390,17 +415,15 @@ public class UserMakeOrder implements Initializable {
             int index = tp.getRow();
             AddNewOrderTVModel orderData = (AddNewOrderTVModel)itemsTable.getSelectionModel().getSelectedItem();
 
+            int amount = Integer.parseInt(orderData.getItemAmount());
+
+            total -= amount;
+
+            totalLabel.setText(total + "");
+
             // remove item from data
             data.remove(index);
 
-            // remove from orderdetails "BD"
-            /* PAS BESOIN PUISQUE IL FAUT CONIFMER L'ORDER
-            if(NewOrderController.deleteOrderDetail(orderID.getText(), orderData.getItemCode())) {
-                CustomerAlert.display("success", "le produit est bien supprimée");
-            } else {
-                CustomerAlert.display("error", "Erreur: le produit n'est pas supprimée");
-            }
-            */
 
             // set data again
             itemsTable.setItems(data);
@@ -411,6 +434,9 @@ public class UserMakeOrder implements Initializable {
     private boolean validateOrderInputs() {
         RequiredFieldValidator validator = new RequiredFieldValidator();
         validator.setMessage("Ce champ est obligatoire");
+        payementCB.getValidators().add(validator);
+        customersCB.getValidators().add(validator);
+
         if(orderDate.getValue() == null) {
             try {
                 CustomerAlert.display("error", "Veuillez choisir une date pour la commande");
@@ -418,26 +444,37 @@ public class UserMakeOrder implements Initializable {
                 e.printStackTrace();
             }
             return false;
-        }
 
-//        clientName.getValidators().add(validator);
-//        clientAdress.getValidators().add(validator);
-//        clientTel.getValidators().add(validator);
-        customersCB.getValidators().add(validator);
+        } else if(total == 0) {
+            try {
+                CustomerAlert.display("error", "Veuillez ajouter des produits");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return false;
+        } else if(!payementCB.validate()) {
+            return false;
+        } else if(!customersCB.validate()) {
+            return false;
+        }
+        return true;
+    }
+
+    private boolean validateItemInputs() {
+        RequiredFieldValidator validator = new RequiredFieldValidator();
+        validator.setMessage("Ce champ est obligatoire");
+
         itemType.getValidators().add(validator);
         itemName.getValidators().add(validator);
         qt.getValidators().add(validator);
 
-        if(!customersCB.validate()) {
-            return false;
-        } else if(!itemType.validate()) {
+        if(!itemType.validate()) {
             return false;
         } else if(!itemName.validate()) {
             return false;
         } else if(!qt.validate()) {
             return false;
         }
-
         return true;
     }
 
