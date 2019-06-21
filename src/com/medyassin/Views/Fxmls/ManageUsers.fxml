@@ -29,7 +29,7 @@
                 </Pane>
             <Pane fx:id="manageItems" onMouseClicked="#manageItemsClick" prefHeight="93.0" prefWidth="137.0" style="-fx-background-color: #1d262d;">
                <children>
-                  <Circle fx:id="manageUsersMask1" fill="#ffffff00" layoutX="41.0" layoutY="30.0" radius="16.0" stroke="WHITE" strokeType="INSIDE" />
+                  <Circle fx:id="manageItemsMask" fill="#ffffff00" layoutX="41.0" layoutY="30.0" radius="16.0" stroke="WHITE" strokeType="INSIDE" />
                   <Label layoutX="24.0" layoutY="56.0" text="Gérer les produits" textFill="WHITE">
                      <font>
                         <Font name="Roboto Bold" size="12.0" />

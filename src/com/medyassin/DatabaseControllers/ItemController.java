@@ -33,6 +33,39 @@ public class ItemController {
         return categories;
     }
 
+    public static int countTypes() throws SQLException, ClassNotFoundException {
+        // Connection
+        Connection conn = DatabaseConnection.getDbConn().getConnection();
+
+        // Result
+        int i = 0;
+
+
+        String query = "SELECT DISTINCT ItemType FROM Items";
+        PreparedStatement stmt = conn.prepareStatement(query);
+
+        ResultSet result = stmt.executeQuery();
+        while(result.next()) {
+            i++;
+        }
+        return i;
+    }
+
+    public static boolean deleteItem(int id) throws SQLException, ClassNotFoundException {
+        // Connection
+        Connection conn = DatabaseConnection.getDbConn().getConnection();
+
+        String query = "DELETE FROM Items WHERE ItemCode = ?";
+        PreparedStatement stmt = conn.prepareStatement(query);
+        stmt.setObject(1, id);
+        int count = stmt.executeUpdate();
+        if(count <= 0) {
+            return false;
+        }
+
+        return true;
+    }
+
     public static ArrayList<String> getItemOfCat(String cat) throws SQLException, ClassNotFoundException {
         // Connection
         Connection conn = DatabaseConnection.getDbConn().getConnection();
@@ -98,15 +131,26 @@ public class ItemController {
         return item;
     }
 
-    public static ObservableList<ItemTVModel> getAllItems() throws SQLException, ClassNotFoundException {
+    public static ObservableList<ItemTVModel> getAllItems(String itemType) throws SQLException, ClassNotFoundException {
         // Connection
         Connection conn = DatabaseConnection.getDbConn().getConnection();
 
         // Result
         ObservableList<ItemTVModel> items = FXCollections.observableArrayList();
 
-        String query = "SELECT * FROM items";
+        String query = "";
+        if(itemType.equals("all")) {
+            query = "SELECT * FROM items";
+
+        } else {
+            query = "SELECT * FROM items WHERE ItemType = ?";
+        }
+
         PreparedStatement stmt = conn.prepareStatement(query);
+
+        if(!itemType.equals("all")) {
+            stmt.setObject(1, itemType);
+        }
 
         ResultSet result = stmt.executeQuery();
         while(result.next()) {
@@ -123,5 +167,59 @@ public class ItemController {
         }
 
         return items;
+    }
+
+    public static int getNextID() throws SQLException, ClassNotFoundException {
+        // Connection
+        Connection conn = DatabaseConnection.getDbConn().getConnection();
+
+        String query = "SELECT ItemCode FROM items ORDER BY ItemCode DESC LIMIT 1";
+        PreparedStatement stmt = conn.prepareStatement(query);
+        ResultSet res = stmt.executeQuery();
+        res.next();
+        return (Integer.parseInt(res.getString("ItemCode")) + 1);
+    }
+
+    public static boolean addNewItem(String itemName, String itemPrice, String itemImage, String itemType) throws SQLException, ClassNotFoundException {
+        // Connection
+        Connection conn = DatabaseConnection.getDbConn().getConnection();
+
+        int maxId=getNextID();
+        String query ="ALTER TABLE Items AUTO_INCREMENT = ?";
+        PreparedStatement stmt=conn.prepareStatement(query);
+        stmt.setObject(1,maxId);
+        stmt.execute();
+
+        query = "INSERT INTO Items (ItemName, ItemPrice, ItemImage, ItemType) VALUES(?, ?, ?, ?)";
+        stmt = conn.prepareStatement(query);
+
+        stmt.setObject(1, itemName);
+        stmt.setObject(2, itemPrice);
+        stmt.setObject(3, itemImage);
+        stmt.setObject(4, itemType);
+
+        if(stmt.executeUpdate() <= 0) {
+            return false;
+        }
+
+        return true;
+    }
+
+    public static boolean updateItem(int itemCode, String itemName,String itemImage, String itemType, String itemPrice) throws SQLException, ClassNotFoundException {
+        // Connection
+        Connection conn = DatabaseConnection.getDbConn().getConnection();
+
+        String query = "UPDATE Items SET ItemName = ?, ItemImage = ?, ItemPrice = ?, ItemType = ? WHERE ItemCode = ?";
+        PreparedStatement stmt = conn.prepareStatement(query);
+        stmt.setObject(1, itemName);
+        stmt.setObject(2, itemImage);
+        stmt.setObject(3, itemPrice);
+        stmt.setObject(4, itemType);
+        stmt.setObject(5, itemCode);
+        int count = stmt.executeUpdate();
+        if(count <= 0) {
+            return false;
+        }
+        return true;
     }
 }

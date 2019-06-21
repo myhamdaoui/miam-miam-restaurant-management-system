@@ -64,6 +64,9 @@ public class ManageUsers implements Initializable, EventHandler<MouseEvent> {
     private TableView customersTable;
 
     @FXML
+    private Circle manageItemsMask;
+
+    @FXML
     private JFXButton logoutBtn;
 
     @FXML
@@ -236,6 +239,7 @@ public class ManageUsers implements Initializable, EventHandler<MouseEvent> {
         viewAllOrdersMask.setFill(new ImagePattern(new Image("/com/medyassin/Img/icons/view.png", false)));
         pendingOrdersMask.setFill(new ImagePattern(new Image("/com/medyassin/Img/icons/pending.png", false)));
         manageUsersMask.setFill(new ImagePattern(new Image("/com/medyassin/Img/icons/user.png", false)));
+        manageItemsMask.setFill(new ImagePattern(new Image("/com/medyassin/Img/icons/product.png", false)));
     }
 
     private void deleteCustomer() {

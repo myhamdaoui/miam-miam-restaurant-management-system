@@ -59,16 +59,17 @@ public class AdminManageItems implements Initializable, EventHandler<MouseEvent>
     private Pane manageUsers;
 
     @FXML
+    private Circle manageItemsMask;
+
+    @FXML
     private TableView customersTable;
 
     @FXML
     private JFXButton logoutBtn;
 
     @FXML
-    private JFXTextField userImageTF;
+    private JFXTextField itemCodeTF;
 
-    @FXML
-    private JFXPasswordField userPassTF;
 
     @FXML
     private Circle manageCustomersMask;
@@ -95,10 +96,13 @@ public class AdminManageItems implements Initializable, EventHandler<MouseEvent>
     private BorderPane borderPane;
 
     @FXML
-    private JFXTextField userNameTF;
+    private JFXTextField itemNameTF;
 
     @FXML
-    private JFXTextField userRoleTF;
+    private JFXTextField itemPriceTF;
+
+    @FXML
+    private JFXTextField itemImageTF;
 
     @FXML
     private TableColumn itemCodeTC;
@@ -113,7 +117,7 @@ public class AdminManageItems implements Initializable, EventHandler<MouseEvent>
     private TableColumn itemTypeTC;
 
     @FXML
-    private JFXTextField userIDTF;
+    private JFXTextField itemTypeTF;
 
     @FXML
     private JFXComboBox<String> actionCB;
@@ -176,16 +180,16 @@ public class AdminManageItems implements Initializable, EventHandler<MouseEvent>
 
             } else if(actionCB.getValue().equals("Ajouter")) {
                 try {
-                    addNewUser();
+                    addNewItem();
                 } catch (IOException e1) {
                     e1.printStackTrace();
                 }
             } else if(actionCB.getValue().equals("Supprimer")) {
-                deleteCustomer();
+                deleteItem();
 
             } else if(actionCB.getValue().equals("Mise à jour")) {
                 //TODO
-                updateCustomer();
+                updateItem();
             }
 
         });
@@ -213,12 +217,19 @@ public class AdminManageItems implements Initializable, EventHandler<MouseEvent>
                 System.out.println(imgName);
                 itemImageMask.setFill(new ImagePattern(new Image("file:img/items/" + imgName, false)));
 
+                itemCodeTF.setText(i.getItemCode());
+                itemNameTF.setText(i.getItemName());
+                itemPriceTF.setText(i.getItemPrice());
+                itemImageTF.setText(i.getItemImg());
+
+
             }
         });
     }
 
     private void setItemTypeFilter() {
         try {
+            itemTypeFilter.getItems().add("all");
             ArrayList<String> cats = ItemController.getCategories();
             for(String cat: cats) {
                 itemTypeFilter.getItems().add(cat);
@@ -228,6 +239,10 @@ public class AdminManageItems implements Initializable, EventHandler<MouseEvent>
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
+
+        itemTypeFilter.valueProperty().addListener((observable, oldValue, newValue) -> {
+            refreshTable(newValue);
+        });
 
     }
 
@@ -253,17 +268,18 @@ public class AdminManageItems implements Initializable, EventHandler<MouseEvent>
 
         // Set Image Icon for mask of 'Manage customers' ...
         manageCustomersMask.setFill(new ImagePattern(new Image("/com/medyassin/Img/icons/user.png", false)));
-        makeOrderMask.setFill(new ImagePattern(new Image(getClass().getResource("/com/medyassin/Img/icons/order.png").toExternalForm(), false)));
+        makeOrderMask.setFill(new ImagePattern(new Image("/com/medyassin/Img/icons/order.png", false)));
         viewAllOrdersMask.setFill(new ImagePattern(new Image("/com/medyassin/Img/icons/view.png", false)));
         pendingOrdersMask.setFill(new ImagePattern(new Image("/com/medyassin/Img/icons/pending.png", false)));
         manageUsersMask.setFill(new ImagePattern(new Image("/com/medyassin/Img/icons/user.png", false)));
+        manageItemsMask.setFill(new ImagePattern(new Image("/com/medyassin/Img/icons/product.png", false)));
     }
 
-    private void deleteCustomer() {
-        int id = Integer.parseInt(userIDTF.getText());
+    private void deleteItem() {
+        int id = Integer.parseInt(itemCodeTF.getText());
 
         try {
-            if(UserController.deleteUser(id)) {
+            if(ItemController.deleteItem(id)) {
                 CustomerAlert.display("success", "L'utilisateur a été bien supprimé");
             } else {
                 try {
@@ -281,21 +297,21 @@ public class AdminManageItems implements Initializable, EventHandler<MouseEvent>
         }
 
         // Refresh
-        refreshTable();
+        refreshTable("all");
 
         // Clear inputs
         clearCustomerForm();
     }
 
-    private void updateCustomer() {
-        int id = Integer.parseInt(userIDTF.getText());
-        String userName = userNameTF.getText();
-        String userRole = userRoleTF.getText();
-        String userImage = userImageTF.getText();
-        String password = userPassTF.getText();
+    private void updateItem() {
+        int id = Integer.parseInt(itemCodeTF.getText());
+        String itemName = itemNameTF.getText();
+        String itemPrice = itemPriceTF.getText();
+        String itemImage = itemImageTF.getText();
+        String itemType = itemTypeTF.getText();
 
         try {
-            boolean success = UserController.updateUser(id, userName, password, userRole, userImage);
+            boolean success = ItemController.updateItem(id, itemName, itemImage, itemType, itemPrice);
             if(!success) {
                 try {
                     CustomerAlert.display("error", "Update user has failed !");
@@ -316,20 +332,19 @@ public class AdminManageItems implements Initializable, EventHandler<MouseEvent>
         }
 
         // Refresh
-        refreshTable();
+        refreshTable("all");
     }
 
     private void clearCustomerForm() {
-        userNameTF.setText("");
-        userRoleTF.setText("");
-        userImageTF.setText("");
-        userPassTF.setText("");
+        itemNameTF.setText("");
+        itemPriceTF.setText("");
+        itemImageTF.setText("");
     }
 
-    private void refreshTable() {
+    private void refreshTable(String itemType) {
         data = FXCollections.observableArrayList();
         try {
-            data = ItemController.getAllItems();
+            data = ItemController.getAllItems(itemType);
             customersTable.setItems(data);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -344,13 +359,13 @@ public class AdminManageItems implements Initializable, EventHandler<MouseEvent>
         itemPriceTC.setCellValueFactory(new PropertyValueFactory<CustomerTVModel, String>("itemPrice"));
         itemTypeTC.setCellValueFactory(new PropertyValueFactory<CustomerTVModel, Rectangle>("itemType"));
 
-        refreshTable();
+        refreshTable("all");
     }
 
     private void setIDTF() {
 
         try {
-            userIDTF.setText(UserController.getNextID() + "");
+            itemCodeTF.setText(ItemController.getNextID() + "");
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
@@ -358,11 +373,11 @@ public class AdminManageItems implements Initializable, EventHandler<MouseEvent>
         }
 
     }
-    private void addNewUser() throws IOException {
-        String userName = userNameTF.getText();
-        String userRole = userRoleTF.getText();
-        String userImage = userImageTF.getText();
-        String password = userPassTF.getText();
+    private void addNewItem() throws IOException {
+        String itemName = itemNameTF.getText();
+        String itemPrice = itemPriceTF.getText();
+        String itemImage = itemImageTF.getText();
+        String itemType = itemTypeTF.getText();
 
         //Validate inputs
         boolean validated = validateInputs();
@@ -370,10 +385,10 @@ public class AdminManageItems implements Initializable, EventHandler<MouseEvent>
 
         if(validated) {
             try {
-                if (!UserController.addNewUser(userName, password, userRole, userImage)) {
+                if (!ItemController.addNewItem(itemName, itemPrice, itemImage, itemType)) {
                     CustomerAlert.display("error", "Can't add new user");
                 } else {
-                    CustomerAlert.display("success", "L'utilisateur a été bien ajouté");
+                    CustomerAlert.display("success", "Le produit a été bien ajouté");
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -382,7 +397,7 @@ public class AdminManageItems implements Initializable, EventHandler<MouseEvent>
             }
 
             // Refresh
-            refreshTable();
+            refreshTable("all");
 
             // Clear inputs
             clearCustomerForm();
@@ -396,18 +411,18 @@ public class AdminManageItems implements Initializable, EventHandler<MouseEvent>
     private boolean validateInputs() {
         RequiredFieldValidator validator = new RequiredFieldValidator();
         validator.setMessage("Ce champ est obligatoire");
-        userNameTF.getValidators().add(validator);
-        userRoleTF.getValidators().add(validator);
-        userImageTF.getValidators().add(validator);
-        userPassTF.getValidators().add(validator);
+        itemImageTF.getValidators().add(validator);
+        itemNameTF.getValidators().add(validator);
+        itemPriceTF.getValidators().add(validator);
+        itemTypeTF.getValidators().add(validator);
 
-        if(!userNameTF.validate()) {
+        if(!itemNameTF.validate()) {
             return false;
-        } else if(!userRoleTF.validate()) {
+        } else if(!itemPriceTF.validate()) {
             return false;
-        } else if(!userImageTF.validate()) {
+        } else if(!itemImageTF.validate()) {
             return false;
-        } else if(!userPassTF.validate()) {
+        } else if(!itemTypeTF.validate()) {
             return false;
         }
 
@@ -437,7 +452,7 @@ public class AdminManageItems implements Initializable, EventHandler<MouseEvent>
     public void manageUsersClick(MouseEvent e) {
         Scene currentScene = manageCustomers.getScene();
         try {
-            BorderPane target = FXMLLoader.load(getClass().getResource("/com/medyassin/Views/Fxmls/UserManageCustomers.fxml"));
+            BorderPane target = FXMLLoader.load(getClass().getResource("/com/medyassin/Views/Fxmls/ManageUsers.fxml"));
             Utilities.switchScreen(currentScene, target,getClass().getResource("/com/medyassin/Views/Fxmls/UserManageCustomers.css").toExternalForm(), true, 600);
         } catch (IOException e1) {
             e1.printStackTrace();
