@@ -26,7 +26,7 @@
       </Circle>
    
       <!--App Name-->
-      <Label layoutX="107.0" layoutY="98.0" prefHeight="96.0" prefWidth="364.0" text="Miam-Miam Management Système" textFill="WHITE" wrapText="true">
+      <Label layoutX="107.0" layoutY="98.0" prefHeight="96.0" prefWidth="364.0" text="Miam-Miam Management System" textFill="WHITE" wrapText="true">
          <font>
             <Font name="HK Grotesk SemiBold" size="31.0" />
          </font>
